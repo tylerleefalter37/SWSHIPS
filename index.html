@@ -3,46 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KUAT & BESKAR 200³: Brushed Steel & Copper Starship Foundry</title>
+<title>KUAT & BESKAR: Hard-Surface 3D Starship Sculpture & X-Wing Grid Foundry</title>
 <style>
 :root {
-  --bg: #0c0e12;
-  --steel-dark: #141820;
-  --steel-panel: #1b202b;
-  --steel-card: #222836;
-  --steel-light: #d4dce8;
+  --bg: #0b0d12;
+  --steel-dark: #12161f;
+  --steel-panel: #181d27;
+  --steel-card: #1f2633;
+  --steel-light: #dce4f0;
   --copper: #d97736;
-  --copper-bright: #f29a5e;
+  --copper-bright: #f59e56;
   --copper-dim: #6e3b1b;
   --brass: #eab308;
   --emerald: #10b981;
   --crimson: #ef4444;
-  --text: #e6edf5;
-  --muted: #9ba8b8;
+  --cyan: #38bdf8;
+  --text: #e8eef5;
+  --muted: #94a3b8;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 html, body {
   width: 100%; min-height: 100vh; overflow-x: hidden;
-  background: repeating-linear-gradient(90deg, #0d1015 0px, #0d1015 2px, #10141b 2px, #10141b 4px);
+  background: repeating-linear-gradient(90deg, #0b0d12 0px, #0b0d12 3px, #0e1118 3px, #0e1118 6px);
   color: var(--text);
   font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, monospace;
-  font-size: 13px; line-height: 1.3;
+  font-size: 13px; line-height: 1.35;
 }
 button, select, input {
   font: inherit; color: var(--text);
-  background: linear-gradient(180deg, #2a3140, #191e28);
+  background: linear-gradient(180deg, #2b3344, #181d27);
   border: 1px solid var(--copper-dim); border-radius: 5px;
-  padding: 6px 10px; cursor: pointer;
+  padding: 6px 10px; cursor: pointer; transition: border-color 0.15s, transform 0.1s;
 }
 button:hover { border-color: var(--copper-bright); }
 button:active { transform: translateY(1px); }
 .btn-copper {
-  background: linear-gradient(180deg, #e08244, #9a4b1a);
+  background: linear-gradient(180deg, #e38647, #964615);
   color: #fff; font-weight: 800; border-color: #fbd3b7;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 .btn-steel {
-  background: linear-gradient(180deg, #434d61, #232936);
+  background: linear-gradient(180deg, #434e63, #222836);
   color: var(--steel-light); font-weight: 700; border-color: #8c9bae;
 }
 .btn-emerald {
@@ -53,16 +54,21 @@ button:active { transform: translateY(1px); }
   background: linear-gradient(180deg, #ef4444, #991b1b);
   color: #fff; font-weight: 800; border-color: #fca5a5;
 }
+.mode-btn.active {
+  background: linear-gradient(180deg, #e38647, #964615);
+  color: #fff; font-weight: 900; border-color: #fff;
+  box-shadow: 0 0 10px rgba(245, 158, 86, 0.5);
+}
 
 /* STICKY BRUSHED STEEL & COPPER HEADER */
 #micro-hud {
   position: sticky; top: 0; z-index: 100;
-  background: linear-gradient(180deg, #1d232f 0%, #12161f 100%);
+  background: linear-gradient(180deg, #1d2330 0%, #11151d 100%);
   border-bottom: 2px solid var(--copper);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.65);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.75);
   padding: 6px 14px; width: 100%;
 }
-.hud-inner { max-width: 1280px; margin: 0 auto; }
+.hud-inner { max-width: 1320px; margin: 0 auto; }
 .hud-row1 { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
 .hud-title {
   font-size: 14px; font-weight: 900; letter-spacing: 0.8px;
@@ -74,7 +80,7 @@ button:active { transform: translateY(1px); }
   gap: 6px; margin-bottom: 6px; text-align: center;
 }
 .tele-box {
-  background: linear-gradient(180deg, #141821, #0e1117);
+  background: linear-gradient(180deg, #141821, #0d1016);
   border: 1px solid var(--copper-dim); border-radius: 4px; padding: 3px 6px;
 }
 .tele-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; display: block; }
@@ -83,29 +89,29 @@ button:active { transform: translateY(1px); }
   display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 6px;
 }
-@media (max-width: 760px) {
+@media (max-width: 780px) {
   .hud-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .nav-btn {
   padding: 6px 4px; font-size: 11px; font-weight: 800; text-align: center;
-  background: #161a24; border: 1px solid #323b4e; color: var(--muted);
+  background: #151922; border: 1px solid #323b4e; color: var(--muted);
 }
 .nav-btn.active {
-  background: linear-gradient(180deg, #c86d32, #783912);
+  background: linear-gradient(180deg, #d97736, #7c3a10);
   color: #fff; border-color: #fbd3b7;
   box-shadow: 0 0 10px rgba(217, 119, 54, 0.45);
 }
 
 /* PC WORKSTATION LAYOUT */
-main { padding: 12px; max-width: 1280px; margin: 0 auto; width: 100%; }
+main { padding: 12px; max-width: 1320px; margin: 0 auto; width: 100%; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 .panel {
-  background: linear-gradient(180deg, #1b202b 0%, #141821 100%);
+  background: linear-gradient(180deg, #1a202c 0%, #12161f 100%);
   border: 1px solid var(--copper-dim);
   border-top: 2px solid var(--copper);
   border-radius: 8px; padding: 12px; margin-bottom: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 .panel-hdr {
   display: flex; justify-content: space-between; align-items: center;
@@ -114,9 +120,9 @@ main { padding: 12px; max-width: 1280px; margin: 0 auto; width: 100%; }
   letter-spacing: 0.5px; flex-wrap: wrap; gap: 6px;
 }
 .forge-layout {
-  display: grid; grid-template-columns: 520px 1fr; gap: 14px; align-items: start;
+  display: grid; grid-template-columns: 560px 1fr; gap: 16px; align-items: start;
 }
-@media (max-width: 980px) {
+@media (max-width: 1020px) {
   .forge-layout { grid-template-columns: 1fr; }
 }
 .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
@@ -126,33 +132,33 @@ main { padding: 12px; max-width: 1280px; margin: 0 auto; width: 100%; }
   .grid-4, .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* 200³ BRUSHED STEEL & COPPER VIEWPORT */
+/* HARD-SURFACE STUDIO VIEWPORT */
 .canvas-stage {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #232a38 0%, #12161e 50%, #261b14 100%);
+  background: linear-gradient(145deg, #1e2533 0%, #10141d 55%, #231812 100%);
   border: 2px solid var(--copper);
   border-radius: 8px; padding: 10px;
-  box-shadow: inset 0 0 24px rgba(0,0,0,0.8);
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.85);
 }
 canvas.turntable {
-  width: 100%; max-width: 480px; height: auto; aspect-ratio: 1/1;
-  border: 1px solid #5a6578; border-radius: 6px; cursor: grab;
+  width: 100%; max-width: 530px; height: auto; aspect-ratio: 1/1;
+  border: 1px solid #64748b; border-radius: 6px; cursor: grab;
 }
 canvas.grid-board {
-  width: 100%; max-width: 420px; height: auto; aspect-ratio: 1/1;
+  width: 100%; max-width: 440px; height: auto; aspect-ratio: 1/1;
   border: 2px solid var(--copper); border-radius: 6px; cursor: pointer;
 }
 
-/* CARDS & THUMBNAILS */
+/* SHIP CARDS */
 .unit-card {
-  background: linear-gradient(180deg, #232938, #171b24);
+  background: linear-gradient(180deg, #222938, #161a24);
   border: 1px solid #384256; border-radius: 6px; padding: 8px;
   display: flex; flex-direction: column; gap: 5px; position: relative;
 }
-.unit-card.masterwork { border: 1px solid var(--copper-bright); box-shadow: 0 0 12px rgba(217,119,54,0.35); }
+.unit-card.masterwork { border: 1px solid var(--copper-bright); box-shadow: 0 0 12px rgba(245,158,86,0.35); }
 .thumb-wrap {
-  width: 100%; aspect-ratio: 1/1; max-height: 165px;
-  background: radial-gradient(circle at 50% 45%, #2e3748, #12151c);
+  width: 100%; aspect-ratio: 1/1; max-height: 175px;
+  background: radial-gradient(circle at 50% 45%, #2a3344, #10131a);
   border: 1px solid var(--copper-dim); border-radius: 5px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; position: relative; overflow: hidden;
@@ -160,17 +166,17 @@ canvas.grid-board {
 .thumb-wrap img { width: 100%; height: 100%; object-fit: contain; }
 .badge-tier {
   position: absolute; top: 4px; left: 4px; padding: 2px 5px;
-  font-size: 10px; font-weight: 900; border-radius: 3px; background: rgba(12,14,18,0.9);
+  font-size: 10px; font-weight: 900; border-radius: 3px; background: rgba(12,14,18,0.92);
   border: 1px solid rgba(255,255,255,0.2);
 }
 .badge-class {
   position: absolute; top: 4px; right: 4px; padding: 2px 5px;
   font-size: 9px; font-weight: 800; border-radius: 3px;
-  background: rgba(217,119,54,0.25); border: 1px solid var(--copper); color: #fed7aa;
+  background: rgba(217,119,54,0.28); border: 1px solid var(--copper); color: #fed7aa;
 }
 .badge-codex {
   position: absolute; bottom: 4px; left: 4px; padding: 1px 5px;
-  font-size: 10px; font-weight: 800; background: rgba(12,14,18,0.85); color: var(--steel-light); border-radius: 3px;
+  font-size: 10px; font-weight: 800; background: rgba(12,14,18,0.88); color: var(--steel-light); border-radius: 3px;
 }
 
 .swatch-row { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
@@ -179,20 +185,20 @@ canvas.grid-board {
 
 /* MODAL & TOAST */
 #modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  position: fixed; inset: 0; background: rgba(0,0,0,0.86);
   z-index: 200; display: none; align-items: center; justify-content: center; padding: 14px;
 }
 #modal-overlay.open { display: flex; }
 .modal-box {
   background: var(--steel-panel); border: 2px solid var(--copper);
-  border-radius: 8px; padding: 14px; width: 100%; max-width: 460px;
+  border-radius: 8px; padding: 14px; width: 100%; max-width: 500px;
 }
 .toast {
   position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
-  background: #1b202b; border: 2px solid var(--copper-bright); color: #fff;
+  background: #181d27; border: 2px solid var(--copper-bright); color: #fff;
   padding: 8px 16px; border-radius: 20px; font-weight: 800; font-size: 12px;
   z-index: 300; pointer-events: none; opacity: 0; transition: opacity 0.2s;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.75);
 }
 .toast.show { opacity: 1; }
 </style>
@@ -202,7 +208,7 @@ canvas.grid-board {
 <header id="micro-hud">
   <div class="hud-inner">
     <div class="hud-row1">
-      <div class="hud-title">⚙️ KUAT & BESKAR 200³ — BRUSHED STEEL & COPPER STARSHIP FOUNDRY</div>
+      <div class="hud-title">⚙️ KUAT & BESKAR — HARD-SURFACE 3D STARSHIP SCULPTURE & X-WING GRID FOUNDRY</div>
       <div class="hud-actions">
         <button id="btn-god" onclick="toggleGodMode()">⚡ GOD MODE: OFF</button>
         <button onclick="openCodesModal()">📡 TRADE CODES</button>
@@ -218,7 +224,7 @@ canvas.grid-board {
     </div>
     <nav class="hud-nav">
       <button class="nav-btn" onclick="switchTab(1)">1. 🛡️ Hangar Bay</button>
-      <button class="nav-btn active" onclick="switchTab(2)">2. 🎨 200³ Shipyard Forge</button>
+      <button class="nav-btn active" onclick="switchTab(2)">2. 🎨 Hard-Surface Forge</button>
       <button class="nav-btn" onclick="switchTab(3)">3. 📦 Foundry Crates</button>
       <button class="nav-btn" onclick="switchTab(4)">4. 🔨 Salvage Auctions</button>
       <button class="nav-btn" onclick="switchTab(5)">5. ⚔️ X-Wing Grid Arena</button>
@@ -232,7 +238,7 @@ canvas.grid-board {
   <section id="tab-1" class="tab-pane">
     <div class="panel">
       <div class="panel-hdr">
-        <span>🛡️ ORBITAL HANGAR BAY (200³ HIGH-DEFINITION FLEET)</span>
+        <span>🛡️ ORBITAL HANGAR BAY (PRECISION HARD-SURFACE FLEET)</span>
         <div style="display:flex;gap:6px;flex-wrap:wrap">
           <button class="btn-steel" onclick="autoEquipCommanders()">⚡ Auto-Assign Aces</button>
           <button class="btn-copper" onclick="autoFillSellerLanes()">🔨 Auto-List 5 Ships</button>
@@ -268,42 +274,56 @@ canvas.grid-board {
     </div>
   </section>
 
-  <!-- TAB 2: 200×200×200 SHIPYARD FORGE (DEFAULT ACTIVE TAB) -->
+  <!-- TAB 2: HARD-SURFACE FACETED & HOLLOW SCULPTURE FORGE (DEFAULT ACTIVE TAB) -->
   <section id="tab-2" class="tab-pane active">
     <div class="panel">
       <div class="panel-hdr">
-        <span>🎨 200×200×200 DENSE VOXEL SHIPYARD — 25 REAL HULLS & 2,400 PROCEDURAL VARIANTS</span>
+        <span>🎨 PRECISION 3D HARD-SURFACE & HOLLOW-RIB STARSHIP SCULPTURE STUDIO</span>
         <div style="display:flex;gap:6px;flex-wrap:wrap">
-          <button class="btn-steel" onclick="cyclePresetShip(-1)">◀ Prev Hull</button>
-          <button class="btn-copper" onclick="rollProceduralSeed()">🎲 Procedural Ship (#1–#2400)</button>
-          <button class="btn-steel" onclick="cyclePresetShip(1)">Next Hull ▶</button>
+          <button class="btn-steel" onclick="cyclePresetShip(-1)">◀ Prev Ship</button>
+          <button class="btn-copper" onclick="rollProceduralSeed()">🎲 Roll Procedural Ship (#1–#2400)</button>
+          <button class="btn-steel" onclick="cyclePresetShip(1)">Next Ship ▶</button>
         </div>
       </div>
 
       <div class="forge-layout">
-        <!-- LEFT COLUMN: 480x480 PC VIEWPORT CANVAS -->
+        <!-- LEFT COLUMN: 530x530 HARD-SURFACE PANE & SCULPTURE MODE BAR -->
         <div class="canvas-stage">
-          <canvas id="forge-canvas" class="turntable" width="460" height="460"></canvas>
-          <div id="fg-voxel-stats" style="font-size:11px;color:var(--copper-bright);font-weight:800;margin-top:6px;text-align:center">
-            200×200×200 Solid CSG Voxel Kernel • 26-Neighbor Normals & Ambient Occlusion
+          <canvas id="forge-canvas" class="turntable" width="520" height="520"></canvas>
+          <div id="fg-mesh-stats" style="font-size:11px;color:var(--copper-bright);font-weight:800;margin-top:6px;text-align:center">
+            Hard-Surface Faceted Vector Engine • Anisotropic Brushed Steel & Copper PBR Shading
           </div>
+
+          <!-- 4 SCULPTURE MODES -->
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;width:100%;margin-top:7px">
+            <button id="sm-bevel" class="mode-btn" onclick="setSculptMode('bevel')">🛡️ Bevel Hull</button>
+            <button id="sm-hollow" class="mode-btn active" onclick="setSculptMode('hollow')">🕸️ Hollow Cutaway</button>
+            <button id="sm-exploded" class="mode-btn" onclick="setSculptMode('exploded')">💥 Exploded View</button>
+            <button id="sm-wire" class="mode-btn" onclick="setSculptMode('wire')">📐 Copper Frame</button>
+          </div>
+
+          <div style="width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px">
+            <div>
+              <span class="ctrl-lbl">Hollow Rib / Seam Gap</span>
+              <input type="range" id="sl-gap" min="4" max="55" value="22" style="width:100%" oninput="ForgeCam.panelGap=this.value*0.01;renderForgeFrame()">
+            </div>
+            <div>
+              <span class="ctrl-lbl">Turntable Angle</span>
+              <input type="range" id="sl-yaw" min="-180" max="180" value="36" style="width:100%" oninput="ForgeCam.sweep=false;ForgeCam.yaw=this.value*0.01745;renderForgeFrame()">
+            </div>
+            <div>
+              <span class="ctrl-lbl">Camera Elevation</span>
+              <input type="range" id="sl-pitch" min="-20" max="75" value="24" style="width:100%" oninput="ForgeCam.pitch=this.value*0.01745;renderForgeFrame()">
+            </div>
+          </div>
+
           <div style="display:flex;gap:8px;margin-top:6px;align-items:center;flex-wrap:wrap;justify-content:center">
             <button onclick="ForgeCam.sweep=!ForgeCam.sweep" class="btn-steel">🔄 Showcase Sweep: ON/OFF</button>
-            <button onclick="ForgeCam.zoom=Math.min(1.75,ForgeCam.zoom+0.12);renderForgeFrame()">➕ Zoom In</button>
-            <button onclick="ForgeCam.zoom=Math.max(0.65,ForgeCam.zoom-0.12);renderForgeFrame()">➖ Zoom Out</button>
+            <button onclick="ForgeCam.zoom=Math.min(1.85,ForgeCam.zoom+0.12);renderForgeFrame()">➕ Zoom In</button>
+            <button onclick="ForgeCam.zoom=Math.max(0.6,ForgeCam.zoom-0.12);renderForgeFrame()">➖ Zoom Out</button>
             <label style="font-size:11px;display:flex;align-items:center;gap:4px">
-              <input type="checkbox" id="chk-360" onchange="ForgeCam.full360=this.checked"> Unlock 360°
+              <input type="checkbox" id="chk-360" checked onchange="ForgeCam.full360=this.checked"> Full 360° Orbit
             </label>
-          </div>
-          <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
-            <div>
-              <span class="ctrl-lbl">Turntable Angle (Clamped 3/4 Arc)</span>
-              <input type="range" id="sl-yaw" min="-85" max="85" value="38" style="width:100%" oninput="ForgeCam.sweep=false;ForgeCam.yaw=this.value*0.01;renderForgeFrame()">
-            </div>
-            <div>
-              <span class="ctrl-lbl">Camera Elevation Pitch</span>
-              <input type="range" id="sl-pitch" min="10" max="65" value="28" style="width:100%" oninput="ForgeCam.pitch=this.value*0.01;renderForgeFrame()">
-            </div>
           </div>
         </div>
 
@@ -311,11 +331,11 @@ canvas.grid-board {
         <div style="display:flex;flex-direction:column;gap:8px">
           <div class="panel" style="margin-bottom:0;background:var(--steel-card)">
             <div class="panel-hdr">
-              <span>🛠️ HULL ARCHITECTURE & PROCEDURAL CODEX SEED (#0001–#2400)</span>
+              <span>🛠️ STARSHIP ARCHITECTURE & 2,400 PROCEDURAL BLUEPRINTS</span>
             </div>
             <div class="grid-2">
               <div>
-                <span class="ctrl-lbl">1. Authentic Star Wars Hull (25 Models)</span>
+                <span class="ctrl-lbl">1. Authentic Star Wars Hull (25 Ships)</span>
                 <select id="fg-chassis" style="width:100%" onchange="onChassisSelectChange()"></select>
               </div>
               <div>
@@ -330,11 +350,11 @@ canvas.grid-board {
                 <select id="fg-tier" style="width:100%" onchange="updateForgePreview()"></select>
               </div>
               <div>
-                <span class="ctrl-lbl">4. S-Foil / Superstructure Kit</span>
+                <span class="ctrl-lbl">4. S-Foil / Structural Frame Kit</span>
                 <select id="fg-wings" style="width:100%" onchange="updateForgePreview()">
                   <option value="attack">Combat S-Foils / Heavy Command Bridge</option>
                   <option value="interceptor">Interceptor Forward Dagger Trim</option>
-                  <option value="armored">Reinforced Copper-Ribbed Plating</option>
+                  <option value="armored">Heavy Damascus Ribbed Plating</option>
                   <option value="prototype">Experimental Dorsal Array & Fins</option>
                 </select>
               </div>
@@ -404,7 +424,7 @@ canvas.grid-board {
         <span id="buy-timer" style="color:var(--copper-bright);font-weight:900">10.0s</span>
       </div>
       <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
-        <div class="thumb-wrap" style="width:130px;height:130px;flex-shrink:0" onclick="inspectBuyerLot()">
+        <div class="thumb-wrap" style="width:140px;height:140px;flex-shrink:0" onclick="inspectBuyerLot()">
           <img id="buy-thumb" alt="Lot">
         </div>
         <div style="flex:1;min-width:200px">
@@ -443,9 +463,9 @@ canvas.grid-board {
 
       <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center">
         <div class="canvas-stage">
-          <canvas id="grid-canvas" class="grid-board" width="360" height="360"></canvas>
+          <canvas id="grid-canvas" class="grid-board" width="380" height="380"></canvas>
           <div style="font-size:11px;color:var(--muted);margin-top:4px">
-            Click any highlighted copper/emerald sector to maneuver & fire!
+            Click any highlighted copper sector to maneuver your ship & fire!
           </div>
         </div>
 
@@ -510,34 +530,34 @@ canvas.grid-board {
 
 <script>
 /* ============================================================================
-   1. 16 RARITY TIERS & 25 AUTHENTIC STAR WARS STARSHIPS (16 × 25 × 6 = 2,400)
+   1. 16 RARITY TIERS & 25 AUTHENTIC STAR WARS STARSHIPS (2,400 CODEX)
    ============================================================================ */
 const TIERS = [
-  { id:0,  code:'T1',  name:'Foundry Cast Iron',   val:20,      col:'#94a3b8' },
-  { id:1,  code:'T2',  name:'Brushed Carbon Steel',val:55,      col:'#cbd5e1' },
-  { id:2,  code:'T3',  name:'Tempered Gunmetal',   val:140,     col:'#6ee7b7' },
-  { id:3,  code:'T4',  name:'Hammered Copper',     val:380,     col:'#d97736' },
-  { id:4,  code:'T5',  name:'Burnished Bronze',    val:980,     col:'#f59e0b' },
-  { id:5,  code:'T6',  name:'Corellian Titanium',  val:2600,    col:'#38bdf8' },
-  { id:6,  code:'T7',  name:'Kuat Brass-Trimmed',  val:6800,    col:'#eab308' },
-  { id:7,  code:'T8',  name:'Naboo Mirror Chrome', val:18500,   col:'#e2e8f0' },
-  { id:8,  code:'T9',  name:'Mandalorian Beskar',  val:52000,   col:'#a855f7' },
-  { id:9,  code:'T10', name:'Crimson Copper-Gold', val:145000,  col:'#f43f5e' },
-  { id:10, code:'T11', name:'Imperial Durasteel',  val:390000,  col:'#fb923c' },
-  { id:11, code:'T12', name:'Sith Alchemy Bronze', val:980000,  col:'#ef4444' },
-  { id:12, code:'T13', name:'Starforge Electrum',  val:2200000, col:'#fde047' },
-  { id:13, code:'T14', name:'Kyber-Cored Copper',  val:3600000, col:'#2dd4bf' },
-  { id:14, code:'T15', name:'Sovereign Damascus',  val:4800000, col:'#f97316' },
+  { id:0,  code:'T1',  name:'Foundry Cast Iron',    val:20,      col:'#94a3b8' },
+  { id:1,  code:'T2',  name:'Brushed Carbon Steel', val:55,      col:'#cbd5e1' },
+  { id:2,  code:'T3',  name:'Tempered Gunmetal',    val:140,     col:'#6ee7b7' },
+  { id:3,  code:'T4',  name:'Hammered Copper',      val:380,     col:'#d97736' },
+  { id:4,  code:'T5',  name:'Burnished Bronze',     val:980,     col:'#f59e0b' },
+  { id:5,  code:'T6',  name:'Corellian Titanium',   val:2600,    col:'#38bdf8' },
+  { id:6,  code:'T7',  name:'Kuat Brass-Trimmed',   val:6800,    col:'#eab308' },
+  { id:7,  code:'T8',  name:'Naboo Mirror Chrome',  val:18500,   col:'#e2e8f0' },
+  { id:8,  code:'T9',  name:'Mandalorian Beskar',   val:52000,   col:'#a855f7' },
+  { id:9,  code:'T10', name:'Crimson Copper-Gold',  val:145000,  col:'#f43f5e' },
+  { id:10, code:'T11', name:'Imperial Durasteel',   val:390000,  col:'#fb923c' },
+  { id:11, code:'T12', name:'Sith Alchemy Bronze',  val:980000,  col:'#ef4444' },
+  { id:12, code:'T13', name:'Starforge Electrum',   val:2200000, col:'#fde047' },
+  { id:13, code:'T14', name:'Kyber-Cored Copper',   val:3600000, col:'#2dd4bf' },
+  { id:14, code:'T15', name:'Sovereign Damascus',   val:4800000, col:'#f97316' },
   { id:15, code:'T16', name:'Primeval Beskar Mythic',val:6500000,col:'#ffffff' }
 ];
 
 const FINISHES = {
-  steel_copper:     ['#9aa6b8', '#d97736', '#2b323f', '#f29a5e', '#38bdf8'],
-  burnished_bronze: ['#b47b44', '#6e4726', '#241e1a', '#f5b041', '#f97316'],
-  imperial_iron:    ['#7c8798', '#394150', '#1a1f29', '#eab308', '#10b981'],
-  rebel_alloy:      ['#cbd5e1', '#b94a2c', '#333c4d', '#f59e0b', '#ef4444'],
-  royal_chrome:     ['#e2e8f0', '#d97736', '#3b4454', '#fde047', '#38bdf8'],
-  sith_obsidian:    ['#363c48', '#991b1b', '#14171f', '#d97736', '#ef4444']
+  steel_copper:     ['#a8b5c8', '#d97736', '#252c38', '#f5a665', '#38bdf8'],
+  burnished_bronze: ['#b8834c', '#784820', '#211c18', '#f5b041', '#f97316'],
+  imperial_iron:    ['#8b96a8', '#454f62', '#191e28', '#eab308', '#10b981'],
+  rebel_alloy:      ['#d0d9e6', '#c24d2c', '#2e3646', '#f59e0b', '#ef4444'],
+  royal_chrome:     ['#e8eef7', '#d97736', '#364052', '#fde047', '#38bdf8'],
+  sith_obsidian:    ['#3d4554', '#991b1b', '#13161f', '#d97736', '#ef4444']
 };
 
 const SHIPS = [
@@ -564,7 +584,7 @@ const SHIPS = [
   { id:'venator',        name:'Venator Republic Cruiser',      cls:'Capital',     range:4 },
   { id:'star_destroyer', name:'Imperial-I Star Destroyer',     cls:'Capital',     range:4 },
   { id:'executor_ssd',   name:'Executor Super Star Destroyer', cls:'Dreadnought', range:5 },
-  { id:'death_star',     name:'DS-1 Death Star Battle Station',cls:'BattleMoon',  range:5 },
+  { id:'death_star',     name:'DS-1 / DS-II Death Star',       cls:'BattleMoon',  range:5 },
   { id:'escape_pod',     name:'Class-4 Armored Escape Pod',    cls:'Industrial',  range:2 }
 ];
 
@@ -576,792 +596,690 @@ const WEAPONS = [
   { id:'ion_turret',  name:'Dorsal ArMek Ion Turret' },
   { id:'seismic',     name:'Seismic Charge & Chin Cannons' }
 ];
-const SWATCHES = ['#9aa6b8','#d97736','#f29a5e','#6e4726','#cbd5e1','#363c48','#b94a2c','#eab308','#2b323f','#991b1b','#38bdf8','#10b981'];
+const SWATCHES = ['#a8b5c8','#d97736','#f5a665','#784820','#e8eef7','#3d4554','#c24d2c','#eab308','#252c38','#991b1b','#38bdf8','#10b981'];
 
 /* ============================================================================
-   2. TRUE DENSE 200×200×200 CSG VOXEL KERNEL (8,000,000 VOXELS + CARVING!)
+   2. HARD-SURFACE FACETED POLYGON & HOLLOW-RIB 3D ENGINE
    ============================================================================ */
-const G = 200;
-const G2 = G * G;
-const G3 = G * G * G;
-const voxMat = new Uint8Array(G3);
-const voxStamp = new Uint16Array(G3);
-let curStamp = 1;
+// Each ship is compiled into an exact array of 3D Planar Polygons (faces) and
+// 3D Structural Copper Beams (ribs). No blocky voxels—100% razor-sharp planes!
+let curFaces = [];
+let curStruts = [];
 
-function clearGrid200() {
-  curStamp++;
-  if (curStamp >= 65530) { voxStamp.fill(0); curStamp = 1; }
+function beginMesh() {
+  curFaces = [];
+  curStruts = [];
 }
 
-function setV(x, y, z, m) {
-  const ix = x | 0, iy = y | 0, iz = z | 0;
-  if (ix < 1 || ix >= G - 1 || iy < 1 || iy >= G - 1 || iz < 1 || iz >= G - 1) return;
-  const idx = iy * G2 + iz * G + ix;
-  if (m === 0) {
-    voxStamp[idx] = 0;
-  } else {
-    voxStamp[idx] = curStamp;
-    voxMat[idx] = m;
+// Add a 3D Quad or Triangle Face with automatic surface normal & cutout tag
+function addFace(verts, mat, opts = {}) {
+  if (verts.length < 3) return;
+  const v0 = verts[0], v1 = verts[1], v2 = verts[2];
+  const ux = v1[0] - v0[0], uy = v1[1] - v0[1], uz = v1[2] - v0[2];
+  const vx = v2[0] - v0[0], vy = v2[1] - v0[1], vz = v2[2] - v0[2];
+  let nx = uy * vz - uz * vy;
+  let ny = uz * vx - ux * vz;
+  let nz = ux * vy - uy * vx;
+  const len = Math.hypot(nx, ny, nz) || 1;
+  nx /= len; ny /= len; nz /= len;
+
+  let cx = 0, cy = 0, cz = 0;
+  for (let i = 0; i < verts.length; i++) {
+    cx += verts[i][0]; cy += verts[i][1]; cz += verts[i][2];
+  }
+  const inv = 1 / verts.length;
+  cx *= inv; cy *= inv; cz *= inv;
+
+  curFaces.push({
+    verts, mat, nx, ny, nz, cx, cy, cz,
+    canCutaway: opts.canCutaway !== false,
+    panelId: curFaces.length,
+    isCore: !!opts.isCore,
+    rimMat: opts.rimMat || 2
+  });
+
+  // Also register structural rib edges if requested
+  if (opts.ribEdges) {
+    for (let i = 0; i < verts.length; i++) {
+      const a = verts[i], b = verts[(i + 1) % verts.length];
+      curStruts.push({ x0: a[0], y0: a[1], z0: a[2], x1: b[0], y1: b[1], z1: b[2], mat: opts.rimMat || 2, w: opts.ribWidth || 1.3 });
+    }
   }
 }
 
-function getV(x, y, z) {
-  const ix = x | 0, iy = y | 0, iz = z | 0;
-  if (ix < 0 || ix >= G || iy < 0 || iy >= G || iz < 0 || iz >= G) return 0;
-  const idx = iy * G2 + iz * G + ix;
-  return voxStamp[idx] === curStamp ? voxMat[idx] : 0;
+function addStrut(x0, y0, z0, x1, y1, z1, mat = 2, w = 1.6) {
+  curStruts.push({ x0, y0, z0, x1, y1, z1, mat, w });
 }
 
-// Solid Box & Subtractive Carve Box
-function voxBox(x0, y0, z0, x1, y1, z1, m) {
-  const ax = Math.max(1, Math.min(x0, x1) | 0), bx = Math.min(G - 2, Math.max(x0, x1) | 0);
-  const ay = Math.max(1, Math.min(y0, y1) | 0), by = Math.min(G - 2, Math.max(y0, y1) | 0);
-  const az = Math.max(1, Math.min(z0, z1) | 0), bz = Math.min(G - 2, Math.max(z0, z1) | 0);
-  for (let y = ay; y <= by; y++) {
-    const yOff = y * G2;
-    for (let z = az; z <= bz; z++) {
-      let idx = yOff + z * G + ax;
-      for (let x = ax; x <= bx; x++, idx++) {
-        if (m === 0) voxStamp[idx] = 0;
-        else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
+// Subdivide a quad into (uSteps x vSteps) smaller hard-surface armor plates!
+function addSubdividedQuad(v0, v1, v2, v3, uSteps, vSteps, mat, opts = {}) {
+  const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+  const grid = [];
+  for (let iv = 0; iv <= vSteps; iv++) {
+    const tv = iv / vSteps;
+    const left = lerp(v0, v3, tv);
+    const right = lerp(v1, v2, tv);
+    const row = [];
+    for (let iu = 0; iu <= uSteps; iu++) {
+      row.push(lerp(left, right, iu / uSteps));
+    }
+    grid.push(row);
+  }
+  for (let iv = 0; iv < vSteps; iv++) {
+    for (let iu = 0; iu < uSteps; iu++) {
+      const p0 = grid[iv][iu], p1 = grid[iv][iu + 1], p2 = grid[iv + 1][iu + 1], p3 = grid[iv + 1][iu];
+      const subMat = ((iv + iu) % 5 === 0 && mat === 1) ? 2 : mat;
+      addFace([p0, p1, p2, p3], subMat, opts);
+    }
+  }
+}
+
+// Lathed Multi-Ring Cylinder / Cone / Dome along Z, Y, or X axis
+function addLathe(cx, cy, cz, rings, segs, mat, axis = 'Z', opts = {}) {
+  // rings = array of [posAlongAxis, radius, optionalMatOverride]
+  const ringVerts = [];
+  for (let r = 0; r < rings.length; r++) {
+    const [pos, rad] = rings[r];
+    const pts = [];
+    for (let s = 0; s < segs; s++) {
+      const ang = (s / segs) * Math.PI * 2 + (Math.PI / segs);
+      const ca = Math.cos(ang) * rad, sa = Math.sin(ang) * rad;
+      if (axis === 'Z') pts.push([cx + ca, cy + sa, cz + pos]);
+      else if (axis === 'Y') pts.push([cx + ca, cy + pos, cz + sa]);
+      else pts.push([cx + pos, cy + ca, cz + sa]);
+    }
+    ringVerts.push(pts);
+  }
+  for (let r = 0; r < rings.length - 1; r++) {
+    const rMat = rings[r][2] || mat;
+    const A = ringVerts[r], B = ringVerts[r + 1];
+    for (let s = 0; s < segs; s++) {
+      const sn = (s + 1) % segs;
+      addFace([A[s], A[sn], B[sn], B[s]], rMat, {
+        canCutaway: opts.canCutaway !== false,
+        isCore: opts.isCore,
+        ribEdges: opts.ribEdges !== false,
+        rimMat: opts.rimMat || 2
+      });
+    }
+  }
+  // End caps if requested
+  if (opts.capStart && rings[0][1] > 0.5) {
+    const cPt = axis === 'Z' ? [cx, cy, cz + rings[0][0]] : (axis === 'Y' ? [cx, cy + rings[0][0], cz] : [cx + rings[0][0], cy, cz]);
+    const A = ringVerts[0];
+    for (let s = 0; s < segs; s++) addFace([cPt, A[(s + 1) % segs], A[s]], opts.capMat || mat, { canCutaway: false });
+  }
+  if (opts.capEnd && rings[rings.length - 1][1] > 0.5) {
+    const last = rings[rings.length - 1];
+    const cPt = axis === 'Z' ? [cx, cy, cz + last[0]] : (axis === 'Y' ? [cx, cy + last[0], cz] : [cx + last[0], cy, cz]);
+    const B = ringVerts[ringVerts.length - 1];
+    for (let s = 0; s < segs; s++) addFace([cPt, B[s], B[(s + 1) % segs]], opts.capMat || mat, { canCutaway: false });
+  }
+}
+
+// Lofted Cross-Section Fuselage along Z (connects N-point 2D profiles at various Z stations)
+function addLoftZ(stations, mat, opts = {}) {
+  // stations: [{ z, pts: [[x,y], ...] }, ...]
+  for (let i = 0; i < stations.length - 1; i++) {
+    const sA = stations[i], sB = stations[i + 1];
+    const n = sA.pts.length;
+    const m = sA.mat || mat;
+    for (let k = 0; k < n; k++) {
+      const kn = (k + 1) % n;
+      const v0 = [sA.pts[k][0],  sA.pts[k][1],  sA.z];
+      const v1 = [sA.pts[kn][0], sA.pts[kn][1], sA.z];
+      const v2 = [sB.pts[kn][0], sB.pts[kn][1], sB.z];
+      const v3 = [sB.pts[k][0],  sB.pts[k][1],  sB.z];
+      if (opts.subdivU && opts.subdivU > 1) {
+        addSubdividedQuad(v0, v1, v2, v3, opts.subdivU, opts.subdivV || 1, m, { ribEdges: true, canCutaway: opts.canCutaway !== false });
+      } else {
+        addFace([v0, v1, v2, v3], m, { ribEdges: true, canCutaway: opts.canCutaway !== false });
       }
     }
   }
 }
 
-// Tapered Cylinder along Z (Fuselages, Engines, Barrels, Pods)
-function voxCylZ(cx, cy, z0, z1, r0, r1, m) {
-  const az = Math.max(1, Math.min(z0, z1) | 0), bz = Math.min(G - 2, Math.max(z0, z1) | 0);
-  const span = Math.max(1, bz - az);
-  for (let z = az; z <= bz; z++) {
-    const t = (z - az) / span;
-    const r = r0 + (r1 - r0) * t;
-    const r2 = r * r;
-    const x0 = Math.max(1, Math.floor(cx - r)), x1 = Math.min(G - 2, Math.ceil(cx + r));
-    const y0 = Math.max(1, Math.floor(cy - r)), y1 = Math.min(G - 2, Math.ceil(cy + r));
-    for (let y = y0; y <= y1; y++) {
-      const dy2 = (y - cy) * (y - cy);
-      const row = y * G2 + z * G;
-      for (let x = x0; x <= x1; x++) {
-        if ((x - cx) * (x - cx) + dy2 <= r2) {
-          const idx = row + x;
-          if (m === 0) voxStamp[idx] = 0;
-          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
-        }
-      }
+// Rectilinear Hard-Surface Box with Bevel Seams
+function addBox3D(x0, y0, z0, x1, y1, z1, mat, opts = {}) {
+  const v = [
+    [x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0],
+    [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]
+  ];
+  const f = [
+    [v[4], v[5], v[6], v[7]], // Front (+Z)
+    [v[1], v[0], v[3], v[2]], // Back (-Z)
+    [v[3], v[7], v[6], v[2]], // Top (+Y)
+    [v[0], v[1], v[5], v[4]], // Bottom (-Y)
+    [v[1], v[2], v[6], v[5]], // Right (+X)
+    [v[0], v[4], v[7], v[3]]  // Left (-X)
+  ];
+  const o = { ribEdges: true, canCutaway: opts.canCutaway !== false, isCore: opts.isCore };
+  f.forEach(q => {
+    if (opts.subdiv) addSubdividedQuad(q[0], q[1], q[2], q[3], opts.subdiv, opts.subdiv, mat, o);
+    else addFace(q, mat, o);
+  });
+}
+
+// Double-Sided Flat Wing / Solar Panel Plate with Thick Copper Edge Frame
+function addWingPanel(v0, v1, v2, v3, matFace, matFrame = 2, subdiv = 2) {
+  addSubdividedQuad(v0, v1, v2, v3, subdiv, subdiv, matFace, { ribEdges: true, rimMat: matFrame, canCutaway: true });
+  addSubdividedQuad(v0, v3, v2, v1, subdiv, subdiv, matFace, { ribEdges: true, rimMat: matFrame, canCutaway: true });
+  // Outer structural copper perimeter struts
+  addStrut(v0[0], v0[1], v0[2], v1[0], v1[1], v1[2], matFrame, 2.2);
+  addStrut(v1[0], v1[1], v1[2], v2[0], v2[1], v2[2], matFrame, 2.2);
+  addStrut(v2[0], v2[1], v2[2], v3[0], v3[1], v3[2], matFrame, 2.2);
+  addStrut(v3[0], v3[1], v3[2], v0[0], v0[1], v0[2], matFrame, 2.2);
+}
+
+// Internal Glowing Kyber Reactor Core & Forged Copper Bulkhead Rings (Visible inside Hollow Cutaways!)
+function addInternalReactorSpine(z0, z1, rad = 5.5) {
+  addLathe(0, 0, 0, [[z0, rad * 0.7, 5], [(z0 + z1) * 0.5, rad, 5], [z1, rad * 0.6, 5]], 8, 5, 'Z', {
+    canCutaway: false, isCore: true, ribEdges: true, rimMat: 4
+  });
+  // Internal Copper Structural Bulkhead Octagons
+  for (let z = z0 + 8; z < z1 - 4; z += 18) {
+    const r = rad * 1.65;
+    for (let s = 0; s < 8; s++) {
+      const a0 = (s / 8) * Math.PI * 2, a1 = ((s + 1) / 8) * Math.PI * 2;
+      addStrut(Math.cos(a0) * r, Math.sin(a0) * r, z, Math.cos(a1) * r, Math.sin(a1) * r, z, 2, 1.8);
     }
   }
 }
 
-// Tapered Cylinder along Y (Command Towers, Saucer Discs, Turrets)
-function voxCylY(cx, y0, y1, cz, r0, r1, m) {
-  const ay = Math.max(1, Math.min(y0, y1) | 0), by = Math.min(G - 2, Math.max(y0, y1) | 0);
-  const span = Math.max(1, by - ay);
-  for (let y = ay; y <= by; y++) {
-    const t = (y - ay) / span;
-    const r = r0 + (r1 - r0) * t;
-    const r2 = r * r;
-    const x0 = Math.max(1, Math.floor(cx - r)), x1 = Math.min(G - 2, Math.ceil(cx + r));
-    const z0 = Math.max(1, Math.floor(cz - r)), z1 = Math.min(G - 2, Math.ceil(cz + r));
-    const yOff = y * G2;
-    for (let z = z0; z <= z1; z++) {
-      const dz2 = (z - cz) * (z - cz);
-      const row = yOff + z * G;
-      for (let x = x0; x <= x1; x++) {
-        if ((x - cx) * (x - cx) + dz2 <= r2) {
-          const idx = row + x;
-          if (m === 0) voxStamp[idx] = 0;
-          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
-        }
-      }
-    }
-  }
-}
-
-// Tapered Cylinder along X (Wing Pylons, Crossbars)
-function voxCylX(x0, x1, cy, cz, r0, r1, m) {
-  const ax = Math.max(1, Math.min(x0, x1) | 0), bx = Math.min(G - 2, Math.max(x0, x1) | 0);
-  const span = Math.max(1, bx - ax);
-  for (let x = ax; x <= bx; x++) {
-    const t = (x - ax) / span;
-    const r = r0 + (r1 - r0) * t;
-    const r2 = r * r;
-    const y0 = Math.max(1, Math.floor(cy - r)), y1 = Math.min(G - 2, Math.ceil(cy + r));
-    const z0 = Math.max(1, Math.floor(cz - r)), z1 = Math.min(G - 2, Math.ceil(cz + r));
-    for (let y = y0; y <= y1; y++) {
-      const dy2 = (y - cy) * (y - cy);
-      const yOff = y * G2;
-      for (let z = z0; z <= z1; z++) {
-        if (dy2 + (z - cz) * (z - cz) <= r2) {
-          const idx = yOff + z * G + x;
-          if (m === 0) voxStamp[idx] = 0;
-          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
-        }
-      }
-    }
-  }
-}
-
-function voxEllipsoid(cx, cy, cz, rx, ry, rz, m) {
-  const x0 = Math.max(1, Math.floor(cx - rx)), x1 = Math.min(G - 2, Math.ceil(cx + rx));
-  const y0 = Math.max(1, Math.floor(cy - ry)), y1 = Math.min(G - 2, Math.ceil(cy + ry));
-  const z0 = Math.max(1, Math.floor(cz - rz)), z1 = Math.min(G - 2, Math.ceil(cz + rz));
-  for (let y = y0; y <= y1; y++) {
-    const dy = (y - cy) / (ry || 1);
-    const yOff = y * G2;
-    for (let z = z0; z <= z1; z++) {
-      const dz = (z - cz) / (rz || 1);
-      const row = yOff + z * G;
-      for (let x = x0; x <= x1; x++) {
-        const dx = (x - cx) / (rx || 1);
-        if (dx * dx + dy * dy + dz * dz <= 1.0) {
-          const idx = row + x;
-          if (m === 0) voxStamp[idx] = 0;
-          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
-        }
-      }
-    }
-  }
-}
-
-function voxLine(x0, y0, z0, x1, y1, z1, r0, r1, m) {
-  const steps = Math.max(2, Math.ceil(Math.hypot(x1 - x0, y1 - y0, z1 - z0) * 1.2));
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps;
-    const r = r0 + (r1 - r0) * t;
-    voxEllipsoid(x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, z0 + (z1 - z0) * t, r, r, r, m);
-  }
-}
-
-// Chiseled Wedge Hull Generator (Star Destroyers, Venators, A-Wings, Interceptors)
-function voxWedgeZ(z0, z1, w0, w1, h0, h1, cy, mHull, mTrim, mTrench) {
-  const az = Math.min(z0, z1) | 0, bz = Math.max(z0, z1) | 0;
-  const span = Math.max(1, bz - az);
-  for (let z = az; z <= bz; z++) {
-    const t = (z - az) / span;
-    const hw = Math.max(1, w0 + (w1 - w0) * t);
-    const hh = Math.max(1, h0 + (h1 - h0) * t);
-    const x0 = Math.floor(100 - hw), x1 = Math.ceil(100 + hw);
-    for (let x = x0; x <= x1; x++) {
-      const xf = Math.abs(x - 100) / hw;
-      if (xf > 1.0) continue;
-      const localH = Math.max(1, Math.round(hh * (1.0 - xf * 0.88)));
-      for (let y = cy - localH; y <= cy + localH; y++) {
-        let mat = mHull;
-        if (Math.abs(y - cy) <= 1 && xf > 0.82) mat = mTrench; // Recessed side trench
-        else if (xf > 0.92 || ((z % 14 === 0) && y === cy + localH)) mat = mTrim; // Copper bevel & ribs
-        setV(x, y, z, mat);
-      }
-    }
-  }
-}
-
-// Procedural Shipyard Micro-Greebles & Copper Piping
-function addHullGreebles(x0, x1, yBase, z0, z1, count, seed, m1, m2) {
-  let s = (seed * 9301 + 49297) | 0;
-  for (let i = 0; i < count; i++) {
-    s = (s * 1664525 + 1013904223) | 0;
-    const u1 = ((s >>> 0) % 1000) / 1000;
-    s = (s * 1664525 + 1013904223) | 0;
-    const u2 = ((s >>> 0) % 1000) / 1000;
-    const gx = Math.round(x0 + u1 * (x1 - x0));
-    const gz = Math.round(z0 + u2 * (z1 - z0));
-    const gw = 2 + (i % 3), gh = 2 + (i % 4), gd = 2 + ((i + 1) % 4);
-    voxBox(gx - gw, yBase, gz - gd, gx + gw, yBase + gh, gz + gd, (i % 2 === 0) ? m1 : m2);
-  }
+function octProfile(w, h, cy = 0) {
+  return [
+    [-w * 0.45, cy + h], [w * 0.45, cy + h],
+    [w, cy + h * 0.4],   [w, cy - h * 0.4],
+    [w * 0.45, cy - h], [-w * 0.45, cy - h],
+    [-w, cy - h * 0.4],  [-w, cy + h * 0.4]
+  ];
 }
 
 /* ============================================================================
-   3. 25 HIGH-PRECISION 200×200×200 STAR WARS SHIP SCULPTORS
+   3. 25 AUTHENTIC STAR WARS HARD-SURFACE & HOLLOW-RIB SHIP GENERATORS
    ============================================================================ */
-function sculptShip200(ship) {
-  clearGrid200();
+function buildStarshipMesh(ship) {
+  beginMesh();
   const id = ship.chassis || 'xwing';
-  const seed = Number(ship.seed) || 1;
   const wKit = ship.wings || 'attack';
 
-  // Universal Forged Copper & Brushed Steel Engineering Display Pedestal (Optional subtle cradle)
-  // Ships float above a sleek machined copper-and-steel collector telemetry ring at Y=12..18
-  voxCylY(100, 10, 15, 100, 46, 42, 3);
-  voxCylY(100, 15, 17, 100, 40, 38, 2);
-  voxCylY(100, 14, 18, 100, 34, 34, 1);
-  // Twin angled steel museum mounting struts up to Y=55
-  voxLine(100, 16, 86, 100, 56, 94, 3.2, 2.2, 3);
-  voxLine(100, 16, 114, 100, 56, 106, 2.8, 2.0, 2);
-
   if (id === 'escape_pod') {
-    // RE-ENGINEERED CLASS-4 ARMORED INDUSTRIAL JETTISON POD (Multi-stage CSG + Copper Ribs + Thrusters)
-    voxCylZ(100, 102, 42, 142, 28, 25, 1);     // Heavy main pressure hull
-    voxCylZ(100, 102, 142, 172, 25, 12, 2);    // Conical copper heat-shield nose cone
-    voxCylZ(100, 102, 172, 180, 9, 9, 4);      // Forward umbilical docking ring
-    voxCylZ(100, 102, 166, 182, 5, 5, 0);      // Carved hollow docking bore!
-    // Raised Forged-Copper Circumferential Compression Rings & Longitudinal Flutes
-    for (const rz of [54, 76, 98, 120, 140]) {
-      voxCylZ(100, 102, rz - 2, rz + 2, 30, 30, 2);
-    }
-    for (let a = 0; a < 8; a++) {
-      const ang = (a / 8) * Math.PI * 2;
-      const fx = 100 + Math.cos(ang) * 28, fy = 102 + Math.sin(ang) * 28;
-      voxCylZ(fx, fy, 46, 138, 2.5, 2.0, (a % 2 === 0) ? 3 : 2);
-    }
-    // Deep-Carved Upper Armored Viewport Bezel with Cross-Mullions
-    voxCylY(100, 124, 134, 122, 12, 10, 4);
-    voxCylY(100, 126, 136, 122, 8, 8, 3);
-    voxBox(99, 128, 114, 101, 134, 130, 2);
-    // 4 Aft Retro-Rocket Thruster Bells with Carved Exhaust Throats
-    for (const [ox, oy] of [[-15,-15],[15,-15],[-15,15],[15,15]]) {
-      voxCylZ(100 + ox, 102 + oy, 24, 44, 9, 12, 3);
-      voxCylZ(100 + ox, 102 + oy, 22, 30, 6, 6, 0); // Carved hollow bell
-      voxEllipsoid(100 + ox, 102 + oy, 31, 5, 5, 3, 5); // Ignited core
+    // CLASS-4 JETTISON ESCAPE POD (16-Faceted Precision Cylinder + Copper Ribs + Thrusters + Internal Core)
+    addInternalReactorSpine(-42, 42, 9);
+    addLathe(0, 0, 0, [
+      [-48, 24, 2], [-40, 28, 1], [-18, 28, 2], [-12, 28, 1],
+      [12, 27, 1],  [18, 28, 2],  [36, 25, 1],  [56, 13, 2], [64, 7, 4]
+    ], 14, 1, 'Z', { capStart: true, capEnd: true, capMat: 3 });
+    // Upper Armored Viewport Bezel & Glass
+    addBox3D(-11, 22, 12, 11, 31, 32, 3, { canCutaway: false });
+    addStrut(-11, 31, 22, 11, 31, 22, 2, 2.2);
+    addStrut(0, 31, 12, 0, 31, 32, 2, 2.2);
+    // 4 Flared Aft Gimbal Rocket Nozzles
+    for (const [ox, oy] of [[-13,-13],[13,-13],[-13,13],[13,13]]) {
+      addLathe(ox, oy, 0, [[-64, 8, 5], [-56, 9, 3], [-48, 6, 2]], 8, 3, 'Z', { canCutaway: false, capStart: true, capMat: 5 });
     }
   }
   else if (id === 'xwing') {
-    // T-65B X-WING STARFIGHTER (200³ Solid CSG with Carved Turbine Intakes & R2 Socket)
-    voxCylZ(100, 100, 38, 108, 13, 11, 1);     // Rear fuselage engine block
-    voxCylZ(100, 100, 108, 182, 11, 4, 1);     // Long chiseled nose cone
-    voxBox(88, 98, 110, 112, 103, 182, 2);     // Copper/Red lateral squadron chine stripe
-    voxEllipsoid(100, 104, 184, 4.5, 3.5, 5, 3); // Nose sensor cone
-    // Recessed Cockpit Canopy + R2 Astromech Droid Behind Canopy
-    voxEllipsoid(100, 111, 112, 8, 7, 22, 3);
-    voxLine(93, 112, 118, 107, 112, 118, 1.5, 1.5, 2); // Canopy copper frame arch
-    voxEllipsoid(100, 114, 86, 5.5, 5.5, 5.5, 4);      // R2 Astromech dome!
-    // 4 Attack S-Foils + 4 Hollowed Turbine Intakes + 4 Wingtip Taim & Bak Cannons
-    const spreadY = (wKit === 'armored') ? 6 : 24;
+    // T-65B X-WING STARFIGHTER (Chiseled Hexagonal Fuselage + S-Foils + 12-Sided Turbines + R2 Dome)
+    addInternalReactorSpine(-52, 48, 4.5);
+    addLoftZ([
+      { z: -58, pts: octProfile(11, 9, 0), mat: 2 },
+      { z: -12, pts: octProfile(12, 10, 0), mat: 1 },
+      { z: 24,  pts: octProfile(9, 7.5, -1), mat: 1 },
+      { z: 68,  pts: octProfile(4.5, 3.5, -1), mat: 1 },
+      { z: 78,  pts: octProfile(2.0, 1.8, -1), mat: 3 }
+    ], 1, { subdivU: 1, subdivV: 2 });
+    // Faceted Transparisteel Canopy + R2 Astromech Dome
+    addLoftZ([
+      { z: -14, pts: octProfile(7, 5, 8), mat: 3 },
+      { z: 6,   pts: octProfile(6.5, 6.5, 9), mat: 3 },
+      { z: 26,  pts: octProfile(3.5, 2.5, 5), mat: 3 }
+    ], 3, { canCutaway: false });
+    addLathe(0, 10, -22, [[0, 5.5, 4], [4, 4.8, 4], [7, 2.0, 5]], 10, 4, 'Y', { capEnd: true, canCutaway: false });
+
+    // 4 Attack S-Foils + 4 Precision Cylindrical Engines + 4 Wingtip Laser Cannons
+    const openY = (wKit === 'armored') ? 5 : 22;
     for (const sx of [-1, 1]) {
       for (const sy of [-1, 1]) {
-        for (let d = 10; d <= 76; d++) {
-          const wx = 100 + sx * d;
-          const wy = Math.round(100 + sy * (d / 76) * spreadY);
-          const mat = (d > 56 && d < 68) ? 2 : ((d % 16 === 0) ? 3 : 1);
-          voxBox(wx, wy - 1, 46, wx, wy + 1, 84, mat);
-        }
-        // Incom 4L4 Fusial Thrust Engine Cylinder + Carved Front Intake!
-        const ex = 100 + sx * 21, ey = Math.round(100 + sy * (spreadY * 0.28));
-        voxCylZ(ex, ey, 34, 92, 7.5, 7.5, 3);
-        voxCylZ(ex, ey, 85, 94, 5.2, 5.2, 0);          // Carved intake cavity!
-        voxBox(ex - 1, ey - 6, 86, ex + 1, ey + 6, 91, 2); // Intake splitter vane
-        voxCylZ(ex, ey, 24, 36, 4.5, 5.5, 2);          // Exhaust nozzle
-        voxEllipsoid(ex, ey, 23, 3.5, 3.5, 2, 5);      // Engine glow
-        // Wingtip Laser Cannon + Flash Suppressor
-        const tx = 100 + sx * 76, ty = 100 + sy * spreadY;
-        voxCylZ(tx, ty, 44, 158, 2.6, 1.5, 3);
-        voxCylZ(tx, ty, 148, 154, 3.2, 3.2, 4);
-        voxEllipsoid(tx, ty, 160, 2.2, 2.2, 3, 5);
+        const v0 = [sx * 10, sy * 2, -52];
+        const v1 = [sx * 72, sy * openY, -46];
+        const v2 = [sx * 72, sy * openY, -16];
+        const v3 = [sx * 10, sy * 2, -12];
+        addWingPanel(v0, v1, v2, v3, 1, 2, 2);
+        // 12-Sided Turbine Intake & Aft Nozzle
+        const ex = sx * 20, ey = sy * (openY * 0.26 + 3);
+        addLathe(ex, ey, 0, [[-64, 4.5, 5], [-54, 6.2, 3], [-10, 6.8, 2], [-8, 5.0, 3]], 10, 3, 'Z', {
+          capStart: true, capEnd: true, capMat: 5, canCutaway: false
+        });
+        // Wingtip Taim & Bak Laser Cannon
+        const tx = sx * 72, ty = sy * openY;
+        addLathe(tx, ty, 0, [[-48, 2.2, 3], [32, 1.4, 3], [42, 2.4, 4], [48, 1.2, 5]], 6, 3, 'Z', { canCutaway: false });
       }
     }
   }
   else if (id === 'tie_ln' || id === 'tie_interceptor' || id === 'tie_advanced' || id === 'tie_defender' || id === 'tie_bomber') {
-    // TIE SERIES FAMILY (TIE/ln, Interceptor, Vader Advanced x1, Bomber, Tri-Wing Defender)
+    // TIE SERIES (Faceted Ball Cockpit + Octagonal Viewport + Razor-Sharp Flat Solar Panels)
+    addInternalReactorSpine(-18, 18, 8);
     if (id === 'tie_bomber') {
-      // Twin Side-by-Side Cylindrical Hull Pods
-      voxCylZ(84, 100, 62, 144, 16, 14, 1);
-      voxCylZ(116, 100, 62, 144, 16, 14, 1);
-      voxCylX(80, 120, 100, 102, 9, 9, 2);
-      voxCylZ(84, 100, 140, 148, 10, 10, 3); // Viewport pod
-      voxCylZ(116, 94, 140, 152, 6, 6, 5);   // Torpedo chute
+      for (const ox of [-18, 18]) {
+        addLathe(ox, 0, 0, [[-38, 14, 2], [-28, 16, 1], [28, 16, 1], [38, 11, 3]], 12, 1, 'Z', { capStart: true, capEnd: true, capMat: 3 });
+      }
+      addLathe(0, 0, 0, [[-18, 8, 2], [18, 8, 2]], 8, 2, 'X', { canCutaway: false });
     } else {
-      voxEllipsoid(100, 100, 100, 21, 21, 21, 1); // Spherical ball cockpit
-      voxCylZ(100, 100, 116, 123, 13, 13, 2);     // Octagonal viewport bezel
-      voxCylZ(100, 100, 118, 124, 10, 10, 3);     // Recessed dark glass
-      // Viewport radial spokes
-      voxLine(90, 100, 122, 110, 100, 122, 1.2, 1.2, 2);
-      voxLine(100, 90, 122, 100, 110, 122, 1.2, 1.2, 2);
-      voxEllipsoid(93, 83, 118, 2.5, 2.5, 4, 5);  // Chin lasers
-      voxEllipsoid(107, 83, 118, 2.5, 2.5, 4, 5);
-    }
-    if (id === 'tie_advanced' || id === 'tie_defender') {
-      voxBox(82, 90, 54, 118, 110, 96, 2); // Extended aft hyperdrive collar
+      // 14-Sided Spherical Ball Cockpit
+      addLathe(0, 0, 0, [
+        [-22, 6, 2], [-18, 15, 1], [-9, 21, 1], [0, 23, 1], [9, 21, 1], [18, 15, 2], [23, 11, 3]
+      ], 14, 1, 'Z', { capStart: true, capEnd: true, capMat: 3 });
+      // Octagonal Viewport Spokes
+      for (let s = 0; s < 8; s++) {
+        const a = (s / 8) * Math.PI * 2;
+        addStrut(0, 0, 23.5, Math.cos(a) * 11, Math.sin(a) * 11, 23.2, 2, 1.6);
+      }
     }
 
-    const wingSpanX = (id === 'tie_bomber') ? 68 : 56;
-    voxCylX(100 - wingSpanX, 100 + wingSpanX, 100, 100, 6.5, 6.5, 1); // Wing pylons
+    const spanX = (id === 'tie_bomber') ? 56 : 46;
+    addLathe(0, 0, 0, [[-spanX, 5.5, 2], [spanX, 5.5, 2]], 8, 1, 'X', { canCutaway: false });
 
-    const wingsCount = (id === 'tie_defender') ? 3 : 2;
-    for (let w = 0; w < wingsCount; w++) {
+    const wingCount = (id === 'tie_defender') ? 3 : 2;
+    for (let w = 0; w < wingCount; w++) {
       if (id === 'tie_defender') {
         const ang = (w / 3) * Math.PI * 2 + Math.PI / 6;
-        const px = Math.round(100 + Math.cos(ang) * 58);
-        const py = Math.round(100 + Math.sin(ang) * 58);
-        voxLine(100, 100, 88, px, py, 88, 5, 4, 1);
-        voxBox(px - 8, py - 8, 42, px + 8, py + 8, 152, 3);
-        voxBox(px - 9, py - 9, 40, px + 9, py + 9, 46, 2);
+        const px = Math.cos(ang) * 48, py = Math.sin(ang) * 48;
+        addStrut(0, 0, 0, px, py, 0, 2, 3.0);
+        addWingPanel([px, py, -46], [px*1.25, py*1.25, 42], [px*0.75, py*0.75, 58], [px*0.75, py*0.75, -46], 3, 2, 2);
         continue;
       }
       const sx = (w === 0) ? -1 : 1;
-      const wx = 100 + sx * wingSpanX;
-      for (let dy = -64; dy <= 64; dy++) {
-        const ay = Math.abs(dy);
-        const bend = (id !== 'tie_ln' && ay > 18) ? Math.round((ay - 18) * 0.48) : 0;
-        const px = wx - sx * bend;
-        const maxZ = (id === 'tie_interceptor') ? Math.round(72 - ay * 0.45) : Math.round(54 - ay * 0.25);
-        for (let dz = -52; dz <= maxZ; dz++) {
-          if (id === 'tie_interceptor' && dz > 12 && ay < (dz - 12) * 0.65) continue; // Forward dagger notch!
-          const isRib = (ay > 59 || dz < -47 || dz > maxZ - 4 || ay < 3 || Math.abs(dz) < 3 || Math.abs(ay - Math.abs(dz)) < 2);
-          setV(px, 100 + dy, 100 + dz, isRib ? 2 : 3);
+      const wx = sx * spanX;
+      if (id === 'tie_ln') {
+        // 6-Segment Hexagonal Flat Solar Array with Forged Copper Radial Frame!
+        const hex = [
+          [wx, 62, 26], [wx, 62, -26], [wx, 0, -52],
+          [wx, -62, -26], [wx, -62, 26], [wx, 0, 52]
+        ];
+        const c = [wx, 0, 0];
+        for (let i = 0; i < 6; i++) {
+          const a = hex[i], b = hex[(i + 1) % 6];
+          addFace([c, a, b], 3, { ribEdges: true, rimMat: 2 });
+          addFace([c, b, a], 3, { ribEdges: true, rimMat: 2 });
+          addStrut(c[0], c[1], c[2], a[0], a[1], a[2], 2, 2.2);
+          addStrut(a[0], a[1], a[2], b[0], b[1], b[2], 2, 2.6);
         }
+      } else if (id === 'tie_interceptor') {
+        // Bent Upper & Lower Forward-Swept Split Dagger Solar Wings!
+        const bx = wx - sx * 18;
+        for (const sy of [-1, 1]) {
+          // Rear triangle + Upper/Lower Forward Daggers
+          addWingPanel([wx, 0, -44], [wx, sy * 22, -40], [bx, sy * 58, 68], [wx, sy * 16, 18], 3, 2, 2);
+          addLathe(wx, sy * 20, 0, [[10, 2, 4], [56, 1.2, 5]], 6, 4, 'Z', { canCutaway: false });
+        }
+      } else {
+        // Vader TIE Advanced x1 / TIE Bomber Angled Bent Solar Wings
+        const bx = wx - sx * 16;
+        addWingPanel([wx, -22, -46], [wx, 22, -46], [wx, 22, 46], [wx, -22, 46], 3, 2, 2);
+        addWingPanel([wx, 22, -46], [bx, 58, -36], [bx, 58, 36], [wx, 22, 46], 3, 2, 2);
+        addWingPanel([wx, -22, -46], [wx, -22, 46], [bx, -58, 36], [bx, -58, -36], 3, 2, 2);
       }
     }
   }
   else if (id === 'falcon') {
-    // YT-1300 MILLENNIUM FALCON (Saucer + Recessed Maintenance Pits + Mandibles + Starboard Cockpit)
-    voxCylY(94, 92, 108, 92, 62, 58, 1);         // Main saucer hull
-    voxCylY(94, 96, 104, 92, 65, 65, 2);         // Saucer copper rim docking ring
-    voxEllipsoid(94, 110, 92, 22, 7, 22, 2);     // Central turret dome
-    voxCylZ(94, 116, 92, 118, 2.2, 1.5, 5);      // Dorsal quad laser cannon
-    // Port & Starboard Docking Rings
-    voxCylX(26, 36, 100, 92, 13, 11, 2);
-    voxCylX(152, 162, 100, 92, 13, 11, 2);
-    // Forward Tapered Mandibles with Carved Maintenance Trenches
-    for (let z = 135; z <= 186; z++) {
-      const t = (z - 135) / 51;
-      const w = Math.round(22 * (1 - t * 0.55));
-      voxBox(62, 95, z, 62 + w, 105, z, (z % 12 === 0) ? 2 : 1);
-      voxBox(126 - w, 95, z, 126, 105, z, (z % 12 === 0) ? 2 : 1);
+    // YT-1300 MILLENNIUM FALCON (16-Faceted Saucer + Tapered Mandibles + Offset Cockpit + Blue Sublight Arc)
+    addInternalReactorSpine(-45, 35, 12);
+    addLathe(-4, 0, -10, [
+      [-9, 46, 2], [-5, 58, 1], [0, 62, 2], [5, 58, 1], [10, 26, 2], [14, 14, 4]
+    ], 16, 1, 'Y', { capStart: true, capEnd: true, capMat: 3 });
+    // Twin Forward Tapered Mandibles
+    for (const mx of [-22, 14]) {
+      addLoftZ([
+        { z: 28, pts: octProfile(12, 5.5, 0), mat: 1 },
+        { z: 78, pts: octProfile(6, 3.5, 0), mat: 2 }
+      ], 1, { subdivU: 1, subdivV: 2 });
+      // Shift lofted mandible X
+      for (let i = curFaces.length - 16; i < curFaces.length; i++) {
+        curFaces[i].verts.forEach(v => v[0] += mx);
+        curFaces[i].cx += mx;
+      }
     }
-    // Starboard Offset Cylindrical Outrigger Cockpit & Corridor
-    voxLine(132, 100, 96, 168, 100, 122, 9, 8, 1);
-    voxCylZ(168, 100, 118, 156, 9, 5, 2);
-    voxEllipsoid(168, 101, 157, 5, 5, 5, 3);
-    // Port Sensor Dish + 6 Rear Engine Exhaust Vents + Glowing Blue Sublight Strip
-    voxCylZ(64, 114, 108, 114, 10, 2, 4);
-    for (const ox of [-24, -8, 8, 24]) voxCylY(94 + ox, 106, 110, 62, 5, 5, 3);
-    voxBox(62, 98, 29, 126, 102, 33, 5);
+    // Starboard Offset Cylindrical Outrigger Cockpit & Access Tube
+    addLathe(0, 0, -4, [[28, 7, 1], [62, 6, 2]], 8, 1, 'X', { canCutaway: false });
+    addLathe(62, 0, 0, [[-12, 8.5, 2], [28, 7.5, 1], [44, 4.0, 3]], 10, 1, 'Z', { capEnd: true, capMat: 5, canCutaway: false });
+    // Glowing Rear Sublight Engine Strip
+    addBox3D(-34, -3, -72, 26, 3, -66, 5, { canCutaway: false, isCore: true });
+  }
+  else if (id === 'star_destroyer' || id === 'venator' || id === 'executor_ssd') {
+    // CAPITAL WEDGE DREADNOUGHTS (ISD-I, Venator, Executor Super Star Destroyer)
+    const isSSD = (id === 'executor_ssd');
+    const isVen = (id === 'venator');
+    const halfW = isSSD ? 44 : (isVen ? 48 : 58);
+    addInternalReactorSpine(-64, 64, 9);
+    // Razor-Sharp Faceted Chiseled Wedge Hull
+    const zBack = -74, zMid = isSSD ? -35 : -58, zTip = 84;
+    const topPeak = [0, 15, zMid], botPeak = [0, -11, zMid];
+    const nose = [0, 0, zTip];
+    const portWing = [-halfW, 0, zMid], stbdWing = [halfW, 0, zMid];
+    const aftPort = [-halfW * 0.65, 0, zBack], aftStbd = [halfW * 0.65, 0, zBack];
+
+    // Subdivided Upper & Lower Wedge Armor Plates
+    addSubdividedQuad(topPeak, stbdWing, nose, nose, 3, 4, 1, { ribEdges: true });
+    addSubdividedQuad(portWing, topPeak, nose, nose, 3, 4, 1, { ribEdges: true });
+    addSubdividedQuad(stbdWing, botPeak, nose, nose, 2, 3, 2, { ribEdges: true });
+    addSubdividedQuad(botPeak, portWing, nose, nose, 2, 3, 2, { ribEdges: true });
+    addSubdividedQuad(aftPort, aftStbd, stbdWing, portWing, 2, 2, 2, { ribEdges: true });
+
+    // Terraced Command Superstructure & Bridge Tower(s)
+    addBox3D(-22, 10, -54, 22, 19, 10, 2, { subdiv: 2 });
+    addBox3D(-14, 19, -48, 14, 26, -8, 1);
+    if (isVen) {
+      // Twin Venator Bridge Towers
+      for (const ox of [-9, 9]) addBox3D(ox - 4, 26, -46, ox + 4, 42, -32, 2, { canCutaway: false });
+    } else {
+      // Iconic ISD Hammerhead Bridge + Twin Spherical Shield Generator Domes
+      addBox3D(-4, 26, -44, 4, 38, -34, 2, { canCutaway: false });
+      addBox3D(-18, 38, -46, 18, 45, -32, 1, { canCutaway: false });
+      for (const ox of [-12, 12]) {
+        addLathe(ox, 45, -39, [[0, 4.5, 4], [4, 4.5, 4], [6, 1.5, 4]], 8, 4, 'Y', { capEnd: true, canCutaway: false });
+      }
+    }
+    // 3 Stern Ion Drive Thruster Nozzles
+    for (const ox of [-18, 0, 18]) {
+      addLathe(ox, 2, 0, [[-82, 6, 5], [-72, 8.5, 3]], 8, 3, 'Z', { capStart: true, capMat: 5, canCutaway: false });
+    }
+  }
+  else if (id === 'death_star') {
+    // DS-1 / DS-II ORBITAL BATTLE STATION (Geodesic Lathed Sphere + Equatorial Trench + Superlaser Dish + Core!)
+    // Central Glowing Kyber Reactor Core & 8 Tributary Beams inside the Sphere!
+    addLathe(0, 0, 0, [[-18, 8, 5], [0, 18, 5], [18, 8, 5]], 10, 5, 'Y', { isCore: true, canCutaway: false });
+    addLathe(0, -56, 0, [[0, 10, 4], [112, 10, 4]], 8, 4, 'Y', { isCore: true, canCutaway: false });
+
+    // Outer 16-Segment Lathed Armored Hemisphere Bands with Recessed Equatorial Trench
+    addLathe(0, 0, 0, [
+      [-60, 18, 2], [-48, 42, 1], [-28, 55, 1], [-6, 61, 2], [-5, 54, 3],
+      [5, 54, 3],   [6, 61, 2],   [28, 55, 1],  [48, 42, 1], [60, 18, 2]
+    ], 16, 1, 'Y', { capStart: true, capEnd: true, capMat: 2 });
+
+    // Northern Hemisphere Superlaser Dish + Ignited Green/Cyan Planet-Killer Beam!
+    addLathe(-22, 28, 46, [[0, 18, 2], [4, 12, 3], [7, 4, 5]], 12, 2, 'Z', { canCutaway: false });
+    addLathe(-22, 28, 0, [[50, 2.5, 5], [92, 6.5, 5]], 8, 5, 'Z', { isCore: true, canCutaway: false, capEnd: true, capMat: 5 });
   }
   else if (id === 'slave1') {
-    // FIRESPRAY-31 PATROL CRAFT (SLAVE I — VERTICAL FLIGHT ORIENTATION)
-    voxCylZ(100, 68, 80, 96, 44, 38, 2);         // Elliptical curved base skirt
-    voxLine(100, 72, 92, 100, 158, 82, 22, 11, 1);// Sloped vertical green/steel fuselage
-    voxEllipsoid(100, 126, 98, 14, 24, 11, 3);   // Dark armored canopy
-    voxBox(54, 96, 84, 146, 112, 94, 4);         // Twin side gyro stabilizer wings
-    voxCylZ(90, 56, 92, 138, 3, 2, 5);           // Twin lower rotating blaster cannons
-    voxCylZ(110, 56, 92, 138, 3, 2, 5);
+    // FIRESPRAY-31 PATROL CRAFT (SLAVE I — Curved Elliptical Base Skirt + Vertical Fuselage)
+    addInternalReactorSpine(-25, 35, 8);
+    addLathe(0, -32, -8, [[-10, 42, 2], [0, 46, 2], [10, 36, 1]], 14, 2, 'Z', { capStart: true });
+    addLoftZ([
+      { z: -18, pts: octProfile(20, 42, 10), mat: 1 },
+      { z: 12,  pts: octProfile(14, 36, 8),  mat: 3 },
+      { z: 24,  pts: octProfile(8, 20, -10), mat: 2 }
+    ], 1);
+    addBox3D(-46, -6, -12, 46, 8, 4, 4, { canCutaway: false }); // Gyro wings
   }
-  else if (id === 'ywing') {
-    // BTL-A4 Y-WING ASSAULT BOMBER (Nose Pod + Ion Turret + Twin Open-Frame Nacelles)
-    voxWedgeZ(106, 182, 16, 7, 8, 4, 100, 1, 2, 3); // Chiseled nose pod
-    voxEllipsoid(100, 109, 138, 8, 6, 16, 3);       // Canopy
-    voxCylY(100, 112, 122, 128, 4, 3, 4);           // Dorsal Ion Cannon Turret
-    voxCylX(44, 156, 100, 108, 7, 7, 2);            // Central wing crossbar
-    for (const sx of [-48, 48]) {
-      voxCylZ(100 + sx, 100, 110, 128, 11, 9, 2);   // Forward engine domes
-      // 4 Open-Frame Support Struts Along Engine Nacelles
-      for (const [ox, oy] of [[-6,-6],[6,-6],[-6,6],[6,6]]) {
-        voxCylZ(100 + sx + ox, 100 + oy, 28, 110, 2, 2, 3);
-      }
-      voxCylZ(100 + sx, 100, 42, 96, 5, 5, 1);      // Inner reactor core
-      voxCylZ(100 + sx, 100, 22, 32, 9, 11, 4);     // Rear thruster ring
-      voxEllipsoid(100 + sx, 100, 21, 6, 6, 3, 5);
-    }
-  }
-  else if (id === 'awing') {
-    // RZ-1 A-WING INTERCEPTOR
-    voxWedgeZ(52, 176, 42, 8, 9, 3, 100, 1, 2, 3);
-    voxEllipsoid(100, 109, 112, 10, 7, 22, 3);
-    for (const sx of [-32, 32]) {
-      voxBox(100 + sx - 2, 82, 44, 100 + sx + 2, 126, 86, 2); // Canted stabilizer fins
-      voxCylZ(100 + sx * 0.55, 100, 32, 54, 9, 8, 3);         // Twin oversized engines
-      voxEllipsoid(100 + sx * 0.55, 100, 31, 6, 6, 3, 5);
-    }
-  }
-  else if (id === 'bwing') {
-    // A/SF-01 B-WING HEAVY ASSAULT STARFIGHTER
-    voxCylZ(100, 154, 82, 156, 11, 6, 1);        // Top gyro-stabilized cockpit pod
-    voxEllipsoid(100, 158, 132, 7, 6, 14, 3);    // Canopy
-    voxBox(97, 36, 84, 103, 152, 118, 1);        // Tall vertical main airfoil blade
-    voxBox(96, 36, 114, 104, 152, 120, 2);       // Copper leading edge
-    voxBox(56, 92, 88, 144, 98, 116, 2);         // Horizontal S-foils
-    voxCylZ(100, 34, 78, 162, 8, 4, 4);          // Lower heavy autoblasters & ion pod
-    voxEllipsoid(100, 34, 164, 4, 4, 4, 5);
-  }
-  else if (id === 'uwing') {
-    // UT-60D U-WING GUNSHIP / TROOP TRANSPORT
-    voxWedgeZ(62, 154, 18, 11, 10, 5, 98, 1, 2, 3); // Troop transport hull
-    voxEllipsoid(100, 108, 132, 9, 6, 16, 3);
-    // Long Dual Forward Prongs + Swept Strike Wings + 4 Engines
-    for (const sx of [-1, 1]) {
-      voxBox(100 + sx * 16, 98, 110, 100 + sx * 24, 103, 186, 2);
-      voxLine(100 + sx * 20, 102, 96, 100 + sx * 86, 102, 64, 5, 2, 1);
-      voxCylZ(100 + sx * 22, 108, 44, 88, 6, 6, 3);
-      voxCylZ(100 + sx * 36, 108, 48, 88, 6, 6, 3);
+  else if (id === 'razor_crest') {
+    // ST-70 RAZOR CREST GUNSHIP (Chiseled Hull + Twin Massive High-Mounted Turbine Nacelles)
+    addInternalReactorSpine(-46, 48, 7);
+    addLoftZ([
+      { z: -52, pts: octProfile(18, 13, -6), mat: 2 },
+      { z: 18,  pts: octProfile(22, 15, -4), mat: 1 },
+      { z: 58,  pts: octProfile(13, 10, -6), mat: 3 }
+    ], 1, { subdivU: 1, subdivV: 2 });
+    addBox3D(-48, 8, -22, 48, 14, 14, 2);
+    for (const sx of [-38, 38]) {
+      addLathe(sx, 16, 0, [[-44, 9, 5], [-34, 14, 1], [24, 14, 2], [32, 11, 3]], 12, 1, 'Z', {
+        capStart: true, capEnd: true, capMat: 5
+      });
     }
   }
   else if (id === 'lambda_shuttle') {
-    // LAMBDA-CLASS T-4a IMPERIAL SHUTTLE (Tall Dorsal Wing + Twin Folding Lower Gull Wings)
-    voxWedgeZ(68, 168, 16, 8, 12, 5, 94, 1, 2, 3);
-    voxBox(88, 96, 142, 112, 102, 158, 3);       // Sloped cockpit viewport
-    // Tall Central Dorsal Stabilizer Fin
-    for (let y = 104; y <= 184; y++) {
-      const zStart = 64 + Math.round((y - 104) * 0.45);
-      voxBox(98, y, zStart, 102, y, 126, (y % 16 === 0) ? 2 : 1);
-    }
-    // Twin Lower Dihedral Gull Wings
+    // LAMBDA-CLASS T-4a IMPERIAL SHUTTLE (Tri-Wing Dihedral Foil)
+    addInternalReactorSpine(-44, 48, 6);
+    addLoftZ([
+      { z: -48, pts: octProfile(15, 11, -8), mat: 1 },
+      { z: 32,  pts: octProfile(14, 10, -8), mat: 1 },
+      { z: 64,  pts: octProfile(7, 5, -10),  mat: 3 }
+    ], 1);
+    // Tall Dorsal Fin + Twin Folding Lower Gull Wings
+    addWingPanel([0, 2, -44], [0, 72, -28], [0, 72, -8], [0, 2, 18], 1, 2, 3);
     for (const sx of [-1, 1]) {
-      voxLine(100 + sx * 14, 92, 96, 100 + sx * 76, 48, 88, 4, 2, 2);
-      voxLine(100 + sx * 14, 92, 74, 100 + sx * 76, 48, 68, 4, 2, 1);
-      voxCylZ(100 + sx * 16, 92, 110, 152, 3, 2, 5);
+      addWingPanel([sx * 12, -8, -38], [sx * 64, -46, -24], [sx * 64, -46, -4], [sx * 12, -8, 16], 1, 2, 2);
     }
   }
-  else if (id === 'razor_crest') {
-    // ST-70 ASSAULT SHIP (RAZOR CREST — Twin Huge High-Mounted Turbine Engines)
-    voxWedgeZ(52, 166, 20, 13, 14, 8, 94, 1, 2, 3);
-    voxBox(88, 102, 142, 112, 108, 162, 3);      // Dark cockpit glass
-    voxBox(54, 106, 84, 146, 112, 118, 2);       // High shoulder wing pylon
-    for (const sx of [-42, 42]) {
-      voxCylZ(100 + sx, 116, 56, 136, 14, 13, 1);// Massive twin engine nacelles
-      voxCylZ(100 + sx, 116, 118, 136, 15, 15, 2);// Copper front cowling ring
-      voxCylZ(100 + sx, 116, 128, 138, 10, 10, 0);// Carved turbine intake!
-      voxEllipsoid(100 + sx, 116, 54, 9, 9, 4, 5);
-      voxCylZ(100 + sx * 0.35, 84, 140, 182, 3, 2, 4); // Heavy chin cannons
+  else if (id === 'ywing' || id === 'naboo_n1' || id === 'arc170') {
+    // TWIN-NACELLE STARFIGHTERS (Y-Wing, Naboo N-1, ARC-170)
+    addInternalReactorSpine(-48, 52, 5);
+    addLoftZ([
+      { z: -48, pts: octProfile(11, 8, 0), mat: 2 },
+      { z: 22,  pts: octProfile(12, 9, 0), mat: 1 },
+      { z: 68,  pts: octProfile(5, 4, 0),  mat: 3 }
+    ], 1);
+    addWingPanel([-56, 0, -14], [56, 0, -14], [56, 0, 18], [-56, 0, 18], 2, 2, 2);
+    for (const sx of [-46, 46]) {
+      addLathe(sx, 0, 0, [[-62, 6, 5], [-46, 10, 1], [28, 10, 2], [44, 4, 4]], 10, 2, 'Z', {
+        capStart: true, capEnd: true, capMat: 5
+      });
     }
   }
-  else if (id === 'naboo_n1') {
-    // NABOO N-1 ROYAL STARFIGHTER
-    voxCylZ(100, 100, 22, 168, 11, 3, 1);        // Sleek hull + long tail finial
-    voxEllipsoid(100, 109, 116, 7, 6, 16, 3);
-    voxEllipsoid(100, 111, 96, 5, 5, 5, 4);      // R2 Dome
-    voxCylX(34, 166, 100, 132, 6, 4, 1);         // Forward swept main wing
-    for (const sx of [-62, 62]) {
-      voxCylZ(100 + sx, 100, 62, 174, 9, 2, 2);  // Chrome/Copper J-type nacelles + long tail spikes
-      voxEllipsoid(100 + sx, 100, 175, 7, 7, 7, 4);
-    }
-  }
-  else if (id === 'jedi_eta2') {
-    // ETA-2 ACTIS JEDI INTERCEPTOR
-    voxCylZ(100, 100, 62, 156, 14, 4, 1);
-    voxEllipsoid(100, 108, 96, 9, 7, 18, 3);
+  else {
+    // ALL OTHER REBEL / IMPERIAL / REPUBLIC HULLS (A-Wing, B-Wing, U-Wing, Jedi Eta-2, LAAT/i, CR90, Nebulon-B)
+    addInternalReactorSpine(-54, 54, 7);
+    addLoftZ([
+      { z: -58, pts: octProfile(22, 11, 0), mat: 2 },
+      { z: 0,   pts: octProfile(26, 13, 0), mat: 1 },
+      { z: 48,  pts: octProfile(14, 7, 0),  mat: 1 },
+      { z: 74,  pts: octProfile(6, 4, 0),   mat: 4 }
+    ], 1, { subdivU: 1, subdivV: 2 });
     for (const sx of [-1, 1]) {
-      for (let z = 64; z <= 168; z++) {
-        const w = Math.round(58 * (1 - (z - 64) / 135));
-        if (z > 118 && w < 28) continue;         // Forward fork notch
-        voxBox(100 + sx * 14, 99, z, 100 + sx * (14 + w), 101, z, (z % 10 === 0) ? 2 : 1);
-      }
-      // Angled S-Foil Radiator Panels
-      voxLine(100 + sx * 48, 101, 78, 100 + sx * 56, 122, 98, 2, 2, 4);
-      voxLine(100 + sx * 48, 99, 78, 100 + sx * 56, 78, 98, 2, 2, 4);
-    }
-  }
-  else if (id === 'arc170') {
-    // ARC-170 HEAVY RECONNAISSANCE STARFIGHTER
-    voxCylZ(100, 100, 48, 172, 13, 6, 1);
-    voxEllipsoid(100, 110, 122, 8, 6, 20, 3);
-    voxBox(22, 99, 86, 178, 102, 118, 1);        // Wide main wings
-    for (const sx of [-1, 1]) {
-      voxCylZ(100 + sx * 22, 104, 52, 118, 8, 8, 2); // Twin heavy engines
-      // Upper & Lower Secondary S-Foils + Wingtip Heavy Cannons
-      voxLine(100 + sx * 36, 102, 98, 100 + sx * 76, 122, 98, 2, 2, 2);
-      voxLine(100 + sx * 36, 98, 98, 100 + sx * 76, 78, 98, 2, 2, 2);
-      voxCylZ(100 + sx * 76, 100, 78, 168, 3, 2, 4);
-    }
-  }
-  else if (id === 'laati_gunship') {
-    // LAAT/i REPUBLIC ATTACK GUNSHIP
-    voxWedgeZ(54, 168, 18, 9, 14, 7, 96, 1, 2, 3);
-    voxEllipsoid(100, 110, 138, 8, 6, 12, 3);    // Tandem bubble cockpits
-    voxEllipsoid(100, 114, 118, 8, 6, 12, 3);
-    // Twin Dorsal Mass-Driver Missile Launchers
-    voxCylZ(90, 124, 62, 136, 5, 5, 2);
-    voxCylZ(110, 124, 62, 136, 5, 5, 2);
-    // Down-Swept Troop Wings & Ball Turrets
-    for (const sx of [-1, 1]) {
-      voxLine(100 + sx * 14, 114, 98, 100 + sx * 74, 78, 98, 4, 2, 1);
-      voxEllipsoid(100 + sx * 34, 88, 108, 6, 6, 6, 4);
-    }
-  }
-  else if (id === 'tantive_cr90') {
-    // CR90 TANTIVE IV CORELLIAN CORVETTE (Hammerhead Bow + 11-Turbine Engine Block)
-    voxCylZ(100, 100, 56, 158, 14, 12, 1);       // Central hull spine
-    voxCylY(100, 82, 118, 168, 10, 18, 2);       // Iconic Hammerhead Command Bow
-    voxEllipsoid(100, 120, 118, 7, 5, 7, 4);     // Dorsal turbolaser turret
-    voxEllipsoid(100, 80, 118, 7, 5, 7, 4);      // Ventral turbolaser turret
-    // Massive 11-Engine Rectangular Thruster Bank
-    voxBox(62, 82, 22, 138, 118, 62, 2);
-    for (const ox of [-28, -14, 0, 14, 28]) {
-      for (const oy of [-9, 9]) {
-        voxCylZ(100 + ox, 100 + oy, 16, 26, 5, 5, 3);
-        voxEllipsoid(100 + ox, 100 + oy, 15, 3.5, 3.5, 2, 5);
-      }
-    }
-  }
-  else if (id === 'nebulon_b') {
-    // EF76 NEBULON-B ESCORT FRIGATE (Deep Vertical Sensor Blade + Slender Spine)
-    voxCylZ(100, 108, 32, 154, 7, 5, 1);         // Slender connecting spine
-    voxBox(92, 42, 124, 108, 126, 174, 2);       // Deep vertical forward frigate blade
-    voxBox(90, 62, 132, 110, 118, 164, 1);
-    voxBox(82, 92, 22, 118, 124, 68, 2);         // Aft engine block
-    for (const ox of [-10, 0, 10]) voxEllipsoid(100 + ox, 108, 20, 5, 5, 3, 5);
-  }
-  else if (id === 'venator') {
-    // VENATOR-CLASS REPUBLIC STAR DESTROYER (Twin Bridge Towers + Open Red Flight Deck)
-    voxWedgeZ(26, 184, 58, 8, 14, 3, 96, 1, 2, 3);
-    voxBox(94, 106, 92, 106, 111, 182, 2);       // Dorsal flight deck copper/red stripe
-    // Side Hangar Notches
-    voxBox(42, 88, 98, 64, 106, 126, 0);
-    voxBox(136, 88, 98, 158, 106, 126, 0);
-    // Twin Asymmetrical Republic Bridge Towers!
-    for (const ox of [-14, 14]) {
-      voxLine(100 + ox, 106, 54, 100 + ox, 136, 46, 5, 4, 2);
-      voxBox(94 + ox, 134, 40, 106 + ox, 142, 54, 4);
-    }
-  }
-  else if (id === 'star_destroyer') {
-    // IMPERIAL-I CLASS STAR DESTROYER (Chiseled Wedge + Terraced Superstructure + Shield Domes)
-    voxWedgeZ(24, 186, 68, 4, 16, 2, 94, 1, 2, 3);
-    voxBox(72, 106, 42, 128, 116, 112, 2);       // Terraced deck 1
-    voxBox(80, 116, 48, 120, 124, 92, 1);        // Terraced deck 2
-    addHullGreebles(74, 126, 116, 46, 108, 18, seed, 2, 3);
-    voxCylY(100, 124, 146, 56, 8, 6, 2);         // Bridge stalk
-    voxBox(76, 144, 48, 124, 154, 64, 1);        // Wide Hammerhead Command Bridge
-    voxEllipsoid(82, 160, 56, 5.5, 5.5, 5.5, 4); // Port Deflector Shield Dome
-    voxEllipsoid(118, 160, 56, 5.5, 5.5, 5.5, 4);// Starboard Deflector Shield Dome
-    // 3 Massive Stern Ion Drive Nozzles
-    for (const ox of [-22, 0, 22]) {
-      voxCylZ(100 + ox, 96, 16, 26, 9, 11, 3);
-      voxEllipsoid(100 + ox, 96, 15, 6, 6, 3, 5);
-    }
-  }
-  else if (id === 'executor_ssd') {
-    // EXECUTOR-CLASS SUPER STAR DESTROYER (19km Arrowhead Dreadnought + Axial City Ridge)
-    voxWedgeZ(16, 190, 52, 2, 10, 2, 94, 1, 2, 3);
-    voxWedgeZ(16, 62, 52, 12, 10, 4, 94, 2, 3, 1); // Tapered aft tail
-    // Dense Axial Superstructure City Greeble Spine
-    addHullGreebles(78, 122, 101, 38, 152, 42, seed, 2, 4);
-    voxBox(90, 106, 48, 110, 122, 62, 4);          // Command citadel
-  }
-  else if (id === 'death_star') {
-    // DS-1 ORBITAL BATTLE STATION (DEATH STAR — Carved Trench & Concave Superlaser Dish!)
-    voxEllipsoid(100, 102, 100, 68, 68, 68, 1);
-    // Carve Recessed Equatorial Trench
-    voxCylY(100, 99, 105, 100, 70, 70, 0);
-    voxCylY(100, 98, 106, 100, 63, 63, 3);
-    // Copper Latitude Armor Bands
-    for (const ly of [64, 82, 122, 140]) {
-      const r = Math.sqrt(Math.max(10, 68*68 - (ly - 102)*(ly - 102)));
-      voxCylY(100, ly - 1, ly + 1, 100, r + 0.5, r + 0.5, 2);
-    }
-    // Carve Concave Northern Superlaser Dish & Rebuild Concentric Focusing Rings
-    voxEllipsoid(78, 132, 148, 26, 26, 26, 0);
-    voxEllipsoid(82, 126, 140, 22, 22, 22, 2);
-    voxLine(78, 132, 146, 52, 158, 186, 4, 7, 5); // Ignited Kyber Superlaser Beam!
-  }
-
-  return extractSurfaceSnapshot200(ship);
-}
-
-/* ============================================================================
-   4. 26-NEIGHBOR NORMAL & AMBIENT OCCLUSION EXTRACTOR + BRUSHED METAL SHADER
-   ============================================================================ */
-function extractSurfaceSnapshot200(ship) {
-  const pts = [];
-  let minX = 999, maxX = -999, minY = 999, maxY = -999, minZ = 999, maxZ = -999;
-
-  for (let y = 1; y < G - 1; y++) {
-    const yOff = y * G2;
-    for (let z = 1; z < G - 1; z++) {
-      const row = yOff + z * G;
-      for (let x = 1; x < G - 1; x++) {
-        const idx = row + x;
-        if (voxStamp[idx] !== curStamp) continue;
-
-        // Check 6 face neighbors for surface exposure
-        const nL = voxStamp[idx - 1] === curStamp;
-        const nR = voxStamp[idx + 1] === curStamp;
-        const nF = voxStamp[idx - G] === curStamp;
-        const nB = voxStamp[idx + G] === curStamp;
-        const nD = voxStamp[idx - G2] === curStamp;
-        const nU = voxStamp[idx + G2] === curStamp;
-        if (nL && nR && nF && nB && nD && nU) continue;
-
-        // Compute 26-Neighbor Surface Normal & Ambient Occlusion (AO)
-        let nx = 0, ny = 0, nz = 0, solidCount = 0;
-        for (let dy = -1; dy <= 1; dy++) {
-          const nyOff = (y + dy) * G2;
-          for (let dz = -1; dz <= 1; dz++) {
-            const nRow = nyOff + (z + dz) * G;
-            for (let dx = -1; dx <= 1; dx++) {
-              if (dx === 0 && dy === 0 && dz === 0) continue;
-              if (voxStamp[nRow + x + dx] === curStamp) {
-                solidCount++;
-              } else {
-                nx += dx; ny += dy; nz += dz;
-              }
-            }
-          }
-        }
-        const len = Math.hypot(nx, ny, nz) || 1;
-        // Pack Normal & AO into signed bytes (-100..100)
-        const pnx = Math.round((nx / len) * 100);
-        const pny = Math.round((ny / len) * 100);
-        const pnz = Math.round((nz / len) * 100);
-        const ao = Math.round(Math.max(35, 100 - (solidCount / 26) * 68));
-        // Brushed horizontal micro-grain factor
-        const grain = Math.round(Math.sin(z * 0.7 + x * 0.35) * 8);
-
-        pts.push(x, y, z, voxMat[idx], pnx, pny, pnz, ao + grain);
-        if (x < minX) minX = x; if (x > maxX) maxX = x;
-        if (y < minY) minY = y; if (y > maxY) maxY = y;
-        if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
-      }
+      addWingPanel([sx * 18, 0, -32], [sx * 66, 0, -18], [sx * 58, 0, 34], [sx * 14, 0, 24], 1, 2, 2);
+      addLathe(sx * 24, 0, 0, [[-68, 6, 5], [-56, 8, 3]], 8, 3, 'Z', { capStart: true, capMat: 5, canCutaway: false });
     }
   }
 
   return {
-    data: new Int16Array(pts),
-    count: pts.length / 8,
-    cx: (minX + maxX) * 0.5,
-    cy: (minY + maxY) * 0.5,
-    cz: (minZ + maxZ) * 0.5,
-    span: Math.max(65, maxX - minX, maxY - minY, maxZ - minZ),
+    faces: curFaces,
+    struts: curStruts,
     colors: ship.colors || FINISHES.steel_copper
   };
 }
 
+/* ============================================================================
+   4. HARD-SURFACE ANISOTROPIC PBR SHADER & HOLLOW CUTAWAY RENDERER
+   ============================================================================ */
 function hexToRgb(h) {
   const v = parseInt((h || '#ffffff').replace('#', ''), 16);
   return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
 }
 
-// Pre-rendered Static Brushed Steel & Copper Backdrop Cache (Zero Scrolling Stars!)
-const BgCache = new Map();
-function getSteelCopperBackground(W, H) {
-  const key = W + 'x' + H;
-  if (BgCache.has(key)) return BgCache.get(key);
-  const c = document.createElement('canvas');
-  c.width = W; c.height = H;
-  const ctx = c.getContext('2d');
-  const img = ctx.createImageData(W, H);
-  const pix = img.data;
-  const cx = W * 0.5, cy = H * 0.5, maxR = Math.hypot(cx, cy);
-
-  for (let y = 0; y < H; y++) {
-    // Subtle horizontal brushed-steel machining texture
-    const brush = Math.sin(y * 1.7) * 3.5 + Math.cos(y * 0.43) * 2.5;
-    for (let x = 0; x < W; x++) {
-      const d = Math.hypot(x - cx, y - cy) / maxR;
-      const vig = Math.max(0.28, 1.0 - d * d * 0.78);
-      // Warm copper studio spotlight in center + cool brushed gunmetal outer plate
-      const copperGlow = Math.max(0, 1.0 - d * 1.45) * 22;
-      const r = Math.min(255, Math.max(0, (28 + brush + copperGlow * 1.4) * vig)) | 0;
-      const g = Math.min(255, Math.max(0, (33 + brush + copperGlow * 0.7) * vig)) | 0;
-      const b = Math.min(255, Math.max(0, (44 + brush + copperGlow * 0.2) * vig)) | 0;
-      const pi = (y * W + x) * 4;
-      pix[pi] = r; pix[pi + 1] = g; pix[pi + 2] = b; pix[pi + 3] = 255;
-    }
-  }
-  ctx.putImageData(img, 0, 0);
-
-  // Etched Copper Engineering Reticle Ring (Static)
-  ctx.strokeStyle = 'rgba(217, 119, 54, 0.22)';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.arc(cx, cy, W * 0.42, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.strokeStyle = 'rgba(212, 220, 232, 0.12)';
-  ctx.beginPath();
-  ctx.arc(cx, cy, W * 0.34, 0, Math.PI * 2);
-  ctx.stroke();
-
-  const finalImg = ctx.getImageData(0, 0, W, H);
-  BgCache.set(key, finalImg);
-  return finalImg;
-}
-
-const zBuf = new Float32Array(500 * 500);
-function render200Snapshot(snap, cvs, yaw, pitch, zoom) {
+function renderHardSurfaceMesh(mesh, cvs, yaw, pitch, zoom, mode = 'hollow', panelGap = 0.22) {
   const ctx = cvs.getContext('2d');
   const W = cvs.width, H = cvs.height;
-  const bg = getSteelCopperBackground(W, H);
-  const img = new ImageData(new Uint8ClampedArray(bg.data), W, H);
-  const pix = img.data;
-  zBuf.fill(-99999);
+
+  // 1. Static Machined Brushed-Steel & Copper Studio Backdrop
+  const grad = ctx.createRadialGradient(W * 0.5, H * 0.44, W * 0.05, W * 0.5, H * 0.5, W * 0.68);
+  grad.addColorStop(0, '#252d3d');
+  grad.addColorStop(0.55, '#131720');
+  grad.addColorStop(1, '#090b10');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Static Machined Horizontal Brush Lines & Caliper Reticle
+  ctx.strokeStyle = 'rgba(217, 119, 54, 0.16)';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.arc(W * 0.5, H * 0.5, W * 0.41, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(220, 228, 240, 0.08)';
+  ctx.beginPath();
+  ctx.arc(W * 0.5, H * 0.5, W * 0.31, 0, Math.PI * 2);
+  ctx.stroke();
 
   const pal = [
     [0, 0, 0],
-    hexToRgb(snap.colors[0]), // Zone 1: Brushed Steel Hull
-    hexToRgb(snap.colors[1]), // Zone 2: Forged Copper Trim / Ribs
-    hexToRgb(snap.colors[2]), // Zone 3: Gunmetal Recessed Trench / Canopy
-    hexToRgb(snap.colors[3]), // Zone 4: Polished Brass / Domes / R2
-    hexToRgb(snap.colors[4])  // Zone 5: Plasma / Superlaser Core
+    hexToRgb(mesh.colors[0]), // Zone 1: Brushed Steel Primary Hull
+    hexToRgb(mesh.colors[1]), // Zone 2: Forged Copper Structural Ribs & Bevels
+    hexToRgb(mesh.colors[2]), // Zone 3: Dark Gunmetal Recessed Plates & Canopy
+    hexToRgb(mesh.colors[3]), // Zone 4: Polished Brass Domes & Fittings
+    hexToRgb(mesh.colors[4])  // Zone 5: Ignited Kyber / Plasma Core
   ];
 
   const cy = Math.cos(yaw), sy = Math.sin(yaw);
   const cp = Math.cos(pitch), sp = Math.sin(pitch);
-  const scale = (W * 0.78 / snap.span) * zoom;
-  const splat = Math.max(1, Math.ceil(scale * 0.62));
-  const arr = snap.data;
+  const fov = W * 0.85 * zoom;
+  const camDist = 240;
 
-  // Key Studio Light + Warm Copper Rim Light Vectors
-  const lx = 0.48, ly = 0.72, lz = 0.50;
-  const hx = 0.25, hy = 0.45, hz = 0.85; // Half-vector for metallic specular shine
-
-  for (let i = 0; i < arr.length; i += 8) {
-    const x = arr[i] - snap.cx;
-    const y = arr[i + 1] - snap.cy;
-    const z = arr[i + 2] - snap.cz;
-    const cIdx = arr[i + 3];
-    const nx = arr[i + 4] * 0.01;
-    const ny = arr[i + 5] * 0.01;
-    const nz = arr[i + 6] * 0.01;
-    const ao = arr[i + 7] * 0.01;
-
-    // Rotate Position
+  function xform(x, y, z) {
     const rx = x * cy + z * sy;
     const rz = -x * sy + z * cy;
     const ry = y * cp - rz * sp;
     const depth = y * sp + rz * cp;
+    const persp = fov / Math.max(60, camDist - depth);
+    return [W * 0.5 + rx * persp, H * 0.48 - ry * persp, depth, rx, ry, rz];
+  }
 
-    const sx = Math.round(W * 0.5 + rx * scale);
-    const sy2 = Math.round(H * 0.52 - ry * scale);
-    if (sx < splat || sx >= W - splat || sy2 < splat || sy2 >= H - splat) continue;
+  // 2. Projected Studio Floor Shadow Plate (Y = -72)
+  ctx.fillStyle = 'rgba(4, 6, 10, 0.42)';
+  ctx.beginPath();
+  ctx.ellipse(W * 0.5, H * 0.78, W * 0.28 * zoom, W * 0.08 * zoom, 0, 0, Math.PI * 2);
+  ctx.fill();
 
-    // Rotate Normal for True Metallic PBR-Style Specular Reflection
-    const rnx = nx * cy + nz * sy;
-    const rnz = -nx * sy + nz * cy;
-    const rny = ny * cp - rnz * sp;
-    const rnd = ny * sp + rnz * cp;
+  const renderQueue = [];
 
-    const rgb = pal[cIdx] || pal[1];
-    let r, g, b;
-    if (cIdx === 5) {
-      // Emissive Plasma / Laser Glow
-      r = Math.min(255, rgb[0] * 1.35 + 45) | 0;
-      g = Math.min(255, rgb[1] * 1.35 + 45) | 0;
-      b = Math.min(255, rgb[2] * 1.35 + 45) | 0;
-    } else {
-      const diff = Math.max(0, rnx * lx + rny * ly + rnd * lz);
-      const rim = Math.max(0, -rnx * 0.6 + rny * 0.3 - rnd * 0.5);
-      const specAngle = Math.max(0, rnx * hx + rny * hy + rnd * hz);
-      const spec = Math.pow(specAngle, cIdx === 2 || cIdx === 4 ? 14 : 9) * (cIdx === 3 ? 35 : 78);
-      const light = (0.36 + diff * 0.72) * ao;
-
-      r = Math.min(255, rgb[0] * light + spec * 1.08 + rim * 38) | 0;
-      g = Math.min(255, rgb[1] * light + spec * 0.92 + rim * 20) | 0;
-      b = Math.min(255, rgb[2] * light + spec * 0.78 + rim * 8) | 0;
-    }
-
-    for (let dy = -splat; dy <= splat; dy++) {
-      const py = sy2 + dy;
-      const rowOff = py * W;
-      for (let dx = -splat; dx <= splat; dx++) {
-        const bi = rowOff + sx + dx;
-        if (depth > zBuf[bi]) {
-          zBuf[bi] = depth;
-          const pi = bi * 4;
-          pix[pi] = r; pix[pi + 1] = g; pix[pi + 2] = b; pix[pi + 3] = 255;
-        }
-      }
+  // 3. Process Structural Copper Exoskeleton Struts
+  const showStruts = (mode !== 'bevel' || panelGap > 0.12);
+  if (showStruts) {
+    for (let i = 0; i < mesh.struts.length; i++) {
+      const st = mesh.struts[i];
+      const p0 = xform(st.x0, st.y0, st.z0);
+      const p1 = xform(st.x1, st.y1, st.z1);
+      renderQueue.push({
+        type: 'strut',
+        z: (p0[2] + p1[2]) * 0.5 - 1.5,
+        x0: p0[0], y0: p0[1], x1: p1[0], y1: p1[1],
+        mat: st.mat, w: st.w * zoom
+      });
     }
   }
-  ctx.putImageData(img, 0, 0);
+
+  // 4. Process 3D Hard-Surface Polygon Faces
+  if (mode !== 'wire') {
+    const insetRatio = mode === 'bevel' ? Math.max(0.75, 1.0 - panelGap * 0.45) : Math.max(0.38, 1.0 - panelGap);
+    const explodeDist = mode === 'exploded' ? (16 + panelGap * 32) : 0;
+
+    for (let i = 0; i < mesh.faces.length; i++) {
+      const f = mesh.faces[i];
+      // In 'hollow' cutaway mode, selectively leave 35% of outer hull bays completely open so you see the internal reactor & copper rib-cage!
+      if (mode === 'hollow' && f.canCutaway && !f.isCore && ((f.panelId % 3 === 1) || (f.cx > 4 && f.panelId % 2 === 0))) {
+        continue;
+      }
+
+      // Rotate Normal Vector
+      const rnx = f.nx * cy + f.nz * sy;
+      const rnz = -f.nx * sy + f.nz * cy;
+      const rny = f.ny * cp - rnz * sp;
+      const rnd = f.ny * sp + rnz * cp;
+
+      // Project Inset / Exploded Vertices
+      const pts2d = [];
+      let zSum = 0;
+      const shrink = f.isCore ? 1.0 : insetRatio;
+      const exp = f.isCore ? 0 : explodeDist;
+
+      for (let k = 0; k < f.verts.length; k++) {
+        const v = f.verts[k];
+        const vx = f.cx + (v[0] - f.cx) * shrink + f.nx * exp;
+        const vy = f.cy + (v[1] - f.cy) * shrink + f.ny * exp;
+        const vz = f.cz + (v[2] - f.cz) * shrink + f.nz * exp;
+        const p = xform(vx, vy, vz);
+        pts2d.push(p);
+        zSum += p[2];
+      }
+
+      renderQueue.push({
+        type: 'face',
+        z: zSum / f.verts.length,
+        pts: pts2d,
+        mat: f.mat,
+        rimMat: f.rimMat,
+        isCore: f.isCore,
+        rnx, rny, rnd
+      });
+    }
+  }
+
+  // Painter's Algorithm Depth Sort (Back to Front)
+  renderQueue.sort((a, b) => a.z - b.z);
+
+  // Studio Light Vectors (Key Light + Copper Rim Light + Blinn-Phong Half Vector)
+  const lx = 0.45, ly = 0.68, lz = 0.57;
+  const hx = 0.22, hy = 0.42, hz = 0.88;
+
+  for (let i = 0; i < renderQueue.length; i++) {
+    const it = renderQueue[i];
+    if (it.type === 'strut') {
+      const rgb = pal[it.mat] || pal[2];
+      ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+      ctx.lineWidth = Math.max(1, it.w);
+      ctx.beginPath();
+      ctx.moveTo(it.x0, it.y0);
+      ctx.lineTo(it.x1, it.y1);
+      ctx.stroke();
+      continue;
+    }
+
+    // Shade 3D Polygon Face
+    const rgb = pal[it.mat] || pal[1];
+    const isBackface = it.rnd < -0.05 && !it.isCore;
+    let fillCol, strokeCol;
+
+    if (it.isCore || it.mat === 5) {
+      // Glowing Internal Kyber / Plasma Core
+      const r = Math.min(255, rgb[0] * 1.3 + 55) | 0;
+      const g = Math.min(255, rgb[1] * 1.3 + 55) | 0;
+      const b = Math.min(255, rgb[2] * 1.3 + 55) | 0;
+      fillCol = `rgb(${r},${g},${b})`;
+      strokeCol = '#ffffff';
+    } else if (isBackface) {
+      // Darkened Interior Hull Ribbing (seen through hollow sculpture openings!)
+      const r = (rgb[0] * 0.28) | 0;
+      const g = (rgb[1] * 0.26) | 0;
+      const b = (rgb[2] * 0.30) | 0;
+      fillCol = `rgb(${r},${g},${b})`;
+      strokeCol = `rgba(217, 119, 54, 0.35)`;
+    } else {
+      // Front-Facing Brushed Steel & Forged Copper Anisotropic Specular Shader
+      const nx = it.rnx, ny = it.rny, nz = Math.abs(it.rnd);
+      const diff = Math.max(0, nx * lx + ny * ly + nz * lz);
+      const specDot = Math.max(0, nx * hx + ny * hy + nz * hz);
+      const spec = Math.pow(specDot, 20) * 95;
+      const copperRim = Math.pow(1.0 - Math.min(1, nz), 2.5) * 42;
+      const baseLight = 0.36 + diff * 0.72;
+
+      const r = Math.min(255, rgb[0] * baseLight + spec + copperRim * 1.3) | 0;
+      const g = Math.min(255, rgb[1] * baseLight + spec * 0.92 + copperRim * 0.7) | 0;
+      const b = Math.min(255, rgb[2] * baseLight + spec * 0.82 + copperRim * 0.25) | 0;
+      fillCol = `rgb(${r},${g},${b})`;
+      const rimRgb = pal[it.rimMat || 2];
+      strokeCol = `rgba(${rimRgb[0]},${rimRgb[1]},${rimRgb[2]},0.75)`;
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(it.pts[0][0], it.pts[0][1]);
+    for (let k = 1; k < it.pts.length; k++) {
+      ctx.lineTo(it.pts[k][0], it.pts[k][1]);
+    }
+    ctx.closePath();
+    ctx.fillStyle = fillCol;
+    ctx.fill();
+    ctx.strokeStyle = strokeCol;
+    ctx.lineWidth = 1.1;
+    ctx.stroke();
+  }
 }
 
 const ThumbCache = new Map();
 const ThumbQueue = [];
 const thumbCvs = document.createElement('canvas');
-thumbCvs.width = 160; thumbCvs.height = 160;
+thumbCvs.width = 180; thumbCvs.height = 180;
 
 function bakeThumbnailImmediate(unit) {
-  const snap = sculptShip200(unit);
-  render200Snapshot(snap, thumbCvs, 0.58, 0.30, 1.05);
+  const mesh = buildStarshipMesh(unit);
+  renderHardSurfaceMesh(mesh, thumbCvs, 0.62, 0.34, 1.08, unit.sculptMode || 'hollow', 0.20);
   const url = thumbCvs.toDataURL('image/png');
   ThumbCache.set(unit.uid, url);
   return url;
@@ -1422,6 +1340,7 @@ function makeUnit(opts = {}) {
     cls: sh.cls,
     wings: opts.wings || base.wings,
     weapon: opts.weapon || base.weapon,
+    sculptMode: opts.sculptMode || 'hollow',
     colors: opts.colors ? [...opts.colors] : [...base.colors],
     val, hp: 100, quality: opts.quality || 'Foundry Cast', vaulted: false
   };
@@ -1471,13 +1390,22 @@ function switchTab(n) {
 }
 
 /* ============================================================================
-   6. TAB 2: 200³ SHIPYARD GENERATOR & CLAMPED SHOWCASE CAMERA
+   6. TAB 2: HARD-SURFACE & HOLLOW-RIB SHIPYARD CONTROLS
    ============================================================================ */
 const ForgeCam = {
-  yaw: 0.58, pitch: 0.28, zoom: 1.06,
-  sweep: true, sweepDir: 1, full360: false,
-  snap: null, colors: [...FINISHES.steel_copper]
+  yaw: 0.62, pitch: 0.34, zoom: 1.08,
+  mode: 'hollow', panelGap: 0.22,
+  sweep: true, sweepDir: 1, full360: true,
+  mesh: null, colors: [...FINISHES.steel_copper]
 };
+
+function setSculptMode(m) {
+  ForgeCam.mode = m;
+  ['bevel', 'hollow', 'exploded', 'wire'].forEach(k => {
+    document.getElementById('sm-' + k).classList.toggle('active', k === m);
+  });
+  renderForgeFrame();
+}
 
 function initForgeControls() {
   document.getElementById('fg-chassis').innerHTML = SHIPS.map((s, i) => `<option value="${s.id}">${i+1}. ${s.name} [${s.cls}]</option>`).join('');
@@ -1486,11 +1414,11 @@ function initForgeControls() {
   document.getElementById('fg-weapon').innerHTML = WEAPONS.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
 
   const zNames = [
-    'Zone 1: Brushed Steel Primary Hull',
-    'Zone 2: Forged Copper Ribs & Trim',
-    'Zone 3: Dark Gunmetal Trench & Glass',
-    'Zone 4: Polished Brass Domes & R2',
-    'Zone 5: Ignited Plasma & Laser Core'
+    'Zone 1: Brushed Steel Outer Plates',
+    'Zone 2: Forged Copper Structural Ribs',
+    'Zone 3: Dark Gunmetal Interior & Glass',
+    'Zone 4: Polished Brass Domes & Trim',
+    'Zone 5: Ignited Kyber & Plasma Core'
   ];
   document.getElementById('paint-zones').innerHTML = zNames.map((zn, i) => `
     <div style="background:var(--steel-panel);padding:6px;border-radius:5px;border:1px solid var(--copper-dim)">
@@ -1502,7 +1430,6 @@ function initForgeControls() {
       <div class="swatch-row">${SWATCHES.map(s => `<div class="swatch" style="background:${s}" onclick="setZoneColor(${i},'${s}')"></div>`).join('')}</div>
     </div>`).join('');
 
-  // Clamped Showcase Drag on #forge-canvas
   const cvs = document.getElementById('forge-canvas');
   let dragging = false, lx = 0, ly = 0;
   cvs.addEventListener('pointerdown', e => {
@@ -1512,11 +1439,8 @@ function initForgeControls() {
   });
   cvs.addEventListener('pointermove', e => {
     if (!dragging) return;
-    ForgeCam.yaw += (e.clientX - lx) * 0.009;
-    if (!ForgeCam.full360) ForgeCam.yaw = Math.max(-0.85, Math.min(0.85, ForgeCam.yaw));
-    ForgeCam.pitch = Math.max(0.10, Math.min(0.68, ForgeCam.pitch + (e.clientY - ly) * 0.008));
-    document.getElementById('sl-yaw').value = Math.round(ForgeCam.yaw * 100);
-    document.getElementById('sl-pitch').value = Math.round(ForgeCam.pitch * 100);
+    ForgeCam.yaw += (e.clientX - lx) * 0.01;
+    ForgeCam.pitch = Math.max(-0.35, Math.min(1.2, ForgeCam.pitch + (e.clientY - ly) * 0.009));
     lx = e.clientX; ly = e.clientY;
     renderForgeFrame();
   });
@@ -1533,12 +1457,10 @@ function setZoneColor(i, hex) {
   ForgeCam.colors[i] = hex;
   document.getElementById('cp-' + i).value = hex;
   document.getElementById('ht-' + i).value = hex;
-  if (ForgeCam.snap) { ForgeCam.snap.colors = [...ForgeCam.colors]; renderForgeFrame(); }
+  if (ForgeCam.mesh) { ForgeCam.mesh.colors = [...ForgeCam.colors]; renderForgeFrame(); }
 }
 
-function onChassisSelectChange() {
-  updateForgePreview();
-}
+function onChassisSelectChange() { updateForgePreview(); }
 
 function cyclePresetShip(dir) {
   const sel = document.getElementById('fg-chassis');
@@ -1570,24 +1492,25 @@ function getForgeSpec() {
     chassis: document.getElementById('fg-chassis').value,
     wings: document.getElementById('fg-wings').value,
     weapon: document.getElementById('fg-weapon').value,
+    sculptMode: ForgeCam.mode,
     colors: [...ForgeCam.colors]
   };
 }
 
 function updateForgePreview() {
   const spec = getForgeSpec();
-  ForgeCam.snap = sculptShip200(spec);
+  ForgeCam.mesh = buildStarshipMesh(spec);
   const sh = SHIPS.find(s => s.id === spec.chassis) || SHIPS[0];
-  document.getElementById('fg-voxel-stats').textContent =
-    `200³ Solid CSG • ${sh.name} (Codex #${String(spec.seed).padStart(4,'0')}) • ${ForgeCam.snap.count.toLocaleString()} Shaded Surface Voxels`;
+  document.getElementById('fg-mesh-stats').textContent =
+    `${sh.name} (Codex #${String(spec.seed).padStart(4,'0')}) • ${ForgeCam.mesh.faces.length} Hard-Surface Plates & ${ForgeCam.mesh.struts.length} Copper Ribs`;
   const cost = Math.round(TIERS[spec.tier].val * 0.45);
   document.getElementById('fg-cost-lbl').textContent = `Foundry Cost: ◈${cost.toLocaleString()} + 20 Alloy`;
   renderForgeFrame();
 }
 
 function renderForgeFrame() {
-  if (!ForgeCam.snap) return;
-  render200Snapshot(ForgeCam.snap, document.getElementById('forge-canvas'), ForgeCam.yaw, ForgeCam.pitch, ForgeCam.zoom);
+  if (!ForgeCam.mesh) return;
+  renderHardSurfaceMesh(ForgeCam.mesh, document.getElementById('forge-canvas'), ForgeCam.yaw, ForgeCam.pitch, ForgeCam.zoom, ForgeCam.mode, ForgeCam.panelGap);
 }
 
 function craftCustomUnit() {
@@ -1656,28 +1579,28 @@ function drawGridBoard() {
   const ctx = cvs.getContext('2d');
   const W = cvs.width, H = cvs.height, cell = W / 8;
 
-  ctx.fillStyle = '#141820';
+  ctx.fillStyle = '#12161f';
   ctx.fillRect(0, 0, W, H);
 
   for (let y = 0; y < 8; y++) {
     for (let x = 0; x < 8; x++) {
       const dist = Math.abs(x - GridMatch.px) + Math.abs(y - GridMatch.py);
       if (dist >= 1 && dist <= 2 && !isAsteroid(x, y) && !(x === GridMatch.ex && y === GridMatch.ey)) {
-        ctx.fillStyle = 'rgba(217, 119, 54, 0.22)';
+        ctx.fillStyle = 'rgba(217, 119, 54, 0.24)';
         ctx.fillRect(x * cell, y * cell, cell, cell);
       }
-      ctx.strokeStyle = '#2e3748';
+      ctx.strokeStyle = '#2b3446';
       ctx.strokeRect(x * cell, y * cell, cell, cell);
     }
   }
 
   const shInfo = SHIPS.find(s => s.id === GridMatch.pShip.chassis) || SHIPS[0];
-  ctx.strokeStyle = 'rgba(242, 154, 94, 0.45)';
+  ctx.strokeStyle = 'rgba(245, 158, 86, 0.45)';
   ctx.beginPath();
   ctx.arc((GridMatch.px + 0.5) * cell, (GridMatch.py + 0.5) * cell, shInfo.range * cell, 0, Math.PI * 2);
   ctx.stroke();
 
-  ctx.fillStyle = '#6e4726';
+  ctx.fillStyle = '#784820';
   GridMatch.asteroids.forEach(([ax, ay]) => {
     ctx.beginPath();
     ctx.arc((ax + 0.5) * cell, (ay + 0.5) * cell, cell * 0.34, 0, Math.PI * 2);
@@ -1742,7 +1665,7 @@ function gridFireWeapons() {
   if (dist <= pInfo.range + 0.8) {
     const dice = 2 + Math.floor(Math.random()*6) + Math.floor(Math.random()*6);
     const dmg = Math.round(dice * 5);
-    GridMatch.beam = { x0: GridMatch.px, y0: GridMatch.py, x1: GridMatch.ex, y1: GridMatch.ey, col: '#f29a5e' };
+    GridMatch.beam = { x0: GridMatch.px, y0: GridMatch.py, x1: GridMatch.ex, y1: GridMatch.ey, col: '#f59e56' };
     if (GridMatch.eShield > 0) {
       const sHit = Math.min(GridMatch.eShield, dmg);
       GridMatch.eShield -= sHit;
@@ -1830,7 +1753,7 @@ function renderOwnedTab() {
     </div>`;
   }).join('');
 
-  const tNames = ['Brushed Beskar Rollers','Copper Induction Coils','CSG Hull Lathe','Kyber Core Calibrator'];
+  const tNames = ['Brushed Beskar Rollers','Copper Induction Coils','Hard-Surface Bevel Press','Kyber Core Calibrator'];
   document.getElementById('tech-grid').innerHTML = tNames.map((nm, i) => `
     <div class="unit-card">
       <div style="font-weight:800">${nm} (Lv.${State.tech[i]})</div>
@@ -1995,11 +1918,11 @@ function openInspector(uid) {
   if (!u) return;
   document.getElementById('modal-content').innerHTML = `
     <div class="panel-hdr"><span>🔍 ${u.name}</span><button onclick="closeModal()">✖</button></div>
-    <div class="canvas-stage"><canvas id="inspector-canvas" class="turntable" width="380" height="380"></canvas></div>
+    <div class="canvas-stage"><canvas id="inspector-canvas" class="turntable" width="400" height="400"></canvas></div>
     <div style="font-size:12px;margin-top:6px">Value: <b style="color:var(--copper-bright)">◈${u.val.toLocaleString()}</b> | Class: <b>${u.cls}</b> | Codex: <b>#${String(u.dexNum).padStart(4,'0')}</b></div>
   `;
   document.getElementById('modal-overlay').classList.add('open');
-  render200Snapshot(sculptShip200(u), document.getElementById('inspector-canvas'), 0.58, 0.28, 1.06);
+  renderHardSurfaceMesh(buildStarshipMesh(u), document.getElementById('inspector-canvas'), 0.62, 0.34, 1.08, u.sculptMode || 'hollow', 0.22);
 }
 function inspectBuyerLot() {
   if (BuyerLot.unit) { State.units.push(BuyerLot.unit); openInspector(BuyerLot.unit.uid); State.units.pop(); }
@@ -2017,23 +1940,23 @@ function openCodesModal() {
 }
 function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
 function saveState(manual) {
-  try { localStorage.setItem('SW_FOUNDRY_200', JSON.stringify({ credits: State.credits, supply: State.supply, trials: State.trials })); if (manual) showToast('💾 Fleet Saved!'); } catch(e) {}
+  try { localStorage.setItem('SW_HARD_SURFACE_V1', JSON.stringify({ credits: State.credits, supply: State.supply, trials: State.trials })); if (manual) showToast('💾 Fleet Saved!'); } catch(e) {}
 }
 
 /* ============================================================================
-   9. BOOT & CLAMPED SHOWCASE TURNTABLE LOOP
+   9. BOOT & 60FPS HARD-SURFACE SHOWCASE LOOP
    ============================================================================ */
 function boot() {
   initForgeControls();
   initCratesAndCommand();
 
-  // Pre-Bake 6 Iconic Brushed Steel & Copper Starter Ships
+  // Pre-Bake 6 Iconic Brushed Steel & Copper Hollow-Rib Starter Ships
   addUnitToRoster(makeUnit({ tier: 6,  sIdx: 0,  seed: 1,    name: 'Brushed Steel T-65B X-Wing' }), true);
-  addUnitToRoster(makeUnit({ tier: 8,  sIdx: 6,  seed: 407,  name: 'Forged Copper Millennium Falcon' }), true);
   addUnitToRoster(makeUnit({ tier: 11, sIdx: 21, seed: 1222, name: 'Imperial-I Star Destroyer' }), true);
-  addUnitToRoster(makeUnit({ tier: 9,  sIdx: 13, seed: 814,  name: 'Beskar ST-70 Razor Crest' }), true);
-  addUnitToRoster(makeUnit({ tier: 15, sIdx: 23, seed: 2324, name: 'DS-1 Death Star Station' }), true);
-  addUnitToRoster(makeUnit({ tier: 4,  sIdx: 24, seed: 250,  name: 'Class-4 Armored Jettison Pod' }), true);
+  addUnitToRoster(makeUnit({ tier: 8,  sIdx: 6,  seed: 407,  name: 'Forged Copper Millennium Falcon' }), true);
+  addUnitToRoster(makeUnit({ tier: 15, sIdx: 23, seed: 2324, name: 'DS-II Hollow-Rib Death Star' }), true);
+  addUnitToRoster(makeUnit({ tier: 7,  sIdx: 2,  seed: 303,  name: 'TIE/IN Dagger Interceptor' }), true);
+  addUnitToRoster(makeUnit({ tier: 4,  sIdx: 24, seed: 250,  name: 'Class-4 Armored Escape Pod' }), true);
 
   document.getElementById('grid-canvas').addEventListener('pointerdown', e => {
     const rect = e.target.getBoundingClientRect();
@@ -2103,13 +2026,11 @@ function boot() {
     }
     if (ForgeCam.sweep && document.getElementById('tab-2').classList.contains('active')) {
       if (ForgeCam.full360) {
-        ForgeCam.yaw += 0.012;
+        ForgeCam.yaw += 0.011;
       } else {
-        // Smooth pendulum showcase sweep between +15° and +68° heroic 3/4 view!
-        ForgeCam.yaw += 0.0045 * ForgeCam.sweepDir;
-        if (ForgeCam.yaw > 0.72) ForgeCam.sweepDir = -1;
-        if (ForgeCam.yaw < 0.22) ForgeCam.sweepDir = 1;
-        document.getElementById('sl-yaw').value = Math.round(ForgeCam.yaw * 100);
+        ForgeCam.yaw += 0.005 * ForgeCam.sweepDir;
+        if (ForgeCam.yaw > 0.85) ForgeCam.sweepDir = -1;
+        if (ForgeCam.yaw < -0.25) ForgeCam.sweepDir = 1;
       }
       renderForgeFrame();
     }
