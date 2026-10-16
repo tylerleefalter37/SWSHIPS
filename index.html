@@ -2,165 +2,197 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>STARFORGE 512³: Galactic Starship Collector & X-Wing Grid Arena</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUAT & BESKAR 200³: Brushed Steel & Copper Starship Foundry</title>
 <style>
 :root {
-  --bg: #030406;
-  --panel: #0d0f15;
-  --card: #12151e;
-  --border: #d8e0ec;
-  --border-dim: #283044;
-  --white: #ffffff;
-  --gold: #f5b041;
+  --bg: #0c0e12;
+  --steel-dark: #141820;
+  --steel-panel: #1b202b;
+  --steel-card: #222836;
+  --steel-light: #d4dce8;
+  --copper: #d97736;
+  --copper-bright: #f29a5e;
+  --copper-dim: #6e3b1b;
+  --brass: #eab308;
   --emerald: #10b981;
   --crimson: #ef4444;
-  --cyan: #38bdf8;
-  --text: #e2e8f0;
-  --muted: #94a3b8;
+  --text: #e6edf5;
+  --muted: #9ba8b8;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; }
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 html, body {
-  width: 100%; max-width: 100vw; overflow-x: hidden;
-  background: var(--bg); color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
-  font-size: 12px; line-height: 1.25;
+  width: 100%; min-height: 100vh; overflow-x: hidden;
+  background: repeating-linear-gradient(90deg, #0d1015 0px, #0d1015 2px, #10141b 2px, #10141b 4px);
+  color: var(--text);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, monospace;
+  font-size: 13px; line-height: 1.3;
 }
 button, select, input {
-  font: inherit; color: var(--text); background: var(--card);
-  border: 1px solid var(--border-dim); border-radius: 5px;
-  padding: 5px 7px; cursor: pointer;
+  font: inherit; color: var(--text);
+  background: linear-gradient(180deg, #2a3140, #191e28);
+  border: 1px solid var(--copper-dim); border-radius: 5px;
+  padding: 6px 10px; cursor: pointer;
 }
-button:active { transform: scale(0.96); }
-.btn-gold { background: linear-gradient(180deg, #f5b041, #b47818); color: #000; font-weight: 800; border-color: #fff; }
-.btn-emerald { background: linear-gradient(180deg, #10b981, #067451); color: #000; font-weight: 800; border-color: #a7f3d0; }
-.btn-crimson { background: linear-gradient(180deg, #ef4444, #991b1b); color: #fff; font-weight: 800; border-color: #fca5a5; }
-.btn-silver { background: linear-gradient(180deg, #262c3a, #12151e); color: var(--white); font-weight: 700; border-color: var(--border); }
+button:hover { border-color: var(--copper-bright); }
+button:active { transform: translateY(1px); }
+.btn-copper {
+  background: linear-gradient(180deg, #e08244, #9a4b1a);
+  color: #fff; font-weight: 800; border-color: #fbd3b7;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+.btn-steel {
+  background: linear-gradient(180deg, #434d61, #232936);
+  color: var(--steel-light); font-weight: 700; border-color: #8c9bae;
+}
+.btn-emerald {
+  background: linear-gradient(180deg, #10b981, #065f46);
+  color: #fff; font-weight: 800; border-color: #a7f3d0;
+}
+.btn-crimson {
+  background: linear-gradient(180deg, #ef4444, #991b1b);
+  color: #fff; font-weight: 800; border-color: #fca5a5;
+}
 
-/* ULTRA-COMPACT STICKY MICRO-HUD (<18% vh) */
+/* STICKY BRUSHED STEEL & COPPER HEADER */
 #micro-hud {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(3, 4, 6, 0.96);
-  border-bottom: 1px solid var(--border);
-  padding: 4px 6px; width: 100%; max-width: 100vw;
-  backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, #1d232f 0%, #12161f 100%);
+  border-bottom: 2px solid var(--copper);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.65);
+  padding: 6px 14px; width: 100%;
 }
-.hud-row1 { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-bottom: 3px; }
+.hud-inner { max-width: 1280px; margin: 0 auto; }
+.hud-row1 { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
 .hud-title {
-  font-size: 11px; font-weight: 900; letter-spacing: 0.4px;
-  color: var(--white); text-shadow: 0 0 8px rgba(56,189,248,0.65);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 14px; font-weight: 900; letter-spacing: 0.8px;
+  color: var(--copper-bright); text-transform: uppercase;
 }
-.hud-actions { display: flex; gap: 3px; flex-shrink: 0; }
-.hud-actions button { padding: 2px 5px; font-size: 10px; font-weight: 800; }
+.hud-actions { display: flex; gap: 6px; }
 .hud-telemetry {
   display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 3px; margin-bottom: 4px; text-align: center;
+  gap: 6px; margin-bottom: 6px; text-align: center;
 }
 .tele-box {
-  background: var(--panel); border: 1px solid var(--border-dim);
-  border-radius: 4px; padding: 2px 1px; overflow: hidden;
+  background: linear-gradient(180deg, #141821, #0e1117);
+  border: 1px solid var(--copper-dim); border-radius: 4px; padding: 3px 6px;
 }
-.tele-lbl { font-size: 8px; color: var(--muted); text-transform: uppercase; display: block; }
-.tele-val { font-size: 10px; font-weight: 800; color: var(--white); white-space: nowrap; }
+.tele-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; display: block; }
+.tele-val { font-size: 12px; font-weight: 900; color: var(--steel-light); }
 .hud-nav {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 3px;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+@media (max-width: 760px) {
+  .hud-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .nav-btn {
-  padding: 4px 2px; font-size: 10px; font-weight: 800;
-  text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  background: var(--panel); border: 1px solid var(--border-dim); color: var(--muted);
+  padding: 6px 4px; font-size: 11px; font-weight: 800; text-align: center;
+  background: #161a24; border: 1px solid #323b4e; color: var(--muted);
 }
 .nav-btn.active {
-  background: var(--card); color: var(--white);
-  border-color: var(--white); box-shadow: 0 0 8px rgba(255,255,255,0.28);
+  background: linear-gradient(180deg, #c86d32, #783912);
+  color: #fff; border-color: #fbd3b7;
+  box-shadow: 0 0 10px rgba(217, 119, 54, 0.45);
 }
 
-/* MAIN LAYOUT */
-main { padding: 6px; max-width: 920px; margin: 0 auto; width: 100%; overflow-x: hidden; }
+/* PC WORKSTATION LAYOUT */
+main { padding: 12px; max-width: 1280px; margin: 0 auto; width: 100%; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 .panel {
-  background: var(--panel); border: 1px solid var(--border-dim);
-  border-radius: 7px; padding: 8px; margin-bottom: 8px;
+  background: linear-gradient(180deg, #1b202b 0%, #141821 100%);
+  border: 1px solid var(--copper-dim);
+  border-top: 2px solid var(--copper);
+  border-radius: 8px; padding: 12px; margin-bottom: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
 }
 .panel-hdr {
   display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid var(--border-dim); padding-bottom: 5px; margin-bottom: 6px;
-  font-weight: 900; font-size: 12px; color: var(--white); flex-wrap: wrap; gap: 4px;
+  border-bottom: 1px solid #2e3748; padding-bottom: 8px; margin-bottom: 10px;
+  font-weight: 900; font-size: 13px; color: var(--copper-bright);
+  letter-spacing: 0.5px; flex-wrap: wrap; gap: 6px;
 }
-.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
-@media (max-width: 540px) {
-  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.forge-layout {
+  display: grid; grid-template-columns: 520px 1fr; gap: 14px; align-items: start;
+}
+@media (max-width: 980px) {
+  .forge-layout { grid-template-columns: 1fr; }
+}
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 720px) {
+  .grid-4, .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* SHIP CARDS */
-.unit-card {
-  background: var(--card); border: 1px solid var(--border-dim);
-  border-radius: 6px; padding: 6px; display: flex; flex-direction: column; gap: 4px;
-  position: relative; overflow: hidden;
+/* 200³ BRUSHED STEEL & COPPER VIEWPORT */
+.canvas-stage {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #232a38 0%, #12161e 50%, #261b14 100%);
+  border: 2px solid var(--copper);
+  border-radius: 8px; padding: 10px;
+  box-shadow: inset 0 0 24px rgba(0,0,0,0.8);
 }
-.unit-card.masterwork { border-color: var(--gold); box-shadow: 0 0 10px rgba(245,176,65,0.28); }
+canvas.turntable {
+  width: 100%; max-width: 480px; height: auto; aspect-ratio: 1/1;
+  border: 1px solid #5a6578; border-radius: 6px; cursor: grab;
+}
+canvas.grid-board {
+  width: 100%; max-width: 420px; height: auto; aspect-ratio: 1/1;
+  border: 2px solid var(--copper); border-radius: 6px; cursor: pointer;
+}
+
+/* CARDS & THUMBNAILS */
+.unit-card {
+  background: linear-gradient(180deg, #232938, #171b24);
+  border: 1px solid #384256; border-radius: 6px; padding: 8px;
+  display: flex; flex-direction: column; gap: 5px; position: relative;
+}
+.unit-card.masterwork { border: 1px solid var(--copper-bright); box-shadow: 0 0 12px rgba(217,119,54,0.35); }
 .thumb-wrap {
-  width: 100%; aspect-ratio: 1/1; max-height: 135px;
-  background: radial-gradient(circle at 50% 45%, #161f33, #030408);
-  border: 1px solid var(--border-dim); border-radius: 5px;
+  width: 100%; aspect-ratio: 1/1; max-height: 165px;
+  background: radial-gradient(circle at 50% 45%, #2e3748, #12151c);
+  border: 1px solid var(--copper-dim); border-radius: 5px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; position: relative; overflow: hidden;
 }
 .thumb-wrap img { width: 100%; height: 100%; object-fit: contain; }
 .badge-tier {
-  position: absolute; top: 3px; left: 3px; padding: 1px 4px;
-  font-size: 9px; font-weight: 900; border-radius: 3px; background: rgba(0,0,0,0.85);
+  position: absolute; top: 4px; left: 4px; padding: 2px 5px;
+  font-size: 10px; font-weight: 900; border-radius: 3px; background: rgba(12,14,18,0.9);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 .badge-class {
-  position: absolute; top: 3px; right: 3px; padding: 1px 4px;
-  font-size: 8px; font-weight: 900; border-radius: 3px;
-  background: rgba(56,189,248,0.2); border: 1px solid var(--cyan); color: #bae6fd;
+  position: absolute; top: 4px; right: 4px; padding: 2px 5px;
+  font-size: 9px; font-weight: 800; border-radius: 3px;
+  background: rgba(217,119,54,0.25); border: 1px solid var(--copper); color: #fed7aa;
 }
 .badge-codex {
-  position: absolute; bottom: 3px; left: 3px; padding: 1px 4px;
-  font-size: 9px; font-weight: 800; background: rgba(0,0,0,0.8); color: var(--muted); border-radius: 3px;
+  position: absolute; bottom: 4px; left: 4px; padding: 1px 5px;
+  font-size: 10px; font-weight: 800; background: rgba(12,14,18,0.85); color: var(--steel-light); border-radius: 3px;
 }
 
-/* 512³ DEEP SPACE TURNTABLE & X-WING GRID CANVAS */
-.canvas-stage {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: radial-gradient(circle at center, #10192b 0%, #020306 85%);
-  border: 1px solid var(--border); border-radius: 8px; padding: 6px; margin-bottom: 8px;
-}
-canvas.turntable {
-  width: 100%; max-width: 275px; height: auto; aspect-ratio: 1/1;
-  touch-action: none; cursor: grab; border-radius: 6px;
-}
-canvas.grid-board {
-  width: 100%; max-width: 280px; height: auto; aspect-ratio: 1/1;
-  touch-action: manipulation; border: 1px solid var(--cyan); border-radius: 6px;
-  background: #03060c;
-}
-.swatch-row { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 3px; }
-.swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.4); cursor: pointer; }
-.ctrl-lbl { font-size: 10px; color: var(--muted); font-weight: 700; display: block; margin-bottom: 2px; }
+.swatch-row { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+.swatch { width: 18px; height: 18px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.45); cursor: pointer; }
+.ctrl-lbl { font-size: 11px; color: var(--copper-bright); font-weight: 800; display: block; margin-bottom: 3px; }
 
 /* MODAL & TOAST */
 #modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.86);
-  z-index: 200; display: none; align-items: center; justify-content: center; padding: 10px;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  z-index: 200; display: none; align-items: center; justify-content: center; padding: 14px;
 }
 #modal-overlay.open { display: flex; }
 .modal-box {
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 8px; padding: 10px; width: 100%; max-width: 340px;
+  background: var(--steel-panel); border: 2px solid var(--copper);
+  border-radius: 8px; padding: 14px; width: 100%; max-width: 460px;
 }
 .toast {
-  position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
-  background: #12151e; border: 1px solid var(--white); color: var(--white);
-  padding: 6px 12px; border-radius: 20px; font-weight: 800; font-size: 11px;
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+  background: #1b202b; border: 2px solid var(--copper-bright); color: #fff;
+  padding: 8px 16px; border-radius: 20px; font-weight: 800; font-size: 12px;
   z-index: 300; pointer-events: none; opacity: 0; transition: opacity 0.2s;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
 }
 .toast.show { opacity: 1; }
 </style>
@@ -168,29 +200,31 @@ canvas.grid-board {
 <body>
 
 <header id="micro-hud">
-  <div class="hud-row1">
-    <div class="hud-title">🚀 STARFORGE 512³: GALACTIC FLEET & X-WING GRID</div>
-    <div class="hud-actions">
-      <button id="btn-god" onclick="toggleGodMode()">⚡ GOD: OFF</button>
-      <button onclick="openCodesModal()">📡 CODES</button>
-      <button onclick="saveState(true)">💾 SAVE</button>
+  <div class="hud-inner">
+    <div class="hud-row1">
+      <div class="hud-title">⚙️ KUAT & BESKAR 200³ — BRUSHED STEEL & COPPER STARSHIP FOUNDRY</div>
+      <div class="hud-actions">
+        <button id="btn-god" onclick="toggleGodMode()">⚡ GOD MODE: OFF</button>
+        <button onclick="openCodesModal()">📡 TRADE CODES</button>
+        <button onclick="saveState(true)">💾 SAVE FLEET</button>
+      </div>
     </div>
+    <div class="hud-telemetry">
+      <div class="tele-box"><span class="tele-lbl">Imperial Credits</span><span class="tele-val" id="hud-credits" style="color:var(--copper-bright)">◈5,000</span></div>
+      <div class="tele-box"><span class="tele-lbl">Forged Alloy</span><span class="tele-val" id="hud-supply" style="color:var(--steel-light)">2,500</span></div>
+      <div class="tele-box"><span class="tele-lbl">Hangar Fleet</span><span class="tele-val" id="hud-owned">0</span></div>
+      <div class="tele-box"><span class="tele-lbl">Shipyard Codex</span><span class="tele-val" id="hud-codex" style="color:var(--emerald)">0/2400</span></div>
+      <div class="tele-box"><span class="tele-lbl">Combat Sorties</span><span class="tele-val" id="hud-trials">0/150</span></div>
+    </div>
+    <nav class="hud-nav">
+      <button class="nav-btn" onclick="switchTab(1)">1. 🛡️ Hangar Bay</button>
+      <button class="nav-btn active" onclick="switchTab(2)">2. 🎨 200³ Shipyard Forge</button>
+      <button class="nav-btn" onclick="switchTab(3)">3. 📦 Foundry Crates</button>
+      <button class="nav-btn" onclick="switchTab(4)">4. 🔨 Salvage Auctions</button>
+      <button class="nav-btn" onclick="switchTab(5)">5. ⚔️ X-Wing Grid Arena</button>
+      <button class="nav-btn" onclick="switchTab(6)">6. 📜 Fleet Admiralty</button>
+    </nav>
   </div>
-  <div class="hud-telemetry">
-    <div class="tele-box"><span class="tele-lbl">Credits</span><span class="tele-val" id="hud-credits" style="color:var(--gold)">◈2,500</span></div>
-    <div class="tele-box"><span class="tele-lbl">Coaxium</span><span class="tele-val" id="hud-supply" style="color:var(--cyan)">1,500</span></div>
-    <div class="tele-box"><span class="tele-lbl">Hangar</span><span class="tele-val" id="hud-owned">0</span></div>
-    <div class="tele-box"><span class="tele-lbl">Nav-Dex</span><span class="tele-val" id="hud-codex" style="color:var(--emerald)">0/2000</span></div>
-    <div class="tele-box"><span class="tele-lbl">Sorties</span><span class="tele-val" id="hud-trials">0/150</span></div>
-  </div>
-  <nav class="hud-nav">
-    <button class="nav-btn" onclick="switchTab(1)">1. 🛡️ Hangar</button>
-    <button class="nav-btn active" onclick="switchTab(2)">2. 🎨 512³ Shipyard</button>
-    <button class="nav-btn" onclick="switchTab(3)">3. 📦 Hyper-Crates</button>
-    <button class="nav-btn" onclick="switchTab(4)">4. 🔨 Auctions</button>
-    <button class="nav-btn" onclick="switchTab(5)">5. ⚔️ X-Wing Grid</button>
-    <button class="nav-btn" onclick="switchTab(6)">6. 📜 Fleet Command</button>
-  </nav>
 </header>
 
 <main>
@@ -198,165 +232,190 @@ canvas.grid-board {
   <section id="tab-1" class="tab-pane">
     <div class="panel">
       <div class="panel-hdr">
-        <span>🛡️ ORBITAL HANGAR BAY & FLEET QOL</span>
-        <div style="display:flex;gap:4px;flex-wrap:wrap">
-          <button class="btn-silver" onclick="autoEquipCommanders()">⚡ Auto-Aces</button>
-          <button class="btn-gold" onclick="autoFillSellerLanes()">🔨 Auto-List 5</button>
-          <button onclick="repairAllUnits()">🔧 Repair Fleet</button>
-          <button class="btn-crimson" onclick="salvageDuplicates()">♻️ Scrap Dupes</button>
+        <span>🛡️ ORBITAL HANGAR BAY (200³ HIGH-DEFINITION FLEET)</span>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn-steel" onclick="autoEquipCommanders()">⚡ Auto-Assign Aces</button>
+          <button class="btn-copper" onclick="autoFillSellerLanes()">🔨 Auto-List 5 Ships</button>
+          <button onclick="repairAllUnits()">🔧 Overhaul All</button>
+          <button class="btn-crimson" onclick="salvageDuplicates()">♻️ Smelt Duplicates</button>
         </div>
       </div>
-      <div class="grid-4" style="margin-bottom:6px">
-        <select id="flt-chassis" onchange="renderOwnedTab()"><option value="ALL">All 12 Starships</option></select>
+      <div class="grid-4" style="margin-bottom:10px">
+        <select id="flt-chassis" onchange="renderOwnedTab()"><option value="ALL">All 25 Star Wars Hulls</option></select>
         <select id="flt-sort" onchange="renderOwnedTab()">
-          <option value="val">Sort: Value</option>
-          <option value="tier">Sort: Tier</option>
-          <option value="dex">Sort: Nav-Dex #</option>
-          <option value="hp">Sort: Hull %</option>
+          <option value="val">Sort: Valuation</option>
+          <option value="tier">Sort: Rarity Tier</option>
+          <option value="dex">Sort: Codex #0001–#2400</option>
+          <option value="hp">Sort: Hull Integrity</option>
         </select>
-        <label style="display:flex;align-items:center;gap:4px;font-weight:700;padding:4px">
-          <input type="checkbox" id="flt-vault" onchange="renderOwnedTab()"> 🔒 Locked Only
+        <label style="display:flex;align-items:center;gap:6px;font-weight:700;padding:4px">
+          <input type="checkbox" id="flt-vault" onchange="renderOwnedTab()"> 🔒 Vaulted Only
         </label>
-        <button class="btn-emerald" onclick="switchTab(5)">⚔️ Launch X-Wing Grid</button>
+        <button class="btn-emerald" onclick="switchTab(5)">⚔️ Launch X-Wing Grid Combat</button>
       </div>
-      <div id="owned-grid" class="grid-3"></div>
+      <div id="owned-grid" class="grid-4"></div>
     </div>
 
     <div class="grid-2">
       <div class="panel">
-        <div class="panel-hdr"><span>⚙️ KUAT & INCOM SHIPYARD TECH</span></div>
+        <div class="panel-hdr"><span>⚙️ KUAT FOUNDRY METALLURGY UPGRADES</span></div>
         <div id="tech-grid" class="grid-2"></div>
       </div>
       <div class="panel">
-        <div class="panel-hdr"><span>🎖️ ACE PILOTS & ADMIRALS</span></div>
+        <div class="panel-hdr"><span>🎖️ COMMISSIONED FLIGHT ACES & ADMIRALS</span></div>
         <div id="pilots-grid" class="grid-2"></div>
       </div>
     </div>
   </section>
 
-  <!-- TAB 2: 512³ CUSTOM SHIPYARD FORGE (DEFAULT ACTIVE TAB!) -->
+  <!-- TAB 2: 200×200×200 SHIPYARD FORGE (DEFAULT ACTIVE TAB) -->
   <section id="tab-2" class="tab-pane active">
     <div class="panel">
       <div class="panel-hdr">
-        <span>🎨 512³ KUAT / INCOM ORBITAL SHIPYARD GENERATOR</span>
-        <div style="display:flex;gap:4px">
-          <button class="btn-silver" onclick="cyclePresetShip(-1)">◀ Prev Ship</button>
-          <button class="btn-gold" onclick="randomizeForge()">🎲 Random Ship</button>
-          <button class="btn-silver" onclick="cyclePresetShip(1)">Next Ship ▶</button>
+        <span>🎨 200×200×200 DENSE VOXEL SHIPYARD — 25 REAL HULLS & 2,400 PROCEDURAL VARIANTS</span>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn-steel" onclick="cyclePresetShip(-1)">◀ Prev Hull</button>
+          <button class="btn-copper" onclick="rollProceduralSeed()">🎲 Procedural Ship (#1–#2400)</button>
+          <button class="btn-steel" onclick="cyclePresetShip(1)">Next Hull ▶</button>
         </div>
       </div>
 
-      <div class="canvas-stage">
-        <canvas id="forge-canvas" class="turntable" width="270" height="270"></canvas>
-        <div id="fg-voxel-stats" style="font-size:10px;color:var(--cyan);font-weight:800;margin-top:3px">
-          512³ Sparse Grid Active • Zero-G Deep Space Float
+      <div class="forge-layout">
+        <!-- LEFT COLUMN: 480x480 PC VIEWPORT CANVAS -->
+        <div class="canvas-stage">
+          <canvas id="forge-canvas" class="turntable" width="460" height="460"></canvas>
+          <div id="fg-voxel-stats" style="font-size:11px;color:var(--copper-bright);font-weight:800;margin-top:6px;text-align:center">
+            200×200×200 Solid CSG Voxel Kernel • 26-Neighbor Normals & Ambient Occlusion
+          </div>
+          <div style="display:flex;gap:8px;margin-top:6px;align-items:center;flex-wrap:wrap;justify-content:center">
+            <button onclick="ForgeCam.sweep=!ForgeCam.sweep" class="btn-steel">🔄 Showcase Sweep: ON/OFF</button>
+            <button onclick="ForgeCam.zoom=Math.min(1.75,ForgeCam.zoom+0.12);renderForgeFrame()">➕ Zoom In</button>
+            <button onclick="ForgeCam.zoom=Math.max(0.65,ForgeCam.zoom-0.12);renderForgeFrame()">➖ Zoom Out</button>
+            <label style="font-size:11px;display:flex;align-items:center;gap:4px">
+              <input type="checkbox" id="chk-360" onchange="ForgeCam.full360=this.checked"> Unlock 360°
+            </label>
+          </div>
+          <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+            <div>
+              <span class="ctrl-lbl">Turntable Angle (Clamped 3/4 Arc)</span>
+              <input type="range" id="sl-yaw" min="-85" max="85" value="38" style="width:100%" oninput="ForgeCam.sweep=false;ForgeCam.yaw=this.value*0.01;renderForgeFrame()">
+            </div>
+            <div>
+              <span class="ctrl-lbl">Camera Elevation Pitch</span>
+              <input type="range" id="sl-pitch" min="10" max="65" value="28" style="width:100%" oninput="ForgeCam.pitch=this.value*0.01;renderForgeFrame()">
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:6px;margin-top:4px;font-size:10px;color:var(--muted);flex-wrap:wrap;justify-content:center">
-          <span>👆 Drag 360° Orbit</span>
-          <button onclick="ForgeCam.autoSpin=!ForgeCam.autoSpin" style="padding:1px 6px">🔄 Spin</button>
-          <button onclick="ForgeCam.zoom=Math.min(1.8,ForgeCam.zoom+0.15);renderForgeFrame()" style="padding:1px 6px">➕ Zoom</button>
-          <button onclick="ForgeCam.zoom=Math.max(0.6,ForgeCam.zoom-0.15);renderForgeFrame()" style="padding:1px 6px">➖ Zoom</button>
-        </div>
-      </div>
 
-      <div class="grid-3" style="margin-bottom:6px">
-        <div>
-          <span class="ctrl-lbl">1. Authentic Hull (Pods to Death Star!)</span>
-          <select id="fg-chassis" style="width:100%" onchange="onChassisSelectChange()"></select>
-        </div>
-        <div>
-          <span class="ctrl-lbl">2. Rarity Class (T1–T15)</span>
-          <select id="fg-tier" style="width:100%" onchange="updateForgePreview()"></select>
-        </div>
-        <div>
-          <span class="ctrl-lbl">3. Wing / S-Foil / Superstructure</span>
-          <select id="fg-wings" style="width:100%" onchange="updateForgePreview()">
-            <option value="attack">Attack S-Foils / Combat Lock</option>
-            <option value="cruise">Cruise Trim / Heavy Plating</option>
-            <option value="interceptor">Interceptor Dagger Array</option>
-            <option value="command">Command Crest / Dorsal Array</option>
-          </select>
-        </div>
-        <div>
-          <span class="ctrl-lbl">4. Primary Weapon Battery</span>
-          <select id="fg-weapon" style="width:100%" onchange="updateForgePreview()"></select>
-        </div>
-        <div>
-          <span class="ctrl-lbl">5. Sublight & Hyperdrive Glow</span>
-          <select id="fg-engine" style="width:100%" onchange="updateForgePreview()">
-            <option value="twin_ion">Twin Ion / Quad Sublight</option>
-            <option value="hyper_ring">Overcharged Hyperdrive Array</option>
-            <option value="stealth">Cloaked Whisper Thrust</option>
-            <option value="super_reactor">Kyber Reactor Core Vent</option>
-          </select>
-        </div>
-        <div>
-          <span class="ctrl-lbl">6. Deep Space Sector Backdrop</span>
-          <select id="fg-backdrop" style="width:100%" onchange="updateForgePreview()">
-            <option value="deep_space">Deep Space Starfield</option>
-            <option value="endor_orbit">Endor Sanctuary Moon Orbit</option>
-            <option value="scarif_gate">Scarif Nebula & Laser Flak</option>
-            <option value="asteroid_belt">Hoth Asteroid Field</option>
-            <option value="hyperspace">Hyperspace Jump Streaks</option>
-          </select>
-        </div>
-      </div>
+        <!-- RIGHT COLUMN: 25 AUTHENTIC HULLS + PROCEDURAL SEED + BRUSHED METALS -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="panel" style="margin-bottom:0;background:var(--steel-card)">
+            <div class="panel-hdr">
+              <span>🛠️ HULL ARCHITECTURE & PROCEDURAL CODEX SEED (#0001–#2400)</span>
+            </div>
+            <div class="grid-2">
+              <div>
+                <span class="ctrl-lbl">1. Authentic Star Wars Hull (25 Models)</span>
+                <select id="fg-chassis" style="width:100%" onchange="onChassisSelectChange()"></select>
+              </div>
+              <div>
+                <span class="ctrl-lbl">2. Procedural Codex Seed (#1 to #2400)</span>
+                <div style="display:flex;gap:4px">
+                  <input type="number" id="fg-seed" min="1" max="2400" value="1" style="width:100%" onchange="applyProceduralSeed(this.value)">
+                  <button class="btn-copper" onclick="rollProceduralSeed()">🎲 Roll</button>
+                </div>
+              </div>
+              <div>
+                <span class="ctrl-lbl">3. Foundry Alloy Tier (T1–T16)</span>
+                <select id="fg-tier" style="width:100%" onchange="updateForgePreview()"></select>
+              </div>
+              <div>
+                <span class="ctrl-lbl">4. S-Foil / Superstructure Kit</span>
+                <select id="fg-wings" style="width:100%" onchange="updateForgePreview()">
+                  <option value="attack">Combat S-Foils / Heavy Command Bridge</option>
+                  <option value="interceptor">Interceptor Forward Dagger Trim</option>
+                  <option value="armored">Reinforced Copper-Ribbed Plating</option>
+                  <option value="prototype">Experimental Dorsal Array & Fins</option>
+                </select>
+              </div>
+              <div>
+                <span class="ctrl-lbl">5. Primary Ordnance & Turrets</span>
+                <select id="fg-weapon" style="width:100%" onchange="updateForgePreview()"></select>
+              </div>
+              <div>
+                <span class="ctrl-lbl">6. Metallic Foundry Finish Preset</span>
+                <select id="fg-finish" style="width:100%" onchange="applyFinishPreset(this.value)">
+                  <option value="steel_copper">Brushed Beskar Steel & Forged Copper</option>
+                  <option value="burnished_bronze">Burnished Coruscant Bronze & Gunmetal</option>
+                  <option value="imperial_iron">Imperial Machined Iron & Polished Brass</option>
+                  <option value="rebel_alloy">Alliance Weathered Titanium & Copper</option>
+                  <option value="royal_chrome">Naboo Mirror Chrome & Guilded Copper</option>
+                  <option value="sith_obsidian">Obsidian Dark-Steel & Blood Copper</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-      <div class="panel" style="background:var(--card)">
-        <div class="panel-hdr"><span>🎨 5-ZONE STARSHIP HULL & LASER HEX PAINT STUDIO</span></div>
-        <div id="paint-zones" class="grid-2"></div>
-      </div>
+          <div class="panel" style="margin-bottom:0;background:var(--steel-card)">
+            <div class="panel-hdr"><span>🎨 5-ZONE BRUSHED METAL & COPPER HEX STUDIO</span></div>
+            <div id="paint-zones" class="grid-2"></div>
+          </div>
 
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">
-        <div id="fg-cost-lbl" style="font-weight:800;color:var(--gold)">Shipyard Cost: ◈45 + 20 Coaxium</div>
-        <button class="btn-gold" style="padding:8px 14px;font-size:12px" onclick="craftCustomUnit()">🚀 COMMISSION & APPRAISE STARSHIP</button>
+          <div class="panel" style="margin-bottom:0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+            <div>
+              <div id="fg-cost-lbl" style="font-weight:900;font-size:14px;color:var(--copper-bright)">Foundry Cost: ◈45 + 20 Alloy</div>
+              <div style="font-size:11px;color:var(--muted)">Appraises up to ★ MASTERWORK (50x Value) ★</div>
+            </div>
+            <button class="btn-copper" style="padding:10px 18px;font-size:13px" onclick="craftCustomUnit()">🔥 CAST & APPRAISE STARSHIP</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- TAB 3: HYPER-CRATES -->
+  <!-- TAB 3: FOUNDRY CRATES -->
   <section id="tab-3" class="tab-pane">
     <div class="panel">
-      <div class="panel-hdr"><span>📦 ORBITAL SHIPYARD CONTAINERS (1x / 5x / 10x)</span></div>
+      <div class="panel-hdr"><span>📦 KUAT DRIVE YARDS CONTAINERS (1x / 5x / 10x)</span></div>
       <div id="crates-grid" class="grid-2"></div>
     </div>
     <div class="grid-2">
       <div class="panel">
-        <div class="panel-hdr"><span>🎖️ FLIGHT ACADEMY RECRUITMENT</span></div>
+        <div class="panel-hdr"><span>🎖️ ACADEMY COMMANDER PODS</span></div>
         <div id="pods-grid" class="grid-2"></div>
       </div>
       <div class="panel">
-        <div class="panel-hdr"><span>⛽ COAXIUM HYPERFUEL DEPOT</span></div>
+        <div class="panel-hdr"><span>🔩 FORGED STEEL & COPPER SMELTERY</span></div>
         <div class="grid-2">
-          <button class="btn-silver" onclick="buySupply(500, 100)">+500 Fuel (◈100)</button>
-          <button class="btn-silver" onclick="buySupply(3000, 500)">+3,000 Fuel (◈500)</button>
-          <button class="btn-gold" onclick="buySupply(20000, 2500)">+20,000 Fuel (◈2,500)</button>
-          <button class="btn-emerald" onclick="buySupply(100000, 10000)">+100K Fuel (◈10,000)</button>
+          <button class="btn-steel" onclick="buySupply(500, 100)">+500 Alloy (◈100)</button>
+          <button class="btn-steel" onclick="buySupply(3000, 500)">+3,000 Alloy (◈500)</button>
+          <button class="btn-copper" onclick="buySupply(20000, 2500)">+20,000 Alloy (◈2,500)</button>
+          <button class="btn-emerald" onclick="buySupply(100000, 10000)">+100K Alloy (◈10,000)</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TAB 4: AUCTIONS (STRICT "BID" LABELS) -->
+  <!-- TAB 4: SALVAGE AUCTIONS (STRICT "BID" LABELS) -->
   <section id="tab-4" class="tab-pane">
     <div class="panel">
       <div class="panel-hdr">
-        <span>🔨 CORELLIAN SALVAGE BUYER AUCTION (1-LANE LIVE)</span>
-        <span id="buy-timer" style="color:var(--gold);font-weight:900">10.0s</span>
+        <span>🔨 CORELLIAN FOUNDRY BUYER AUCTION (1-LANE LIVE)</span>
+        <span id="buy-timer" style="color:var(--copper-bright);font-weight:900">10.0s</span>
       </div>
-      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-        <div class="thumb-wrap" style="width:110px;height:110px;flex-shrink:0" onclick="inspectBuyerLot()">
-          <img id="buy-thumb" alt="Ship Lot">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+        <div class="thumb-wrap" style="width:130px;height:130px;flex-shrink:0" onclick="inspectBuyerLot()">
+          <img id="buy-thumb" alt="Lot">
         </div>
-        <div style="flex:1;min-width:170px">
-          <div id="buy-title" style="font-weight:900;font-size:13px;color:var(--white)">Scanning Salvage Lot...</div>
-          <div id="buy-meta" style="color:var(--muted);font-size:11px;margin:2px 0">Est. Value: ◈0</div>
-          <div id="buy-bid-line" style="font-size:13px;font-weight:900;color:var(--gold);margin:4px 0">Current Bid: ◈0</div>
-          <div id="buy-leader" style="font-size:11px;font-weight:800;margin-bottom:6px">Leader: Kuat Broker</div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <div id="buy-title" style="font-weight:900;font-size:15px;color:var(--steel-light)">Loading Salvage Hull...</div>
+          <div id="buy-meta" style="color:var(--muted);font-size:12px;margin:3px 0">Est. Value: ◈0</div>
+          <div id="buy-bid-line" style="font-size:14px;font-weight:900;color:var(--copper-bright);margin:5px 0">Current Bid: ◈0</div>
+          <div id="buy-leader" style="font-size:12px;font-weight:800;margin-bottom:8px">Leader: Kuat Guild</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
             <button class="btn-emerald" onclick="placeBuyerBid(1)">🔨 BID (+◈1)</button>
-            <button class="btn-gold" onclick="placeBuyerBid(5)">🔨 BID (+◈5)</button>
-            <button class="btn-silver" onclick="placeBuyerBid(25)">🔨 BID (+◈25)</button>
+            <button class="btn-copper" onclick="placeBuyerBid(5)">🔨 BID (+◈5)</button>
+            <button class="btn-steel" onclick="placeBuyerBid(25)">🔨 BID (+◈25)</button>
           </div>
         </div>
       </div>
@@ -364,86 +423,86 @@ canvas.grid-board {
 
     <div class="panel">
       <div class="panel-hdr">
-        <span>💰 HUTT & KUAT 5-LANE SELLER AUCTIONS (2x–20x BID WARS!)</span>
-        <button class="btn-gold" onclick="autoFillSellerLanes()">⚡ Auto-List 5 Ships</button>
+        <span>💰 SYNDICATE 5-LANE SELLER AUCTIONS (2x–20x BID WARS!)</span>
+        <button class="btn-copper" onclick="autoFillSellerLanes()">⚡ Auto-List 5 Ships</button>
       </div>
       <div id="sell-lanes-grid" class="grid-3"></div>
     </div>
   </section>
 
-  <!-- TAB 5: X-WING TACTICAL SPACE GRID ARENA -->
+  <!-- TAB 5: X-WING TACTICAL GRID ARENA -->
   <section id="tab-5" class="tab-pane">
     <div class="panel">
       <div class="panel-hdr">
-        <span>⚔️ X-WING TACTICAL 8×8 SPACE GRID DOGFIGHT ARENA</span>
-        <div style="display:flex;gap:4px">
-          <button class="btn-silver" onclick="initGridMatch()">🔄 New Sortie</button>
-          <button class="btn-gold" onclick="autoResolveGridMatch()">⚡ Auto-Dogfight</button>
+        <span>⚔️ X-WING 8×8 TACTICAL GRID COMBAT TABLE</span>
+        <div style="display:flex;gap:6px">
+          <button class="btn-steel" onclick="initGridMatch()">🔄 Reset Table</button>
+          <button class="btn-copper" onclick="autoResolveGridMatch()">⚡ Auto-Resolve Engagement</button>
         </div>
       </div>
 
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center">
-        <div class="canvas-stage" style="margin-bottom:0">
-          <canvas id="grid-canvas" class="grid-board" width="280" height="280"></canvas>
-          <div style="font-size:10px;color:var(--muted);margin-top:3px">
-            Tap any highlighted green sector to fly, or use Maneuver Dial buttons!
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center">
+        <div class="canvas-stage">
+          <canvas id="grid-canvas" class="grid-board" width="360" height="360"></canvas>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">
+            Click any highlighted copper/emerald sector to maneuver & fire!
           </div>
         </div>
 
-        <div style="flex:1;min-width:210px;display:flex;flex-direction:column;gap:6px">
+        <div style="flex:1;min-width:250px;display:flex;flex-direction:column;gap:8px">
           <div class="unit-card">
-            <div style="font-weight:900;color:var(--cyan)" id="grid-p-name">🟢 Player Flagship</div>
-            <div style="font-size:11px" id="grid-p-stats">Hull: 100% | Shields: 100% | Pos: (1,4)</div>
+            <div style="font-weight:900;color:var(--emerald)" id="grid-p-name">🟢 Player Flagship</div>
+            <div style="font-size:12px" id="grid-p-stats">Hull: 100% | Shields: 100% | Pos: (1,4)</div>
           </div>
           <div class="unit-card">
-            <div style="font-weight:900;color:var(--crimson)" id="grid-e-name">🔴 Imperial Bogey</div>
-            <div style="font-size:11px" id="grid-e-stats">Hull: 100% | Shields: 100% | Pos: (6,3)</div>
+            <div style="font-weight:900;color:var(--crimson)" id="grid-e-name">🔴 Adversarial Bogey</div>
+            <div style="font-size:12px" id="grid-e-stats">Hull: 100% | Shields: 100% | Pos: (6,3)</div>
           </div>
 
-          <div class="grid-2">
-            <button class="btn-silver" onclick="gridManeuver('FWD1')">⬆️ Thrust 1</button>
-            <button class="btn-silver" onclick="gridManeuver('FWD2')">⏫ Boost 2</button>
-            <button class="btn-silver" onclick="gridManeuver('LEFT')">↰ Bank Left</button>
-            <button class="btn-silver" onclick="gridManeuver('RIGHT')">↱ Bank Right</button>
-            <button class="btn-silver" onclick="gridManeuver('KTURN')">🔄 K-Turn 180°</button>
-            <button class="btn-crimson" onclick="gridFireWeapons()">🔥 FIRE LASERS!</button>
+          <div class="grid-3">
+            <button class="btn-steel" onclick="gridManeuver('FWD1')">⬆️ Speed 1</button>
+            <button class="btn-steel" onclick="gridManeuver('FWD2')">⏫ Boost 2</button>
+            <button class="btn-steel" onclick="gridManeuver('LEFT')">↰ Bank Left</button>
+            <button class="btn-steel" onclick="gridManeuver('RIGHT')">↱ Bank Right</button>
+            <button class="btn-steel" onclick="gridManeuver('KTURN')">🔄 K-Turn</button>
+            <button class="btn-crimson" onclick="gridFireWeapons()">🔥 FIRE BATTERY</button>
           </div>
 
-          <div id="battle-log" style="background:var(--card);border:1px solid var(--border-dim);border-radius:6px;padding:6px;min-height:68px;font-size:11px">
-            Plot your maneuver on the 8×8 grid! Close within Range 1–3 and keep the target in your firing arc (or unleash a 360° Turret / Death Star Superlaser!).
+          <div id="battle-log" style="background:var(--steel-card);border:1px solid var(--copper-dim);border-radius:6px;padding:10px;min-height:80px;font-size:12px">
+            Tactical holotable initialized. Move within firing range on the 8×8 copper grid to engage!
           </div>
         </div>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-hdr"><span>🌌 6 HYPERSPACE TRADE ROUTE PATROLS</span></div>
+      <div class="panel-hdr"><span>🌌 6 SECTOR FLEET PATROLS</span></div>
       <div id="patrols-grid" class="grid-3"></div>
     </div>
   </section>
 
-  <!-- TAB 6: FLEET COMMAND -->
+  <!-- TAB 6: FLEET ADMIRALTY -->
   <section id="tab-6" class="tab-pane">
     <div class="panel">
-      <div class="panel-hdr"><span>🤖 ASTROMECH & NAV-COMPUTER AUTOMATION</span></div>
+      <div class="panel-hdr"><span>🤖 FOUNDRY & COMBAT AUTOMATION</span></div>
       <div class="grid-3">
         <button id="auto-march" onclick="toggleAuto('march')">🤖 Auto-Sortie: OFF</button>
-        <button id="auto-repair" onclick="toggleAuto('repair')">🔧 Auto-Repair: OFF</button>
-        <button id="auto-supply" onclick="toggleAuto('supply')">⛽ Auto-Coaxium: OFF</button>
+        <button id="auto-repair" onclick="toggleAuto('repair')">🔧 Auto-Overhaul: OFF</button>
+        <button id="auto-supply" onclick="toggleAuto('supply')">🔩 Auto-Alloy: OFF</button>
       </div>
     </div>
     <div class="panel">
-      <div class="panel-hdr"><span>📜 REBEL & IMPERIAL ADMIRALTY CONTRACTS</span></div>
+      <div class="panel-hdr"><span>📜 KUAT & REBEL SHIPYARD COMMISSIONS</span></div>
       <div id="commissions-grid" class="grid-3"></div>
     </div>
     <div class="panel">
-      <div class="panel-hdr"><span>🏆 150 GALACTIC CAMPAIGN MEDALS</span></div>
+      <div class="panel-hdr"><span>🏆 150 MASTER SHIPWRIGHT TRIALS</span></div>
       <div id="trials-grid" class="grid-3"></div>
     </div>
   </section>
 </main>
 
-<!-- 3D INSPECTOR & TRADE CODES MODAL -->
+<!-- INSPECTOR & CODES MODAL -->
 <div id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal-box" id="modal-content"></div>
 </div>
@@ -451,484 +510,843 @@ canvas.grid-board {
 
 <script>
 /* ============================================================================
-   1. 15 RARITY TIERS & 12 AUTHENTIC STAR WARS STARSHIPS (512³ SCALE)
+   1. 16 RARITY TIERS & 25 AUTHENTIC STAR WARS STARSHIPS (16 × 25 × 6 = 2,400)
    ============================================================================ */
 const TIERS = [
-  { id:0, code:'T1',  name:'Jettison Salvage',     val:15,      col:'#94a3b8' },
-  { id:1, code:'T2',  name:'Outer Rim Patrol',     val:45,      col:'#cbd5e1' },
-  { id:2, code:'T3',  name:'Snubfighter Squadron', val:120,     col:'#22c55e' },
-  { id:3, code:'T4',  name:'Alliance Interceptor', val:350,     col:'#10b981' },
-  { id:4, code:'T5',  name:'Smuggler SpecModified',val:950,     col:'#38bdf8' },
-  { id:5, code:'T6',  name:'Bounty Hunter Craft',  val:2600,    col:'#0ea5e9' },
-  { id:6, code:'T7',  name:'Royal Naboo Chrome',   val:7200,    col:'#a855f7' },
-  { id:7, code:'T8',  name:'Corvette Blockade',    val:20000,   col:'#d946ef' },
-  { id:8, code:'T9',  name:'Republic Cruiser',     val:58000,   col:'#f43f5e' },
-  { id:9, code:'T10', name:'Imperial Star Wedge',  val:160000,  col:'#f59e0b' },
-  { id:10,code:'T11', name:'Kuat Dreadnought',     val:420000,  col:'#eab308' },
-  { id:11,code:'T12', name:'Executor Flagship',    val:1050000, col:'#ef4444' },
-  { id:12,code:'T13', name:'Eclipse Superlaser',   val:2400000, col:'#ec4899' },
-  { id:13,code:'T14', name:'Starkiller Planetary', val:3800000, col:'#06b6d4' },
-  { id:14,code:'T15', name:'Death Star Mythic',    val:5000000, col:'#ffffff' }
+  { id:0,  code:'T1',  name:'Foundry Cast Iron',   val:20,      col:'#94a3b8' },
+  { id:1,  code:'T2',  name:'Brushed Carbon Steel',val:55,      col:'#cbd5e1' },
+  { id:2,  code:'T3',  name:'Tempered Gunmetal',   val:140,     col:'#6ee7b7' },
+  { id:3,  code:'T4',  name:'Hammered Copper',     val:380,     col:'#d97736' },
+  { id:4,  code:'T5',  name:'Burnished Bronze',    val:980,     col:'#f59e0b' },
+  { id:5,  code:'T6',  name:'Corellian Titanium',  val:2600,    col:'#38bdf8' },
+  { id:6,  code:'T7',  name:'Kuat Brass-Trimmed',  val:6800,    col:'#eab308' },
+  { id:7,  code:'T8',  name:'Naboo Mirror Chrome', val:18500,   col:'#e2e8f0' },
+  { id:8,  code:'T9',  name:'Mandalorian Beskar',  val:52000,   col:'#a855f7' },
+  { id:9,  code:'T10', name:'Crimson Copper-Gold', val:145000,  col:'#f43f5e' },
+  { id:10, code:'T11', name:'Imperial Durasteel',  val:390000,  col:'#fb923c' },
+  { id:11, code:'T12', name:'Sith Alchemy Bronze', val:980000,  col:'#ef4444' },
+  { id:12, code:'T13', name:'Starforge Electrum',  val:2200000, col:'#fde047' },
+  { id:13, code:'T14', name:'Kyber-Cored Copper',  val:3600000, col:'#2dd4bf' },
+  { id:14, code:'T15', name:'Sovereign Damascus',  val:4800000, col:'#f97316' },
+  { id:15, code:'T16', name:'Primeval Beskar Mythic',val:6500000,col:'#ffffff' }
 ];
 
+const FINISHES = {
+  steel_copper:     ['#9aa6b8', '#d97736', '#2b323f', '#f29a5e', '#38bdf8'],
+  burnished_bronze: ['#b47b44', '#6e4726', '#241e1a', '#f5b041', '#f97316'],
+  imperial_iron:    ['#7c8798', '#394150', '#1a1f29', '#eab308', '#10b981'],
+  rebel_alloy:      ['#cbd5e1', '#b94a2c', '#333c4d', '#f59e0b', '#ef4444'],
+  royal_chrome:     ['#e2e8f0', '#d97736', '#3b4454', '#fde047', '#38bdf8'],
+  sith_obsidian:    ['#363c48', '#991b1b', '#14171f', '#d97736', '#ef4444']
+};
+
 const SHIPS = [
-  { id:'xwing',          name:'T-65B X-Wing Starfighter',     cls:'Starfighter', range:3, arc:'FRONT', defColors:['#e2e8f0','#dc2626','#334155','#38bdf8','#ff2a55'] },
-  { id:'tie_ln',         name:'TIE/ln Space Fighter',         cls:'Starfighter', range:2, arc:'FRONT', defColors:['#94a3b8','#0f172a','#334155','#475569','#22c55e'] },
-  { id:'falcon',         name:'YT-1300 Millennium Falcon',    cls:'Freighter',   range:3, arc:'360',   defColors:['#cbd5e1','#64748b','#991b1b','#38bdf8','#ef4444'] },
-  { id:'death_star',     name:'DS-1 Death Star Station',      cls:'BattleMoon',  range:4, arc:'360',   defColors:['#94a3b8','#475569','#1e293b','#334155','#22c55e'] },
-  { id:'star_destroyer', name:'Imperial-I Star Destroyer',    cls:'Capital',     range:4, arc:'360',   defColors:['#d8e0ec','#94a3b8','#475569','#38bdf8','#22c55e'] },
-  { id:'escape_pod',     name:'Class-4 Jettison Escape Pod',  cls:'Pod',         range:2, arc:'360',   defColors:['#f8fafc','#d97706','#475569','#f59e0b','#38bdf8'] },
-  { id:'tie_interceptor',name:'TIE/IN Interceptor',           cls:'Interceptor', range:2, arc:'FRONT', defColors:['#94a3b8','#090d16','#334155','#64748b','#22c55e'] },
-  { id:'slave1',         name:'Firespray-31 (Slave I)',       cls:'Gunship',     range:3, arc:'360',   defColors:['#15803d','#7f1d1d','#78716c','#f5b041','#ef4444'] },
-  { id:'ywing',          name:'BTL-A4 Y-Wing Bomber',         cls:'Bomber',      range:3, arc:'360',   defColors:['#f8fafc','#eab308','#64748b','#94a3b8','#ef4444'] },
-  { id:'awing',          name:'RZ-1 A-Wing Interceptor',      cls:'Interceptor', range:2, arc:'FRONT', defColors:['#b91c1c','#f8fafc','#334155','#fbbf24','#ef4444'] },
-  { id:'naboo_n1',       name:'Naboo N-1 Royal Starfighter',  cls:'Starfighter', range:3, arc:'FRONT', defColors:['#facc15','#e2e8f0','#475569','#38bdf8','#22c55e'] },
-  { id:'tantive_cr90',   name:'CR90 Tantive IV Corvette',     cls:'Corvette',    range:3, arc:'360',   defColors:['#f1f5f9','#991b1b','#64748b','#f59e0b','#ef4444'] }
+  { id:'xwing',          name:'T-65B X-Wing Starfighter',      cls:'Fighter',     range:3 },
+  { id:'tie_ln',         name:'TIE/ln Superiority Fighter',    cls:'Fighter',     range:2 },
+  { id:'tie_interceptor',name:'TIE/IN Interceptor',            cls:'Interceptor', range:2 },
+  { id:'tie_advanced',   name:'Darth Vader TIE Advanced x1',   cls:'Prototype',   range:3 },
+  { id:'tie_bomber',     name:'TIE/sa Surface Bomber',         cls:'Bomber',      range:3 },
+  { id:'tie_defender',   name:'TIE/D Tri-Wing Defender',       cls:'Elite',       range:3 },
+  { id:'falcon',         name:'YT-1300 Millennium Falcon',     cls:'Freighter',   range:3 },
+  { id:'slave1',         name:'Firespray-31 (Slave I)',        cls:'Gunship',     range:3 },
+  { id:'ywing',          name:'BTL-A4 Y-Wing Bomber',          cls:'Bomber',      range:3 },
+  { id:'awing',          name:'RZ-1 A-Wing Interceptor',       cls:'Interceptor', range:2 },
+  { id:'bwing',          name:'A/SF-01 B-Wing Heavy Assault',  cls:'Heavy',       range:3 },
+  { id:'uwing',          name:'UT-60D U-Wing Strike Transport',cls:'Gunship',     range:3 },
+  { id:'lambda_shuttle', name:'Lambda-Class T-4a Shuttle',     cls:'Shuttle',     range:3 },
+  { id:'razor_crest',    name:'ST-70 Razor Crest Gunship',     cls:'Bounty',      range:3 },
+  { id:'naboo_n1',       name:'Naboo N-1 Royal Starfighter',   cls:'Royal',       range:3 },
+  { id:'jedi_eta2',      name:'Eta-2 Actis Jedi Interceptor',  cls:'Interceptor', range:2 },
+  { id:'arc170',         name:'ARC-170 Heavy Recon Fighter',   cls:'Heavy',       range:3 },
+  { id:'laati_gunship',  name:'LAAT/i Republic Attack Gunship',cls:'Gunship',     range:3 },
+  { id:'tantive_cr90',   name:'CR90 Tantive IV Corvette',      cls:'Corvette',    range:4 },
+  { id:'nebulon_b',      name:'EF76 Nebulon-B Escort Frigate', cls:'Frigate',     range:4 },
+  { id:'venator',        name:'Venator Republic Cruiser',      cls:'Capital',     range:4 },
+  { id:'star_destroyer', name:'Imperial-I Star Destroyer',     cls:'Capital',     range:4 },
+  { id:'executor_ssd',   name:'Executor Super Star Destroyer', cls:'Dreadnought', range:5 },
+  { id:'death_star',     name:'DS-1 Death Star Battle Station',cls:'BattleMoon',  range:5 },
+  { id:'escape_pod',     name:'Class-4 Armored Escape Pod',    cls:'Industrial',  range:2 }
 ];
 
 const WEAPONS = [
-  { id:'quad_laser',   name:'Quad Taim & Bak Laser Cannons' },
-  { id:'superlaser',   name:'Kyber Planet-Killer Superlaser Beam' },
-  { id:'turbolaser',   name:'Heavy Octuple Turbolaser Batteries' },
-  { id:'proton_torp',  name:'Proton Torpedo Twin Launchers' },
-  { id:'seismic',      name:'Void Seismic Charge & Ion Cannon' },
-  { id:'sfs_chin',     name:'SFS L-s9.3 Twin Laser Cannons' }
+  { id:'quad_laser',  name:'Quad Taim & Bak Copper-Cased Cannons' },
+  { id:'turbolaser',  name:'Heavy Octuple Turbolaser Batteries' },
+  { id:'superlaser',  name:'Kyber Superlaser Convergence Array' },
+  { id:'proton_torp', name:'Twin Proton Torpedo Tubes' },
+  { id:'ion_turret',  name:'Dorsal ArMek Ion Turret' },
+  { id:'seismic',     name:'Seismic Charge & Chin Cannons' }
 ];
-const SWATCHES = ['#e2e8f0','#94a3b8','#dc2626','#facc15','#15803d','#38bdf8','#0f172a','#7f1d1d','#22c55e','#f59e0b','#a855f7','#ffffff'];
+const SWATCHES = ['#9aa6b8','#d97736','#f29a5e','#6e4726','#cbd5e1','#363c48','#b94a2c','#eab308','#2b323f','#991b1b','#38bdf8','#10b981'];
 
 /* ============================================================================
-   2. 512³ SPARSE COORDINATE SPACE VOXEL ENGINE (ZERO MOBILE MEMORY OVERFLOW)
+   2. TRUE DENSE 200×200×200 CSG VOXEL KERNEL (8,000,000 VOXELS + CARVING!)
    ============================================================================ */
-// Coordinates span [0..511] in X, Y, Z with center at (256, 256, 256).
-// Emits packed surface points into a fast deduplicated spatial hash buffer.
-const MAX_PTS = 48000;
-const ptX = new Int16Array(MAX_PTS);
-const ptY = new Int16Array(MAX_PTS);
-const ptZ = new Int16Array(MAX_PTS);
-const ptC = new Uint8Array(MAX_PTS);
-let ptCount = 0;
+const G = 200;
+const G2 = G * G;
+const G3 = G * G * G;
+const voxMat = new Uint8Array(G3);
+const voxStamp = new Uint16Array(G3);
+let curStamp = 1;
 
-// Fast 64K spatial hash table for 512³ coordinate deduplication
-const HASH_SIZE = 65536;
-const hashTag = new Uint16Array(HASH_SIZE);
-const hashKey = new Uint32Array(HASH_SIZE);
-const hashIdx = new Int32Array(HASH_SIZE);
-let curHashTag = 1;
-
-function begin512Sculpt() {
-  ptCount = 0;
-  curHashTag++;
-  if (curHashTag >= 65530) { hashTag.fill(0); curHashTag = 1; }
+function clearGrid200() {
+  curStamp++;
+  if (curStamp >= 65530) { voxStamp.fill(0); curStamp = 1; }
 }
 
-function plot512(x, y, z, cIdx) {
+function setV(x, y, z, m) {
   const ix = x | 0, iy = y | 0, iz = z | 0;
-  if (ix < 2 || ix > 509 || iy < 2 || iy > 509 || iz < 2 || iz > 509) return;
-  // Quantize to 4-unit 512-space cells so splats fuse cleanly while preserving 512³ proportions
-  const qx = ix >> 2, qy = iy >> 2, qz = iz >> 2;
-  const key = (qy << 14) | (qz << 7) | qx;
-  let h = ((key * 2654435761) >>> 16) & 65535;
-  for (let probe = 0; probe < 6; probe++) {
-    if (hashTag[h] !== curHashTag) {
-      if (ptCount >= MAX_PTS) return;
-      hashTag[h] = curHashTag;
-      hashKey[h] = key;
-      hashIdx[h] = ptCount;
-      ptX[ptCount] = ix; ptY[ptCount] = iy; ptZ[ptCount] = iz; ptC[ptCount] = cIdx;
-      ptCount++;
-      return;
-    } else if (hashKey[h] === key) {
-      ptC[hashIdx[h]] = cIdx;
-      return;
-    }
-    h = (h + 1) & 65535;
+  if (ix < 1 || ix >= G - 1 || iy < 1 || iy >= G - 1 || iz < 1 || iz >= G - 1) return;
+  const idx = iy * G2 + iz * G + ix;
+  if (m === 0) {
+    voxStamp[idx] = 0;
+  } else {
+    voxStamp[idx] = curStamp;
+    voxMat[idx] = m;
   }
 }
 
-// 512³ Geometric Primitives (Hollow shell step = 4 for crisp 512-scale surfaces)
-function box512(x0, y0, z0, x1, y1, z1, cIdx) {
-  const ax = Math.min(x0,x1)|0, bx = Math.max(x0,x1)|0;
-  const ay = Math.min(y0,y1)|0, by = Math.max(y0,y1)|0;
-  const az = Math.min(z0,z1)|0, bz = Math.max(z0,z1)|0;
-  for (let y = ay; y <= by; y += 4) {
-    for (let z = az; z <= bz; z += 4) {
-      for (let x = ax; x <= bx; x += 4) {
-        if (x - ax < 4 || bx - x < 4 || y - ay < 4 || by - y < 4 || z - az < 4 || bz - z < 4) {
-          plot512(x, y, z, cIdx);
+function getV(x, y, z) {
+  const ix = x | 0, iy = y | 0, iz = z | 0;
+  if (ix < 0 || ix >= G || iy < 0 || iy >= G || iz < 0 || iz >= G) return 0;
+  const idx = iy * G2 + iz * G + ix;
+  return voxStamp[idx] === curStamp ? voxMat[idx] : 0;
+}
+
+// Solid Box & Subtractive Carve Box
+function voxBox(x0, y0, z0, x1, y1, z1, m) {
+  const ax = Math.max(1, Math.min(x0, x1) | 0), bx = Math.min(G - 2, Math.max(x0, x1) | 0);
+  const ay = Math.max(1, Math.min(y0, y1) | 0), by = Math.min(G - 2, Math.max(y0, y1) | 0);
+  const az = Math.max(1, Math.min(z0, z1) | 0), bz = Math.min(G - 2, Math.max(z0, z1) | 0);
+  for (let y = ay; y <= by; y++) {
+    const yOff = y * G2;
+    for (let z = az; z <= bz; z++) {
+      let idx = yOff + z * G + ax;
+      for (let x = ax; x <= bx; x++, idx++) {
+        if (m === 0) voxStamp[idx] = 0;
+        else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
+      }
+    }
+  }
+}
+
+// Tapered Cylinder along Z (Fuselages, Engines, Barrels, Pods)
+function voxCylZ(cx, cy, z0, z1, r0, r1, m) {
+  const az = Math.max(1, Math.min(z0, z1) | 0), bz = Math.min(G - 2, Math.max(z0, z1) | 0);
+  const span = Math.max(1, bz - az);
+  for (let z = az; z <= bz; z++) {
+    const t = (z - az) / span;
+    const r = r0 + (r1 - r0) * t;
+    const r2 = r * r;
+    const x0 = Math.max(1, Math.floor(cx - r)), x1 = Math.min(G - 2, Math.ceil(cx + r));
+    const y0 = Math.max(1, Math.floor(cy - r)), y1 = Math.min(G - 2, Math.ceil(cy + r));
+    for (let y = y0; y <= y1; y++) {
+      const dy2 = (y - cy) * (y - cy);
+      const row = y * G2 + z * G;
+      for (let x = x0; x <= x1; x++) {
+        if ((x - cx) * (x - cx) + dy2 <= r2) {
+          const idx = row + x;
+          if (m === 0) voxStamp[idx] = 0;
+          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
         }
       }
     }
   }
 }
 
-function sphere512(cx, cy, cz, rx, ry, rz, cIdx, hollow = true) {
-  const x0 = (cx - rx)|0, x1 = (cx + rx)|0;
-  const y0 = (cy - ry)|0, y1 = (cy + ry)|0;
-  const z0 = (cz - rz)|0, z1 = (cz + rz)|0;
-  for (let y = y0; y <= y1; y += 4) {
-    const dy = (y - cy) / (ry || 1);
-    for (let z = z0; z <= z1; z += 4) {
-      const dz = (z - cz) / (rz || 1);
-      for (let x = x0; x <= x1; x += 4) {
-        const dx = (x - cx) / (rx || 1);
-        const d2 = dx*dx + dy*dy + dz*dz;
-        if (d2 <= 1.0 && (!hollow || d2 >= 0.72)) plot512(x, y, z, cIdx);
+// Tapered Cylinder along Y (Command Towers, Saucer Discs, Turrets)
+function voxCylY(cx, y0, y1, cz, r0, r1, m) {
+  const ay = Math.max(1, Math.min(y0, y1) | 0), by = Math.min(G - 2, Math.max(y0, y1) | 0);
+  const span = Math.max(1, by - ay);
+  for (let y = ay; y <= by; y++) {
+    const t = (y - ay) / span;
+    const r = r0 + (r1 - r0) * t;
+    const r2 = r * r;
+    const x0 = Math.max(1, Math.floor(cx - r)), x1 = Math.min(G - 2, Math.ceil(cx + r));
+    const z0 = Math.max(1, Math.floor(cz - r)), z1 = Math.min(G - 2, Math.ceil(cz + r));
+    const yOff = y * G2;
+    for (let z = z0; z <= z1; z++) {
+      const dz2 = (z - cz) * (z - cz);
+      const row = yOff + z * G;
+      for (let x = x0; x <= x1; x++) {
+        if ((x - cx) * (x - cx) + dz2 <= r2) {
+          const idx = row + x;
+          if (m === 0) voxStamp[idx] = 0;
+          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
+        }
       }
     }
   }
 }
 
-function beam512(x0, y0, z0, x1, y1, z1, r0, r1, cIdx) {
-  const dist = Math.hypot(x1 - x0, y1 - y0, z1 - z0);
-  const steps = Math.max(2, Math.ceil(dist / 3.5));
+// Tapered Cylinder along X (Wing Pylons, Crossbars)
+function voxCylX(x0, x1, cy, cz, r0, r1, m) {
+  const ax = Math.max(1, Math.min(x0, x1) | 0), bx = Math.min(G - 2, Math.max(x0, x1) | 0);
+  const span = Math.max(1, bx - ax);
+  for (let x = ax; x <= bx; x++) {
+    const t = (x - ax) / span;
+    const r = r0 + (r1 - r0) * t;
+    const r2 = r * r;
+    const y0 = Math.max(1, Math.floor(cy - r)), y1 = Math.min(G - 2, Math.ceil(cy + r));
+    const z0 = Math.max(1, Math.floor(cz - r)), z1 = Math.min(G - 2, Math.ceil(cz + r));
+    for (let y = y0; y <= y1; y++) {
+      const dy2 = (y - cy) * (y - cy);
+      const yOff = y * G2;
+      for (let z = z0; z <= z1; z++) {
+        if (dy2 + (z - cz) * (z - cz) <= r2) {
+          const idx = yOff + z * G + x;
+          if (m === 0) voxStamp[idx] = 0;
+          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
+        }
+      }
+    }
+  }
+}
+
+function voxEllipsoid(cx, cy, cz, rx, ry, rz, m) {
+  const x0 = Math.max(1, Math.floor(cx - rx)), x1 = Math.min(G - 2, Math.ceil(cx + rx));
+  const y0 = Math.max(1, Math.floor(cy - ry)), y1 = Math.min(G - 2, Math.ceil(cy + ry));
+  const z0 = Math.max(1, Math.floor(cz - rz)), z1 = Math.min(G - 2, Math.ceil(cz + rz));
+  for (let y = y0; y <= y1; y++) {
+    const dy = (y - cy) / (ry || 1);
+    const yOff = y * G2;
+    for (let z = z0; z <= z1; z++) {
+      const dz = (z - cz) / (rz || 1);
+      const row = yOff + z * G;
+      for (let x = x0; x <= x1; x++) {
+        const dx = (x - cx) / (rx || 1);
+        if (dx * dx + dy * dy + dz * dz <= 1.0) {
+          const idx = row + x;
+          if (m === 0) voxStamp[idx] = 0;
+          else { voxStamp[idx] = curStamp; voxMat[idx] = m; }
+        }
+      }
+    }
+  }
+}
+
+function voxLine(x0, y0, z0, x1, y1, z1, r0, r1, m) {
+  const steps = Math.max(2, Math.ceil(Math.hypot(x1 - x0, y1 - y0, z1 - z0) * 1.2));
   for (let i = 0; i <= steps; i++) {
     const t = i / steps;
-    const x = x0 + (x1 - x0) * t;
-    const y = y0 + (y1 - y0) * t;
-    const z = z0 + (z1 - z0) * t;
     const r = r0 + (r1 - r0) * t;
-    if (r <= 4.5) plot512(x, y, z, cIdx);
-    else sphere512(x, y, z, r, r, r, cIdx, true);
+    voxEllipsoid(x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, z0 + (z1 - z0) * t, r, r, r, m);
   }
 }
 
-function disc512(cx, cy, cz, rad, thick, cIdx, axis = 'Y') {
-  const r2 = rad * rad;
-  for (let a = -rad; a <= rad; a += 4) {
-    for (let b = -rad; b <= rad; b += 4) {
-      const d2 = a*a + b*b;
-      if (d2 > r2) continue;
-      const isRim = d2 >= (rad - 6) * (rad - 6);
-      for (let h = -thick; h <= thick; h += 4) {
-        if (!isRim && Math.abs(h) < thick - 3) continue;
-        if (axis === 'Y') plot512(cx + a, cy + h, cz + b, cIdx);
-        else if (axis === 'X') plot512(cx + h, cy + a, cz + b, cIdx);
-        else plot512(cx + a, cy + b, cz + h, cIdx);
+// Chiseled Wedge Hull Generator (Star Destroyers, Venators, A-Wings, Interceptors)
+function voxWedgeZ(z0, z1, w0, w1, h0, h1, cy, mHull, mTrim, mTrench) {
+  const az = Math.min(z0, z1) | 0, bz = Math.max(z0, z1) | 0;
+  const span = Math.max(1, bz - az);
+  for (let z = az; z <= bz; z++) {
+    const t = (z - az) / span;
+    const hw = Math.max(1, w0 + (w1 - w0) * t);
+    const hh = Math.max(1, h0 + (h1 - h0) * t);
+    const x0 = Math.floor(100 - hw), x1 = Math.ceil(100 + hw);
+    for (let x = x0; x <= x1; x++) {
+      const xf = Math.abs(x - 100) / hw;
+      if (xf > 1.0) continue;
+      const localH = Math.max(1, Math.round(hh * (1.0 - xf * 0.88)));
+      for (let y = cy - localH; y <= cy + localH; y++) {
+        let mat = mHull;
+        if (Math.abs(y - cy) <= 1 && xf > 0.82) mat = mTrench; // Recessed side trench
+        else if (xf > 0.92 || ((z % 14 === 0) && y === cy + localH)) mat = mTrim; // Copper bevel & ribs
+        setV(x, y, z, mat);
       }
     }
+  }
+}
+
+// Procedural Shipyard Micro-Greebles & Copper Piping
+function addHullGreebles(x0, x1, yBase, z0, z1, count, seed, m1, m2) {
+  let s = (seed * 9301 + 49297) | 0;
+  for (let i = 0; i < count; i++) {
+    s = (s * 1664525 + 1013904223) | 0;
+    const u1 = ((s >>> 0) % 1000) / 1000;
+    s = (s * 1664525 + 1013904223) | 0;
+    const u2 = ((s >>> 0) % 1000) / 1000;
+    const gx = Math.round(x0 + u1 * (x1 - x0));
+    const gz = Math.round(z0 + u2 * (z1 - z0));
+    const gw = 2 + (i % 3), gh = 2 + (i % 4), gd = 2 + ((i + 1) % 4);
+    voxBox(gx - gw, yBase, gz - gd, gx + gw, yBase + gh, gz + gd, (i % 2 === 0) ? m1 : m2);
   }
 }
 
 /* ============================================================================
-   3. 12 AUTHENTIC STAR WARS 512³ STARSHIP SCULPTORS
+   3. 25 HIGH-PRECISION 200×200×200 STAR WARS SHIP SCULPTORS
    ============================================================================ */
-function sculptStarship512(ship) {
-  begin512Sculpt();
+function sculptShip200(ship) {
+  clearGrid200();
   const id = ship.chassis || 'xwing';
-  const wMode = ship.wings || 'attack';
-  const fireSuper = (ship.weapon === 'superlaser');
+  const seed = Number(ship.seed) || 1;
+  const wKit = ship.wings || 'attack';
+
+  // Universal Forged Copper & Brushed Steel Engineering Display Pedestal (Optional subtle cradle)
+  // Ships float above a sleek machined copper-and-steel collector telemetry ring at Y=12..18
+  voxCylY(100, 10, 15, 100, 46, 42, 3);
+  voxCylY(100, 15, 17, 100, 40, 38, 2);
+  voxCylY(100, 14, 18, 100, 34, 34, 1);
+  // Twin angled steel museum mounting struts up to Y=55
+  voxLine(100, 16, 86, 100, 56, 94, 3.2, 2.2, 3);
+  voxLine(100, 16, 114, 100, 56, 106, 2.8, 2.0, 2);
 
   if (id === 'escape_pod') {
-    // CLASS-4 JETTISON ESCAPE POD (Tantive IV style)
-    beam512(256, 256, 160, 256, 256, 330, 56, 48, 1); // Cylindrical hull
-    beam512(256, 256, 330, 256, 256, 385, 48, 22, 2); // Tapered nose cone
-    beam512(256, 256, 220, 256, 256, 250, 59, 59, 2); // Hazard stripe band
-    sphere512(256, 295, 290, 22, 14, 22, 4, false);    // Upper viewport window
-    // 4 Rear Jettison Rocket Nozzles
-    for (const [ox, oy] of [[-24,-24],[24,-24],[-24,24],[24,24]]) {
-      beam512(256+ox, 256+oy, 130, 256+ox, 256+oy, 160, 14, 10, 3);
-      sphere512(256+ox, 256+oy, 124, 10, 10, 10, 5, false);
+    // RE-ENGINEERED CLASS-4 ARMORED INDUSTRIAL JETTISON POD (Multi-stage CSG + Copper Ribs + Thrusters)
+    voxCylZ(100, 102, 42, 142, 28, 25, 1);     // Heavy main pressure hull
+    voxCylZ(100, 102, 142, 172, 25, 12, 2);    // Conical copper heat-shield nose cone
+    voxCylZ(100, 102, 172, 180, 9, 9, 4);      // Forward umbilical docking ring
+    voxCylZ(100, 102, 166, 182, 5, 5, 0);      // Carved hollow docking bore!
+    // Raised Forged-Copper Circumferential Compression Rings & Longitudinal Flutes
+    for (const rz of [54, 76, 98, 120, 140]) {
+      voxCylZ(100, 102, rz - 2, rz + 2, 30, 30, 2);
+    }
+    for (let a = 0; a < 8; a++) {
+      const ang = (a / 8) * Math.PI * 2;
+      const fx = 100 + Math.cos(ang) * 28, fy = 102 + Math.sin(ang) * 28;
+      voxCylZ(fx, fy, 46, 138, 2.5, 2.0, (a % 2 === 0) ? 3 : 2);
+    }
+    // Deep-Carved Upper Armored Viewport Bezel with Cross-Mullions
+    voxCylY(100, 124, 134, 122, 12, 10, 4);
+    voxCylY(100, 126, 136, 122, 8, 8, 3);
+    voxBox(99, 128, 114, 101, 134, 130, 2);
+    // 4 Aft Retro-Rocket Thruster Bells with Carved Exhaust Throats
+    for (const [ox, oy] of [[-15,-15],[15,-15],[-15,15],[15,15]]) {
+      voxCylZ(100 + ox, 102 + oy, 24, 44, 9, 12, 3);
+      voxCylZ(100 + ox, 102 + oy, 22, 30, 6, 6, 0); // Carved hollow bell
+      voxEllipsoid(100 + ox, 102 + oy, 31, 5, 5, 3, 5); // Ignited core
     }
   }
   else if (id === 'xwing') {
-    // T-65B X-WING STARFIGHTER (512³ High-Precision)
-    beam512(256, 256, 150, 256, 256, 435, 24, 7, 1);   // Long tapered nose fuselage
-    box512(236, 244, 140, 276, 272, 245, 1);           // Rear engine fuselage block
-    beam512(256, 268, 260, 256, 262, 425, 9, 4, 2);    // Red Red-Five hull stripe
-    sphere512(256, 274, 255, 16, 14, 38, 3, false);    // Transparisteel canopy
-    sphere512(256, 280, 212, 11, 11, 11, 4, false);    // R2 Astromech Droid Dome!
-    // 4 Attack S-Foils + 4 Turbine Intakes + 4 Wingtip Laser Cannons
-    const openY = (wMode === 'cruise') ? 8 : 54;
+    // T-65B X-WING STARFIGHTER (200³ Solid CSG with Carved Turbine Intakes & R2 Socket)
+    voxCylZ(100, 100, 38, 108, 13, 11, 1);     // Rear fuselage engine block
+    voxCylZ(100, 100, 108, 182, 11, 4, 1);     // Long chiseled nose cone
+    voxBox(88, 98, 110, 112, 103, 182, 2);     // Copper/Red lateral squadron chine stripe
+    voxEllipsoid(100, 104, 184, 4.5, 3.5, 5, 3); // Nose sensor cone
+    // Recessed Cockpit Canopy + R2 Astromech Droid Behind Canopy
+    voxEllipsoid(100, 111, 112, 8, 7, 22, 3);
+    voxLine(93, 112, 118, 107, 112, 118, 1.5, 1.5, 2); // Canopy copper frame arch
+    voxEllipsoid(100, 114, 86, 5.5, 5.5, 5.5, 4);      // R2 Astromech dome!
+    // 4 Attack S-Foils + 4 Hollowed Turbine Intakes + 4 Wingtip Taim & Bak Cannons
+    const spreadY = (wKit === 'armored') ? 6 : 24;
     for (const sx of [-1, 1]) {
       for (const sy of [-1, 1]) {
-        // Wing panel
-        for (let d = 22; d <= 165; d += 4) {
-          const wy = 256 + sy * (d / 165) * openY;
-          const wx = 256 + sx * d;
-          box512(wx-2, wy-2, 165, wx+2, wy+2, 228, (d > 125 ? 2 : 1));
+        for (let d = 10; d <= 76; d++) {
+          const wx = 100 + sx * d;
+          const wy = Math.round(100 + sy * (d / 76) * spreadY);
+          const mat = (d > 56 && d < 68) ? 2 : ((d % 16 === 0) ? 3 : 1);
+          voxBox(wx, wy - 1, 46, wx, wy + 1, 84, mat);
         }
-        // Cylindrical turbine intake + rear pink ion nozzle
-        const ix = 256 + sx * 42, iy = 256 + sy * (openY * 0.28);
-        beam512(ix, iy, 135, ix, iy, 238, 13, 13, 3);
-        sphere512(ix, iy, 132, 9, 9, 8, 5, false);
-        // Wingtip Taim & Bak Laser Cannon
-        const tx = 256 + sx * 165, ty = 256 + sy * openY;
-        beam512(tx, ty, 160, tx, ty, 385, 5, 3, 3);
-        sphere512(tx, ty, 392, 5, 5, 8, 5, false);
+        // Incom 4L4 Fusial Thrust Engine Cylinder + Carved Front Intake!
+        const ex = 100 + sx * 21, ey = Math.round(100 + sy * (spreadY * 0.28));
+        voxCylZ(ex, ey, 34, 92, 7.5, 7.5, 3);
+        voxCylZ(ex, ey, 85, 94, 5.2, 5.2, 0);          // Carved intake cavity!
+        voxBox(ex - 1, ey - 6, 86, ex + 1, ey + 6, 91, 2); // Intake splitter vane
+        voxCylZ(ex, ey, 24, 36, 4.5, 5.5, 2);          // Exhaust nozzle
+        voxEllipsoid(ex, ey, 23, 3.5, 3.5, 2, 5);      // Engine glow
+        // Wingtip Laser Cannon + Flash Suppressor
+        const tx = 100 + sx * 76, ty = 100 + sy * spreadY;
+        voxCylZ(tx, ty, 44, 158, 2.6, 1.5, 3);
+        voxCylZ(tx, ty, 148, 154, 3.2, 3.2, 4);
+        voxEllipsoid(tx, ty, 160, 2.2, 2.2, 3, 5);
       }
     }
   }
-  else if (id === 'tie_ln' || id === 'tie_interceptor') {
-    // TIE/ln FIGHTER OR TIE/IN INTERCEPTOR
-    const isInt = (id === 'tie_interceptor' || wMode === 'interceptor');
-    sphere512(256, 256, 256, 44, 44, 44, 1, true);     // Spherical ball cockpit
-    disc512(256, 256, 298, 26, 4, 2, 'Z');             // Octagonal front viewport
-    beam512(132, 256, 256, 380, 256, 256, 13, 13, 1);  // Horizontal wing pylons
-    // Twin SFS Chin Laser Cannons
-    sphere512(242, 220, 294, 6, 6, 10, 5, false);
-    sphere512(270, 220, 294, 6, 6, 10, 5, false);
+  else if (id === 'tie_ln' || id === 'tie_interceptor' || id === 'tie_advanced' || id === 'tie_defender' || id === 'tie_bomber') {
+    // TIE SERIES FAMILY (TIE/ln, Interceptor, Vader Advanced x1, Bomber, Tri-Wing Defender)
+    if (id === 'tie_bomber') {
+      // Twin Side-by-Side Cylindrical Hull Pods
+      voxCylZ(84, 100, 62, 144, 16, 14, 1);
+      voxCylZ(116, 100, 62, 144, 16, 14, 1);
+      voxCylX(80, 120, 100, 102, 9, 9, 2);
+      voxCylZ(84, 100, 140, 148, 10, 10, 3); // Viewport pod
+      voxCylZ(116, 94, 140, 152, 6, 6, 5);   // Torpedo chute
+    } else {
+      voxEllipsoid(100, 100, 100, 21, 21, 21, 1); // Spherical ball cockpit
+      voxCylZ(100, 100, 116, 123, 13, 13, 2);     // Octagonal viewport bezel
+      voxCylZ(100, 100, 118, 124, 10, 10, 3);     // Recessed dark glass
+      // Viewport radial spokes
+      voxLine(90, 100, 122, 110, 100, 122, 1.2, 1.2, 2);
+      voxLine(100, 90, 122, 100, 110, 122, 1.2, 1.2, 2);
+      voxEllipsoid(93, 83, 118, 2.5, 2.5, 4, 5);  // Chin lasers
+      voxEllipsoid(107, 83, 118, 2.5, 2.5, 4, 5);
+    }
+    if (id === 'tie_advanced' || id === 'tie_defender') {
+      voxBox(82, 90, 54, 118, 110, 96, 2); // Extended aft hyperdrive collar
+    }
 
-    for (const sx of [-1, 1]) {
-      const wx = 256 + sx * 126;
-      if (!isInt) {
-        // Classic Hexagonal Vertical Solar Wing Panels
-        for (let dy = -135; dy <= 135; dy += 4) {
-          const maxZ = 115 - Math.abs(dy) * 0.36;
-          for (let dz = -maxZ; dz <= maxZ; dz += 4) {
-            const onEdge = (Math.abs(dy) > 127 || Math.abs(dz) > maxZ - 7 || Math.abs(dy) < 6 || Math.abs(dz) < 6);
-            plot512(wx, 256 + dy, 256 + dz, onEdge ? 1 : 2);
-          }
+    const wingSpanX = (id === 'tie_bomber') ? 68 : 56;
+    voxCylX(100 - wingSpanX, 100 + wingSpanX, 100, 100, 6.5, 6.5, 1); // Wing pylons
+
+    const wingsCount = (id === 'tie_defender') ? 3 : 2;
+    for (let w = 0; w < wingsCount; w++) {
+      if (id === 'tie_defender') {
+        const ang = (w / 3) * Math.PI * 2 + Math.PI / 6;
+        const px = Math.round(100 + Math.cos(ang) * 58);
+        const py = Math.round(100 + Math.sin(ang) * 58);
+        voxLine(100, 100, 88, px, py, 88, 5, 4, 1);
+        voxBox(px - 8, py - 8, 42, px + 8, py + 8, 152, 3);
+        voxBox(px - 9, py - 9, 40, px + 9, py + 9, 46, 2);
+        continue;
+      }
+      const sx = (w === 0) ? -1 : 1;
+      const wx = 100 + sx * wingSpanX;
+      for (let dy = -64; dy <= 64; dy++) {
+        const ay = Math.abs(dy);
+        const bend = (id !== 'tie_ln' && ay > 18) ? Math.round((ay - 18) * 0.48) : 0;
+        const px = wx - sx * bend;
+        const maxZ = (id === 'tie_interceptor') ? Math.round(72 - ay * 0.45) : Math.round(54 - ay * 0.25);
+        for (let dz = -52; dz <= maxZ; dz++) {
+          if (id === 'tie_interceptor' && dz > 12 && ay < (dz - 12) * 0.65) continue; // Forward dagger notch!
+          const isRib = (ay > 59 || dz < -47 || dz > maxZ - 4 || ay < 3 || Math.abs(dz) < 3 || Math.abs(ay - Math.abs(dz)) < 2);
+          setV(px, 100 + dy, 100 + dz, isRib ? 2 : 3);
         }
-      } else {
-        // TIE Interceptor Bent Forward-Swept Dagger Solar Wings
-        for (let dy = -110; dy <= 110; dy += 4) {
-          const bendX = wx - sx * Math.max(0, (Math.abs(dy) - 30) * 0.48);
-          const maxZ = 145 - Math.abs(dy) * 0.55;
-          for (let dz = -75; dz <= maxZ; dz += 4) {
-            if (dz > 25 && Math.abs(dy) < (dz - 25) * 0.65) continue; // Forward dagger notch!
-            const onEdge = (Math.abs(dy) > 102 || Math.abs(dz - maxZ) < 8 || dz < -68);
-            plot512(bendX, 256 + dy, 256 + dz, onEdge ? 1 : 2);
-          }
-        }
-        // 4 Wingtip Laser Cannons
-        beam512(wx - sx*25, 330, 320, wx - sx*25, 330, 385, 4, 3, 5);
-        beam512(wx - sx*25, 182, 320, wx - sx*25, 182, 385, 4, 3, 5);
       }
     }
   }
   else if (id === 'falcon') {
-    // YT-1300 MILLENNIUM FALCON (512³ Iconic Saucer + Mandibles + Side Cockpit)
-    disc512(246, 256, 225, 128, 18, 1, 'Y');           // Main saucer hull
-    sphere512(246, 276, 225, 42, 14, 42, 2, false);    // Central dorsal quad-laser dome
-    beam512(246, 288, 225, 246, 295, 275, 4, 3, 5);    // Dorsal quad-laser barrels
-    // Twin Forward Mandibles with center gap
-    for (let z = 310; z <= 445; z += 4) {
-      const w = 44 - ((z - 310) / 135) * 26;
-      box512(172, 246, z, 172 + w, 266, z + 4, 1);     // Port mandible
-      box512(320 - w, 246, z, 320, 266, z + 4, 1);     // Starboard mandible
+    // YT-1300 MILLENNIUM FALCON (Saucer + Recessed Maintenance Pits + Mandibles + Starboard Cockpit)
+    voxCylY(94, 92, 108, 92, 62, 58, 1);         // Main saucer hull
+    voxCylY(94, 96, 104, 92, 65, 65, 2);         // Saucer copper rim docking ring
+    voxEllipsoid(94, 110, 92, 22, 7, 22, 2);     // Central turret dome
+    voxCylZ(94, 116, 92, 118, 2.2, 1.5, 5);      // Dorsal quad laser cannon
+    // Port & Starboard Docking Rings
+    voxCylX(26, 36, 100, 92, 13, 11, 2);
+    voxCylX(152, 162, 100, 92, 13, 11, 2);
+    // Forward Tapered Mandibles with Carved Maintenance Trenches
+    for (let z = 135; z <= 186; z++) {
+      const t = (z - 135) / 51;
+      const w = Math.round(22 * (1 - t * 0.55));
+      voxBox(62, 95, z, 62 + w, 105, z, (z % 12 === 0) ? 2 : 1);
+      voxBox(126 - w, 95, z, 126, 105, z, (z % 12 === 0) ? 2 : 1);
     }
-    // Starboard Offset Outrigger Cockpit & Access Corridor
-    beam512(330, 256, 240, 398, 256, 285, 16, 15, 1);
-    beam512(398, 256, 275, 398, 256, 355, 18, 11, 3);
-    sphere512(398, 260, 358, 10, 10, 10, 4, false);    // Cockpit glass cone
-    // Port Sensor Dish
-    disc512(175, 284, 265, 22, 4, 3, 'Z');
-    // Glowing Blue Rear Sublight Engine Strip
-    for (let a = -75; a <= 75; a += 4) {
-      plot512(246 + a, 256, 96, 4);
-      plot512(246 + a, 260, 96, 4);
-    }
-  }
-  else if (id === 'star_destroyer') {
-    // IMPERIAL-I CLASS STAR DESTROYER (512³ Wedge Capital Ship)
-    for (let z = 90; z <= 455; z += 4) {
-      const t = (z - 90) / 365;
-      const halfW = Math.max(6, (1 - t) * 148);
-      const halfH = Math.max(4, (1 - t) * 28);
-      for (let x = -halfW; x <= halfW; x += 4) {
-        const slopeY = (1 - Math.abs(x) / halfW) * halfH;
-        plot512(256 + x, 256 + slopeY, z, 1);
-        plot512(256 + x, 256 - slopeY * 0.65, z, 2);
-      }
-    }
-    // Terraced Superstructure & Iconic High Command Bridge Tower
-    box512(200, 276, 130, 312, 296, 260, 2);
-    box512(218, 296, 145, 294, 314, 225, 1);
-    beam512(256, 314, 160, 256, 360, 160, 16, 14, 2);  // Bridge stalk
-    box512(206, 356, 148, 306, 376, 174, 1);           // Wide Hammerhead Bridge
-    // Twin Spherical ISD Shield Generator Domes!
-    sphere512(222, 388, 160, 11, 11, 11, 3, false);
-    sphere512(290, 388, 160, 11, 11, 11, 3, false);
-    // 3 Massive Rear Ion Engine Nozzles
-    for (const ox of [-48, 0, 48]) {
-      sphere512(256 + ox, 262, 86, 18, 18, 10, 4, false);
-    }
-    if (fireSuper) beam512(256, 256, 455, 256, 240, 508, 6, 4, 5);
-  }
-  else if (id === 'death_star') {
-    // DS-1 ORBITAL BATTLE STATION (THE DEATH STAR + CONCAVE DISH + SUPERLASER!)
-    const R = 148;
-    const dishX = 256 - 48, dishY = 256 + 68, dishZ = 256 + 118;
-    for (let y = 256 - R; y <= 256 + R; y += 4) {
-      for (let z = 256 - R; z <= 256 + R; z += 4) {
-        for (let x = 256 - R; x <= 256 + R; x += 4) {
-          const dx = x - 256, dy = y - 256, dz = z - 256;
-          const d = Math.hypot(dx, dy, dz);
-          if (d > R || d < R - 7) continue;
-          // Recessed Equatorial Trench
-          if (Math.abs(dy) <= 8) {
-            plot512(x * 0.92 + 256 * 0.08, y, z * 0.92 + 256 * 0.08, 3);
-            continue;
-          }
-          // Northern Hemisphere Concave Superlaser Dish
-          const dd = Math.hypot(x - dishX, y - dishY, z - dishZ);
-          if (dd < 54) {
-            plot512(x - dx*0.12, y - dy*0.12, z - dz*0.12, dd < 14 ? 5 : 2);
-          } else {
-            // Armored Quad-Plate Trench Grid Pattern
-            const seam = ((x % 24 === 0) || (y % 24 === 0));
-            plot512(x, y, z, seam ? 2 : 1);
-          }
-        }
-      }
-    }
-    // Ignited Planet-Destroying Green Kyber Superlaser Tributary Beams!
-    beam512(dishX, dishY, dishZ, 185, 345, 488, 8, 14, 5);
+    // Starboard Offset Cylindrical Outrigger Cockpit & Corridor
+    voxLine(132, 100, 96, 168, 100, 122, 9, 8, 1);
+    voxCylZ(168, 100, 118, 156, 9, 5, 2);
+    voxEllipsoid(168, 101, 157, 5, 5, 5, 3);
+    // Port Sensor Dish + 6 Rear Engine Exhaust Vents + Glowing Blue Sublight Strip
+    voxCylZ(64, 114, 108, 114, 10, 2, 4);
+    for (const ox of [-24, -8, 8, 24]) voxCylY(94 + ox, 106, 110, 62, 5, 5, 3);
+    voxBox(62, 98, 29, 126, 102, 33, 5);
   }
   else if (id === 'slave1') {
     // FIRESPRAY-31 PATROL CRAFT (SLAVE I — VERTICAL FLIGHT ORIENTATION)
-    disc512(256, 175, 235, 88, 16, 2, 'Z');            // Curved burgundy skirt base
-    beam512(256, 185, 245, 256, 365, 225, 42, 22, 1);  // Vertical green fuselage
-    sphere512(256, 305, 258, 28, 48, 22, 3, false);    // Dark curved canopy
-    // Twin Side Stabilizer Wings & Lower Twin Rotating Blasters
-    box512(165, 235, 225, 347, 265, 245, 4);
-    beam512(236, 145, 250, 236, 135, 340, 6, 4, 5);
-    beam512(276, 145, 250, 276, 135, 340, 6, 4, 5);
+    voxCylZ(100, 68, 80, 96, 44, 38, 2);         // Elliptical curved base skirt
+    voxLine(100, 72, 92, 100, 158, 82, 22, 11, 1);// Sloped vertical green/steel fuselage
+    voxEllipsoid(100, 126, 98, 14, 24, 11, 3);   // Dark armored canopy
+    voxBox(54, 96, 84, 146, 112, 94, 4);         // Twin side gyro stabilizer wings
+    voxCylZ(90, 56, 92, 138, 3, 2, 5);           // Twin lower rotating blaster cannons
+    voxCylZ(110, 56, 92, 138, 3, 2, 5);
   }
   else if (id === 'ywing') {
-    // BTL-A4 Y-WING STARFIGHTER
-    beam512(256, 256, 240, 256, 256, 420, 26, 14, 1);  // Forward nose pod
-    sphere512(256, 276, 330, 16, 14, 28, 3, false);    // Canopy + Ion Turret
-    beam512(150, 256, 255, 362, 256, 255, 14, 14, 2);  // Crossbar pylon
-    for (const sx of [-92, 92]) {
-      beam512(256+sx, 256, 105, 256+sx, 256, 275, 20, 20, 1); // Long engine nacelles
-      sphere512(256+sx, 256, 278, 20, 20, 12, 2, false);      // Yellow engine domes
-      sphere512(256+sx, 256, 102, 12, 12, 8, 5, false);       // Thruster glow
+    // BTL-A4 Y-WING ASSAULT BOMBER (Nose Pod + Ion Turret + Twin Open-Frame Nacelles)
+    voxWedgeZ(106, 182, 16, 7, 8, 4, 100, 1, 2, 3); // Chiseled nose pod
+    voxEllipsoid(100, 109, 138, 8, 6, 16, 3);       // Canopy
+    voxCylY(100, 112, 122, 128, 4, 3, 4);           // Dorsal Ion Cannon Turret
+    voxCylX(44, 156, 100, 108, 7, 7, 2);            // Central wing crossbar
+    for (const sx of [-48, 48]) {
+      voxCylZ(100 + sx, 100, 110, 128, 11, 9, 2);   // Forward engine domes
+      // 4 Open-Frame Support Struts Along Engine Nacelles
+      for (const [ox, oy] of [[-6,-6],[6,-6],[-6,6],[6,6]]) {
+        voxCylZ(100 + sx + ox, 100 + oy, 28, 110, 2, 2, 3);
+      }
+      voxCylZ(100 + sx, 100, 42, 96, 5, 5, 1);      // Inner reactor core
+      voxCylZ(100 + sx, 100, 22, 32, 9, 11, 4);     // Rear thruster ring
+      voxEllipsoid(100 + sx, 100, 21, 6, 6, 3, 5);
     }
   }
   else if (id === 'awing') {
     // RZ-1 A-WING INTERCEPTOR
-    for (let z = 155; z <= 395; z += 4) {
-      const w = Math.max(12, (1 - (z - 155) / 240) * 86);
-      box512(256 - w, 248, z, 256 + w, 266, z + 4, z > 310 ? 1 : 2);
+    voxWedgeZ(52, 176, 42, 8, 9, 3, 100, 1, 2, 3);
+    voxEllipsoid(100, 109, 112, 10, 7, 22, 3);
+    for (const sx of [-32, 32]) {
+      voxBox(100 + sx - 2, 82, 44, 100 + sx + 2, 126, 86, 2); // Canted stabilizer fins
+      voxCylZ(100 + sx * 0.55, 100, 32, 54, 9, 8, 3);         // Twin oversized engines
+      voxEllipsoid(100 + sx * 0.55, 100, 31, 6, 6, 3, 5);
     }
-    sphere512(256, 274, 260, 20, 14, 38, 3, false);    // Bubble canopy
-    // Twin Canted Stabilizer Tail Fins & Huge Sublight Engines
-    for (const sx of [-58, 58]) {
-      box512(256+sx-4, 225, 145, 256+sx+4, 305, 210, 1);
-      sphere512(256+sx*0.6, 256, 142, 16, 16, 10, 5, false);
+  }
+  else if (id === 'bwing') {
+    // A/SF-01 B-WING HEAVY ASSAULT STARFIGHTER
+    voxCylZ(100, 154, 82, 156, 11, 6, 1);        // Top gyro-stabilized cockpit pod
+    voxEllipsoid(100, 158, 132, 7, 6, 14, 3);    // Canopy
+    voxBox(97, 36, 84, 103, 152, 118, 1);        // Tall vertical main airfoil blade
+    voxBox(96, 36, 114, 104, 152, 120, 2);       // Copper leading edge
+    voxBox(56, 92, 88, 144, 98, 116, 2);         // Horizontal S-foils
+    voxCylZ(100, 34, 78, 162, 8, 4, 4);          // Lower heavy autoblasters & ion pod
+    voxEllipsoid(100, 34, 164, 4, 4, 4, 5);
+  }
+  else if (id === 'uwing') {
+    // UT-60D U-WING GUNSHIP / TROOP TRANSPORT
+    voxWedgeZ(62, 154, 18, 11, 10, 5, 98, 1, 2, 3); // Troop transport hull
+    voxEllipsoid(100, 108, 132, 9, 6, 16, 3);
+    // Long Dual Forward Prongs + Swept Strike Wings + 4 Engines
+    for (const sx of [-1, 1]) {
+      voxBox(100 + sx * 16, 98, 110, 100 + sx * 24, 103, 186, 2);
+      voxLine(100 + sx * 20, 102, 96, 100 + sx * 86, 102, 64, 5, 2, 1);
+      voxCylZ(100 + sx * 22, 108, 44, 88, 6, 6, 3);
+      voxCylZ(100 + sx * 36, 108, 48, 88, 6, 6, 3);
+    }
+  }
+  else if (id === 'lambda_shuttle') {
+    // LAMBDA-CLASS T-4a IMPERIAL SHUTTLE (Tall Dorsal Wing + Twin Folding Lower Gull Wings)
+    voxWedgeZ(68, 168, 16, 8, 12, 5, 94, 1, 2, 3);
+    voxBox(88, 96, 142, 112, 102, 158, 3);       // Sloped cockpit viewport
+    // Tall Central Dorsal Stabilizer Fin
+    for (let y = 104; y <= 184; y++) {
+      const zStart = 64 + Math.round((y - 104) * 0.45);
+      voxBox(98, y, zStart, 102, y, 126, (y % 16 === 0) ? 2 : 1);
+    }
+    // Twin Lower Dihedral Gull Wings
+    for (const sx of [-1, 1]) {
+      voxLine(100 + sx * 14, 92, 96, 100 + sx * 76, 48, 88, 4, 2, 2);
+      voxLine(100 + sx * 14, 92, 74, 100 + sx * 76, 48, 68, 4, 2, 1);
+      voxCylZ(100 + sx * 16, 92, 110, 152, 3, 2, 5);
+    }
+  }
+  else if (id === 'razor_crest') {
+    // ST-70 ASSAULT SHIP (RAZOR CREST — Twin Huge High-Mounted Turbine Engines)
+    voxWedgeZ(52, 166, 20, 13, 14, 8, 94, 1, 2, 3);
+    voxBox(88, 102, 142, 112, 108, 162, 3);      // Dark cockpit glass
+    voxBox(54, 106, 84, 146, 112, 118, 2);       // High shoulder wing pylon
+    for (const sx of [-42, 42]) {
+      voxCylZ(100 + sx, 116, 56, 136, 14, 13, 1);// Massive twin engine nacelles
+      voxCylZ(100 + sx, 116, 118, 136, 15, 15, 2);// Copper front cowling ring
+      voxCylZ(100 + sx, 116, 128, 138, 10, 10, 0);// Carved turbine intake!
+      voxEllipsoid(100 + sx, 116, 54, 9, 9, 4, 5);
+      voxCylZ(100 + sx * 0.35, 84, 140, 182, 3, 2, 4); // Heavy chin cannons
     }
   }
   else if (id === 'naboo_n1') {
     // NABOO N-1 ROYAL STARFIGHTER
-    beam512(256, 256, 115, 256, 256, 395, 22, 6, 1);   // Yellow hull + long tail spike
-    sphere512(256, 274, 275, 15, 12, 32, 3, false);    // Canopy
-    sphere512(256, 278, 232, 10, 10, 10, 4, false);    // R2 Dome
-    beam512(130, 256, 325, 382, 256, 325, 12, 10, 1);  // Forward swept wing
-    for (const sx of [-118, 118]) {
-      beam512(256+sx, 256, 175, 256+sx, 256, 395, 16, 6, 2); // Chrome J-type nacelles
-      sphere512(256+sx, 256, 398, 12, 12, 12, 4, false);
+    voxCylZ(100, 100, 22, 168, 11, 3, 1);        // Sleek hull + long tail finial
+    voxEllipsoid(100, 109, 116, 7, 6, 16, 3);
+    voxEllipsoid(100, 111, 96, 5, 5, 5, 4);      // R2 Dome
+    voxCylX(34, 166, 100, 132, 6, 4, 1);         // Forward swept main wing
+    for (const sx of [-62, 62]) {
+      voxCylZ(100 + sx, 100, 62, 174, 9, 2, 2);  // Chrome/Copper J-type nacelles + long tail spikes
+      voxEllipsoid(100 + sx, 100, 175, 7, 7, 7, 4);
     }
   }
-  else {
-    // CR90 TANTIVE IV CORVETTE BLOCKADE RUNNER
-    beam512(256, 256, 145, 256, 256, 390, 28, 24, 1);  // Spine
-    beam512(256, 256, 385, 256, 256, 435, 16, 42, 2);  // Hammerhead bow
-    // Massive 11-Engine Rear Thruster Bank
-    box512(184, 222, 105, 328, 290, 155, 1);
-    for (const ox of [-52, -26, 0, 26, 52]) {
-      for (const oy of [-16, 16]) {
-        sphere512(256+ox, 256+oy, 102, 10, 10, 8, 5, false);
+  else if (id === 'jedi_eta2') {
+    // ETA-2 ACTIS JEDI INTERCEPTOR
+    voxCylZ(100, 100, 62, 156, 14, 4, 1);
+    voxEllipsoid(100, 108, 96, 9, 7, 18, 3);
+    for (const sx of [-1, 1]) {
+      for (let z = 64; z <= 168; z++) {
+        const w = Math.round(58 * (1 - (z - 64) / 135));
+        if (z > 118 && w < 28) continue;         // Forward fork notch
+        voxBox(100 + sx * 14, 99, z, 100 + sx * (14 + w), 101, z, (z % 10 === 0) ? 2 : 1);
+      }
+      // Angled S-Foil Radiator Panels
+      voxLine(100 + sx * 48, 101, 78, 100 + sx * 56, 122, 98, 2, 2, 4);
+      voxLine(100 + sx * 48, 99, 78, 100 + sx * 56, 78, 98, 2, 2, 4);
+    }
+  }
+  else if (id === 'arc170') {
+    // ARC-170 HEAVY RECONNAISSANCE STARFIGHTER
+    voxCylZ(100, 100, 48, 172, 13, 6, 1);
+    voxEllipsoid(100, 110, 122, 8, 6, 20, 3);
+    voxBox(22, 99, 86, 178, 102, 118, 1);        // Wide main wings
+    for (const sx of [-1, 1]) {
+      voxCylZ(100 + sx * 22, 104, 52, 118, 8, 8, 2); // Twin heavy engines
+      // Upper & Lower Secondary S-Foils + Wingtip Heavy Cannons
+      voxLine(100 + sx * 36, 102, 98, 100 + sx * 76, 122, 98, 2, 2, 2);
+      voxLine(100 + sx * 36, 98, 98, 100 + sx * 76, 78, 98, 2, 2, 2);
+      voxCylZ(100 + sx * 76, 100, 78, 168, 3, 2, 4);
+    }
+  }
+  else if (id === 'laati_gunship') {
+    // LAAT/i REPUBLIC ATTACK GUNSHIP
+    voxWedgeZ(54, 168, 18, 9, 14, 7, 96, 1, 2, 3);
+    voxEllipsoid(100, 110, 138, 8, 6, 12, 3);    // Tandem bubble cockpits
+    voxEllipsoid(100, 114, 118, 8, 6, 12, 3);
+    // Twin Dorsal Mass-Driver Missile Launchers
+    voxCylZ(90, 124, 62, 136, 5, 5, 2);
+    voxCylZ(110, 124, 62, 136, 5, 5, 2);
+    // Down-Swept Troop Wings & Ball Turrets
+    for (const sx of [-1, 1]) {
+      voxLine(100 + sx * 14, 114, 98, 100 + sx * 74, 78, 98, 4, 2, 1);
+      voxEllipsoid(100 + sx * 34, 88, 108, 6, 6, 6, 4);
+    }
+  }
+  else if (id === 'tantive_cr90') {
+    // CR90 TANTIVE IV CORELLIAN CORVETTE (Hammerhead Bow + 11-Turbine Engine Block)
+    voxCylZ(100, 100, 56, 158, 14, 12, 1);       // Central hull spine
+    voxCylY(100, 82, 118, 168, 10, 18, 2);       // Iconic Hammerhead Command Bow
+    voxEllipsoid(100, 120, 118, 7, 5, 7, 4);     // Dorsal turbolaser turret
+    voxEllipsoid(100, 80, 118, 7, 5, 7, 4);      // Ventral turbolaser turret
+    // Massive 11-Engine Rectangular Thruster Bank
+    voxBox(62, 82, 22, 138, 118, 62, 2);
+    for (const ox of [-28, -14, 0, 14, 28]) {
+      for (const oy of [-9, 9]) {
+        voxCylZ(100 + ox, 100 + oy, 16, 26, 5, 5, 3);
+        voxEllipsoid(100 + ox, 100 + oy, 15, 3.5, 3.5, 2, 5);
+      }
+    }
+  }
+  else if (id === 'nebulon_b') {
+    // EF76 NEBULON-B ESCORT FRIGATE (Deep Vertical Sensor Blade + Slender Spine)
+    voxCylZ(100, 108, 32, 154, 7, 5, 1);         // Slender connecting spine
+    voxBox(92, 42, 124, 108, 126, 174, 2);       // Deep vertical forward frigate blade
+    voxBox(90, 62, 132, 110, 118, 164, 1);
+    voxBox(82, 92, 22, 118, 124, 68, 2);         // Aft engine block
+    for (const ox of [-10, 0, 10]) voxEllipsoid(100 + ox, 108, 20, 5, 5, 3, 5);
+  }
+  else if (id === 'venator') {
+    // VENATOR-CLASS REPUBLIC STAR DESTROYER (Twin Bridge Towers + Open Red Flight Deck)
+    voxWedgeZ(26, 184, 58, 8, 14, 3, 96, 1, 2, 3);
+    voxBox(94, 106, 92, 106, 111, 182, 2);       // Dorsal flight deck copper/red stripe
+    // Side Hangar Notches
+    voxBox(42, 88, 98, 64, 106, 126, 0);
+    voxBox(136, 88, 98, 158, 106, 126, 0);
+    // Twin Asymmetrical Republic Bridge Towers!
+    for (const ox of [-14, 14]) {
+      voxLine(100 + ox, 106, 54, 100 + ox, 136, 46, 5, 4, 2);
+      voxBox(94 + ox, 134, 40, 106 + ox, 142, 54, 4);
+    }
+  }
+  else if (id === 'star_destroyer') {
+    // IMPERIAL-I CLASS STAR DESTROYER (Chiseled Wedge + Terraced Superstructure + Shield Domes)
+    voxWedgeZ(24, 186, 68, 4, 16, 2, 94, 1, 2, 3);
+    voxBox(72, 106, 42, 128, 116, 112, 2);       // Terraced deck 1
+    voxBox(80, 116, 48, 120, 124, 92, 1);        // Terraced deck 2
+    addHullGreebles(74, 126, 116, 46, 108, 18, seed, 2, 3);
+    voxCylY(100, 124, 146, 56, 8, 6, 2);         // Bridge stalk
+    voxBox(76, 144, 48, 124, 154, 64, 1);        // Wide Hammerhead Command Bridge
+    voxEllipsoid(82, 160, 56, 5.5, 5.5, 5.5, 4); // Port Deflector Shield Dome
+    voxEllipsoid(118, 160, 56, 5.5, 5.5, 5.5, 4);// Starboard Deflector Shield Dome
+    // 3 Massive Stern Ion Drive Nozzles
+    for (const ox of [-22, 0, 22]) {
+      voxCylZ(100 + ox, 96, 16, 26, 9, 11, 3);
+      voxEllipsoid(100 + ox, 96, 15, 6, 6, 3, 5);
+    }
+  }
+  else if (id === 'executor_ssd') {
+    // EXECUTOR-CLASS SUPER STAR DESTROYER (19km Arrowhead Dreadnought + Axial City Ridge)
+    voxWedgeZ(16, 190, 52, 2, 10, 2, 94, 1, 2, 3);
+    voxWedgeZ(16, 62, 52, 12, 10, 4, 94, 2, 3, 1); // Tapered aft tail
+    // Dense Axial Superstructure City Greeble Spine
+    addHullGreebles(78, 122, 101, 38, 152, 42, seed, 2, 4);
+    voxBox(90, 106, 48, 110, 122, 62, 4);          // Command citadel
+  }
+  else if (id === 'death_star') {
+    // DS-1 ORBITAL BATTLE STATION (DEATH STAR — Carved Trench & Concave Superlaser Dish!)
+    voxEllipsoid(100, 102, 100, 68, 68, 68, 1);
+    // Carve Recessed Equatorial Trench
+    voxCylY(100, 99, 105, 100, 70, 70, 0);
+    voxCylY(100, 98, 106, 100, 63, 63, 3);
+    // Copper Latitude Armor Bands
+    for (const ly of [64, 82, 122, 140]) {
+      const r = Math.sqrt(Math.max(10, 68*68 - (ly - 102)*(ly - 102)));
+      voxCylY(100, ly - 1, ly + 1, 100, r + 0.5, r + 0.5, 2);
+    }
+    // Carve Concave Northern Superlaser Dish & Rebuild Concentric Focusing Rings
+    voxEllipsoid(78, 132, 148, 26, 26, 26, 0);
+    voxEllipsoid(82, 126, 140, 22, 22, 22, 2);
+    voxLine(78, 132, 146, 52, 158, 186, 4, 7, 5); // Ignited Kyber Superlaser Beam!
+  }
+
+  return extractSurfaceSnapshot200(ship);
+}
+
+/* ============================================================================
+   4. 26-NEIGHBOR NORMAL & AMBIENT OCCLUSION EXTRACTOR + BRUSHED METAL SHADER
+   ============================================================================ */
+function extractSurfaceSnapshot200(ship) {
+  const pts = [];
+  let minX = 999, maxX = -999, minY = 999, maxY = -999, minZ = 999, maxZ = -999;
+
+  for (let y = 1; y < G - 1; y++) {
+    const yOff = y * G2;
+    for (let z = 1; z < G - 1; z++) {
+      const row = yOff + z * G;
+      for (let x = 1; x < G - 1; x++) {
+        const idx = row + x;
+        if (voxStamp[idx] !== curStamp) continue;
+
+        // Check 6 face neighbors for surface exposure
+        const nL = voxStamp[idx - 1] === curStamp;
+        const nR = voxStamp[idx + 1] === curStamp;
+        const nF = voxStamp[idx - G] === curStamp;
+        const nB = voxStamp[idx + G] === curStamp;
+        const nD = voxStamp[idx - G2] === curStamp;
+        const nU = voxStamp[idx + G2] === curStamp;
+        if (nL && nR && nF && nB && nD && nU) continue;
+
+        // Compute 26-Neighbor Surface Normal & Ambient Occlusion (AO)
+        let nx = 0, ny = 0, nz = 0, solidCount = 0;
+        for (let dy = -1; dy <= 1; dy++) {
+          const nyOff = (y + dy) * G2;
+          for (let dz = -1; dz <= 1; dz++) {
+            const nRow = nyOff + (z + dz) * G;
+            for (let dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0 && dz === 0) continue;
+              if (voxStamp[nRow + x + dx] === curStamp) {
+                solidCount++;
+              } else {
+                nx += dx; ny += dy; nz += dz;
+              }
+            }
+          }
+        }
+        const len = Math.hypot(nx, ny, nz) || 1;
+        // Pack Normal & AO into signed bytes (-100..100)
+        const pnx = Math.round((nx / len) * 100);
+        const pny = Math.round((ny / len) * 100);
+        const pnz = Math.round((nz / len) * 100);
+        const ao = Math.round(Math.max(35, 100 - (solidCount / 26) * 68));
+        // Brushed horizontal micro-grain factor
+        const grain = Math.round(Math.sin(z * 0.7 + x * 0.35) * 8);
+
+        pts.push(x, y, z, voxMat[idx], pnx, pny, pnz, ao + grain);
+        if (x < minX) minX = x; if (x > maxX) maxX = x;
+        if (y < minY) minY = y; if (y > maxY) maxY = y;
+        if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
       }
     }
   }
 
-  // Pack Snapshot with Auto-Bounding-Box in 512³ Space
-  let minX = 999, maxX = -999, minY = 999, maxY = -999, minZ = 999, maxZ = -999;
-  const out = new Int16Array(ptCount * 4);
-  for (let i = 0; i < ptCount; i++) {
-    const x = ptX[i], y = ptY[i], z = ptZ[i];
-    out[i*4] = x; out[i*4+1] = y; out[i*4+2] = z; out[i*4+3] = ptC[i];
-    if (x < minX) minX = x; if (x > maxX) maxX = x;
-    if (y < minY) minY = y; if (y > maxY) maxY = y;
-    if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
-  }
   return {
-    data: out, count: ptCount,
-    cx: (minX + maxX) * 0.5, cy: (minY + maxY) * 0.5, cz: (minZ + maxZ) * 0.5,
-    span: Math.max(120, maxX - minX, maxY - minY, maxZ - minZ),
-    colors: ship.colors || SHIPS[0].defColors,
-    backdrop: ship.backdrop || 'deep_space'
+    data: new Int16Array(pts),
+    count: pts.length / 8,
+    cx: (minX + maxX) * 0.5,
+    cy: (minY + maxY) * 0.5,
+    cz: (minZ + maxZ) * 0.5,
+    span: Math.max(65, maxX - minX, maxY - minY, maxZ - minZ),
+    colors: ship.colors || FINISHES.steel_copper
   };
 }
 
 function hexToRgb(h) {
-  const v = parseInt((h || '#ffffff').replace('#',''), 16);
+  const v = parseInt((h || '#ffffff').replace('#', ''), 16);
   return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
 }
 
-// Precomputed 3D Starfield for Floating Zero-G Space Render
-const STARS = Array.from({length: 90}, () => ({
-  x: Math.random(), y: Math.random(), b: 120 + Math.floor(Math.random()*135), s: Math.random() < 0.2 ? 2 : 1
-}));
+// Pre-rendered Static Brushed Steel & Copper Backdrop Cache (Zero Scrolling Stars!)
+const BgCache = new Map();
+function getSteelCopperBackground(W, H) {
+  const key = W + 'x' + H;
+  if (BgCache.has(key)) return BgCache.get(key);
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  const img = ctx.createImageData(W, H);
+  const pix = img.data;
+  const cx = W * 0.5, cy = H * 0.5, maxR = Math.hypot(cx, cy);
 
-const zBuf = new Float32Array(280 * 280);
-function render512Snapshot(snap, cvs, yaw, pitch, zoom) {
+  for (let y = 0; y < H; y++) {
+    // Subtle horizontal brushed-steel machining texture
+    const brush = Math.sin(y * 1.7) * 3.5 + Math.cos(y * 0.43) * 2.5;
+    for (let x = 0; x < W; x++) {
+      const d = Math.hypot(x - cx, y - cy) / maxR;
+      const vig = Math.max(0.28, 1.0 - d * d * 0.78);
+      // Warm copper studio spotlight in center + cool brushed gunmetal outer plate
+      const copperGlow = Math.max(0, 1.0 - d * 1.45) * 22;
+      const r = Math.min(255, Math.max(0, (28 + brush + copperGlow * 1.4) * vig)) | 0;
+      const g = Math.min(255, Math.max(0, (33 + brush + copperGlow * 0.7) * vig)) | 0;
+      const b = Math.min(255, Math.max(0, (44 + brush + copperGlow * 0.2) * vig)) | 0;
+      const pi = (y * W + x) * 4;
+      pix[pi] = r; pix[pi + 1] = g; pix[pi + 2] = b; pix[pi + 3] = 255;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+
+  // Etched Copper Engineering Reticle Ring (Static)
+  ctx.strokeStyle = 'rgba(217, 119, 54, 0.22)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(cx, cy, W * 0.42, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(212, 220, 232, 0.12)';
+  ctx.beginPath();
+  ctx.arc(cx, cy, W * 0.34, 0, Math.PI * 2);
+  ctx.stroke();
+
+  const finalImg = ctx.getImageData(0, 0, W, H);
+  BgCache.set(key, finalImg);
+  return finalImg;
+}
+
+const zBuf = new Float32Array(500 * 500);
+function render200Snapshot(snap, cvs, yaw, pitch, zoom) {
   const ctx = cvs.getContext('2d');
   const W = cvs.width, H = cvs.height;
-  ctx.fillStyle = snap.backdrop === 'scarif_gate' ? '#091526' : (snap.backdrop === 'endor_orbit' ? '#05140e' : '#03050a');
-  ctx.fillRect(0, 0, W, H);
-
-  // Draw Deep Space Stars / Hyperspace Streaks
-  for (let i = 0; i < STARS.length; i++) {
-    const st = STARS[i];
-    const sx = ((st.x * W + yaw * 40) % W + W) % W;
-    const sy = st.y * H;
-    ctx.fillStyle = `rgb(${st.b},${st.b},255)`;
-    ctx.fillRect(sx, sy, snap.backdrop === 'hyperspace' ? 10 : st.s, st.s);
-  }
-
-  const img = ctx.getImageData(0, 0, W, H);
+  const bg = getSteelCopperBackground(W, H);
+  const img = new ImageData(new Uint8ClampedArray(bg.data), W, H);
   const pix = img.data;
   zBuf.fill(-99999);
 
   const pal = [
-    [0,0,0],
-    hexToRgb(snap.colors[0]),
-    hexToRgb(snap.colors[1]),
-    hexToRgb(snap.colors[2]),
-    hexToRgb(snap.colors[3]),
-    hexToRgb(snap.colors[4])
+    [0, 0, 0],
+    hexToRgb(snap.colors[0]), // Zone 1: Brushed Steel Hull
+    hexToRgb(snap.colors[1]), // Zone 2: Forged Copper Trim / Ribs
+    hexToRgb(snap.colors[2]), // Zone 3: Gunmetal Recessed Trench / Canopy
+    hexToRgb(snap.colors[3]), // Zone 4: Polished Brass / Domes / R2
+    hexToRgb(snap.colors[4])  // Zone 5: Plasma / Superlaser Core
   ];
 
   const cy = Math.cos(yaw), sy = Math.sin(yaw);
   const cp = Math.cos(pitch), sp = Math.sin(pitch);
   const scale = (W * 0.78 / snap.span) * zoom;
-  const splat = Math.max(1, Math.ceil(scale * 2.4));
+  const splat = Math.max(1, Math.ceil(scale * 0.62));
   const arr = snap.data;
 
-  for (let i = 0; i < arr.length; i += 4) {
-    const x = arr[i] - snap.cx;
-    const y = arr[i+1] - snap.cy;
-    const z = arr[i+2] - snap.cz;
-    const cIdx = arr[i+3];
+  // Key Studio Light + Warm Copper Rim Light Vectors
+  const lx = 0.48, ly = 0.72, lz = 0.50;
+  const hx = 0.25, hy = 0.45, hz = 0.85; // Half-vector for metallic specular shine
 
+  for (let i = 0; i < arr.length; i += 8) {
+    const x = arr[i] - snap.cx;
+    const y = arr[i + 1] - snap.cy;
+    const z = arr[i + 2] - snap.cz;
+    const cIdx = arr[i + 3];
+    const nx = arr[i + 4] * 0.01;
+    const ny = arr[i + 5] * 0.01;
+    const nz = arr[i + 6] * 0.01;
+    const ao = arr[i + 7] * 0.01;
+
+    // Rotate Position
     const rx = x * cy + z * sy;
     const rz = -x * sy + z * cy;
     const ry = y * cp - rz * sp;
     const depth = y * sp + rz * cp;
 
     const sx = Math.round(W * 0.5 + rx * scale);
-    const sy2 = Math.round(H * 0.5 - ry * scale);
+    const sy2 = Math.round(H * 0.52 - ry * scale);
     if (sx < splat || sx >= W - splat || sy2 < splat || sy2 >= H - splat) continue;
 
+    // Rotate Normal for True Metallic PBR-Style Specular Reflection
+    const rnx = nx * cy + nz * sy;
+    const rnz = -nx * sy + nz * cy;
+    const rny = ny * cp - rnz * sp;
+    const rnd = ny * sp + rnz * cp;
+
     const rgb = pal[cIdx] || pal[1];
-    // Specular & Emissive Lighting (Zone 4 & 5 glow brightly in space!)
-    const shade = (cIdx >= 4) ? 1.3 : Math.min(1.22, Math.max(0.42, 0.76 + (y / 220) * 0.35 + (rz / 220) * 0.25));
-    const r = Math.min(255, rgb[0] * shade) | 0;
-    const g = Math.min(255, rgb[1] * shade) | 0;
-    const b = Math.min(255, rgb[2] * shade) | 0;
+    let r, g, b;
+    if (cIdx === 5) {
+      // Emissive Plasma / Laser Glow
+      r = Math.min(255, rgb[0] * 1.35 + 45) | 0;
+      g = Math.min(255, rgb[1] * 1.35 + 45) | 0;
+      b = Math.min(255, rgb[2] * 1.35 + 45) | 0;
+    } else {
+      const diff = Math.max(0, rnx * lx + rny * ly + rnd * lz);
+      const rim = Math.max(0, -rnx * 0.6 + rny * 0.3 - rnd * 0.5);
+      const specAngle = Math.max(0, rnx * hx + rny * hy + rnd * hz);
+      const spec = Math.pow(specAngle, cIdx === 2 || cIdx === 4 ? 14 : 9) * (cIdx === 3 ? 35 : 78);
+      const light = (0.36 + diff * 0.72) * ao;
+
+      r = Math.min(255, rgb[0] * light + spec * 1.08 + rim * 38) | 0;
+      g = Math.min(255, rgb[1] * light + spec * 0.92 + rim * 20) | 0;
+      b = Math.min(255, rgb[2] * light + spec * 0.78 + rim * 8) | 0;
+    }
 
     for (let dy = -splat; dy <= splat; dy++) {
       const py = sy2 + dy;
       const rowOff = py * W;
       for (let dx = -splat; dx <= splat; dx++) {
-        const px = sx + dx;
-        const bi = rowOff + px;
+        const bi = rowOff + sx + dx;
         if (depth > zBuf[bi]) {
           zBuf[bi] = depth;
           const pi = bi * 4;
-          pix[pi] = r; pix[pi+1] = g; pix[pi+2] = b; pix[pi+3] = 255;
+          pix[pi] = r; pix[pi + 1] = g; pix[pi + 2] = b; pix[pi + 3] = 255;
         }
       }
     }
@@ -939,51 +1357,73 @@ function render512Snapshot(snap, cvs, yaw, pitch, zoom) {
 const ThumbCache = new Map();
 const ThumbQueue = [];
 const thumbCvs = document.createElement('canvas');
-thumbCvs.width = 110; thumbCvs.height = 110;
+thumbCvs.width = 160; thumbCvs.height = 160;
 
 function bakeThumbnailImmediate(unit) {
-  const snap = sculptStarship512(unit);
-  render512Snapshot(snap, thumbCvs, 0.62, 0.28, 1.05);
+  const snap = sculptShip200(unit);
+  render200Snapshot(snap, thumbCvs, 0.58, 0.30, 1.05);
   const url = thumbCvs.toDataURL('image/png');
   ThumbCache.set(unit.uid, url);
   return url;
 }
 
 /* ============================================================================
-   4. GAME STATE, SHIP FACTORY & CORE LOOP
+   5. PROCEDURAL 2,400-SHIP GENERATOR & GAME STATE
    ============================================================================ */
 let State = {
-  credits: 2500, supply: 1500, godMode: false,
+  credits: 5000, supply: 2500, godMode: false,
   units: [], codex: {}, trials: 0,
   tech: [1, 1, 1, 1],
   pilots: [
-    { id:'p1', name:'Wedge Antilles (Red 2)', bonus:'+25% Starfighter Evasion' },
-    { id:'p2', name:'Han Solo (Falcon)',      bonus:'+30% Turret Crit' },
-    { id:'p3', name:'Grand Moff Tarkin',      bonus:'+35% Superlaser Output' },
-    { id:'p4', name:'Boba Fett (Slave I)',    bonus:'+25% Seismic Pierce' }
+    { id:'p1', name:'Wedge Antilles (Red Leader)', bonus:'+25% Starfighter Attack' },
+    { id:'p2', name:'Han Solo (Corellian Ace)',    bonus:'+30% Freighter Crit' },
+    { id:'p3', name:'Grand Admiral Thrawn',        bonus:'+35% Capital Ship Command' },
+    { id:'p4', name:'Din Djarin (Razor Crest)',    bonus:'+25% Beskar Hull Plating' }
   ],
-  patrols: [null, null, null, null, null, null],
   sellerLanes: [null, null, null, null, null],
   auto: { march:false, repair:false, supply:false }
 };
 
+function decodeSeedToSpec(seedNum) {
+  const n = Math.max(1, Math.min(2400, Number(seedNum) || 1)) - 1;
+  const sIdx = n % 25;
+  const tier = Math.floor(n / 150) % 16;
+  const fKeys = Object.keys(FINISHES);
+  const fKey = fKeys[Math.floor(n / 25) % fKeys.length];
+  const wOpts = ['attack', 'interceptor', 'armored', 'prototype'];
+  return {
+    seed: n + 1,
+    sIdx,
+    chassis: SHIPS[sIdx].id,
+    tier,
+    wings: wOpts[n % wOpts.length],
+    weapon: WEAPONS[n % WEAPONS.length].id,
+    finish: fKey,
+    colors: [...FINISHES[fKey]]
+  };
+}
+
 function makeUnit(opts = {}) {
-  const tier = opts.tier !== undefined ? opts.tier : Math.floor(Math.random() * 5);
-  const sIdx = opts.sIdx !== undefined ? opts.sIdx : Math.floor(Math.random() * SHIPS.length);
+  const seed = opts.seed || (1 + Math.floor(Math.random() * 2400));
+  const base = decodeSeedToSpec(seed);
+  const tier = opts.tier !== undefined ? opts.tier : base.tier;
+  const sIdx = opts.sIdx !== undefined ? opts.sIdx : base.sIdx;
   const sh = SHIPS[sIdx];
   const qualMult = opts.qualMult || 1.0;
-  const dexNum = Math.min(2000, tier * 130 + sIdx * 11 + 1);
+  const dexNum = opts.seed || Math.min(2400, tier * 150 + sIdx * 6 + 1);
   const val = Math.round(TIERS[tier].val * qualMult);
   return {
-    uid: 's_' + Math.random().toString(36).slice(2, 9),
+    uid: 'u_' + Math.random().toString(36).slice(2, 9),
+    seed: dexNum,
+    dexNum,
     name: opts.name || `${TIERS[tier].code} ${sh.name}`,
-    tier, chassis: sh.id, cls: sh.cls, dexNum,
-    wings: opts.wings || 'attack',
-    weapon: opts.weapon || WEAPONS[sIdx % WEAPONS.length].id,
-    engine: opts.engine || 'twin_ion',
-    backdrop: opts.backdrop || 'deep_space',
-    colors: opts.colors ? [...opts.colors] : [...sh.defColors],
-    val, hp: 100, quality: opts.quality || 'Standard', vaulted: false
+    tier,
+    chassis: sh.id,
+    cls: sh.cls,
+    wings: opts.wings || base.wings,
+    weapon: opts.weapon || base.weapon,
+    colors: opts.colors ? [...opts.colors] : [...base.colors],
+    val, hp: 100, quality: opts.quality || 'Foundry Cast', vaulted: false
   };
 }
 
@@ -1004,20 +1444,20 @@ function updateHUD() {
   document.getElementById('hud-credits').textContent = '◈' + State.credits.toLocaleString();
   document.getElementById('hud-supply').textContent = State.supply.toLocaleString();
   document.getElementById('hud-owned').textContent = State.units.length;
-  document.getElementById('hud-codex').textContent = Object.keys(State.codex).length + '/2000';
+  document.getElementById('hud-codex').textContent = Object.keys(State.codex).length + '/2400';
   document.getElementById('hud-trials').textContent = Math.min(150, State.trials) + '/150';
 }
 
 function toggleGodMode() {
   State.godMode = !State.godMode;
   const btn = document.getElementById('btn-god');
-  btn.textContent = State.godMode ? '⚡ GOD: ON' : '⚡ GOD: OFF';
-  btn.className = State.godMode ? 'btn-gold' : '';
+  btn.textContent = State.godMode ? '⚡ GOD MODE: ON' : '⚡ GOD MODE: OFF';
+  btn.className = State.godMode ? 'btn-copper' : '';
   if (State.godMode) {
     State.credits += 10000000;
     State.supply += 100000;
     State.tech = [10, 10, 10, 10];
-    showToast('⚡ GOD MODE: +◈10M Credits, +100K Coaxium & 100% MASTERWORK!');
+    showToast('⚡ GOD MODE: +◈10M Credits, +100K Alloy & 100% MASTERWORK!');
     updateHUD();
   }
 }
@@ -1031,112 +1471,136 @@ function switchTab(n) {
 }
 
 /* ============================================================================
-   5. TAB 2: 512³ CUSTOM SHIPYARD FORGE & TURNTABLE
+   6. TAB 2: 200³ SHIPYARD GENERATOR & CLAMPED SHOWCASE CAMERA
    ============================================================================ */
-const ForgeCam = { yaw: 0.65, pitch: 0.26, zoom: 1.05, autoSpin: true, snap: null, colors: [...SHIPS[0].defColors] };
+const ForgeCam = {
+  yaw: 0.58, pitch: 0.28, zoom: 1.06,
+  sweep: true, sweepDir: 1, full360: false,
+  snap: null, colors: [...FINISHES.steel_copper]
+};
 
 function initForgeControls() {
-  document.getElementById('fg-chassis').innerHTML = SHIPS.map(s => `<option value="${s.id}">${s.name} [${s.cls}]</option>`).join('');
-  document.getElementById('flt-chassis').innerHTML = `<option value="ALL">All 12 Starships</option>` + SHIPS.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+  document.getElementById('fg-chassis').innerHTML = SHIPS.map((s, i) => `<option value="${s.id}">${i+1}. ${s.name} [${s.cls}]</option>`).join('');
+  document.getElementById('flt-chassis').innerHTML = `<option value="ALL">All 25 Star Wars Hulls</option>` + SHIPS.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
   document.getElementById('fg-tier').innerHTML = TIERS.map(t => `<option value="${t.id}">${t.code} — ${t.name} (◈${t.val.toLocaleString()})</option>`).join('');
   document.getElementById('fg-weapon').innerHTML = WEAPONS.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
 
   const zNames = [
-    'Zone 1: Primary Hull Plating',
-    'Zone 2: Squadron Stripes / Solar Arrays',
-    'Zone 3: Canopy / Bridge / Trench Trim',
-    'Zone 4: Ion Engines / R2 Droid / Domes',
-    'Zone 5: Laser Cannons & Superlaser Beam'
+    'Zone 1: Brushed Steel Primary Hull',
+    'Zone 2: Forged Copper Ribs & Trim',
+    'Zone 3: Dark Gunmetal Trench & Glass',
+    'Zone 4: Polished Brass Domes & R2',
+    'Zone 5: Ignited Plasma & Laser Core'
   ];
   document.getElementById('paint-zones').innerHTML = zNames.map((zn, i) => `
-    <div style="background:var(--panel);padding:5px;border-radius:5px;border:1px solid var(--border-dim)">
+    <div style="background:var(--steel-panel);padding:6px;border-radius:5px;border:1px solid var(--copper-dim)">
       <span class="ctrl-lbl">${zn}</span>
-      <div style="display:flex;gap:4px;align-items:center">
+      <div style="display:flex;gap:5px;align-items:center">
         <input type="color" id="cp-${i}" value="${ForgeCam.colors[i]}" onchange="setZoneColor(${i},this.value)">
-        <input type="text" id="ht-${i}" value="${ForgeCam.colors[i]}" style="width:78px" onchange="setZoneColor(${i},this.value)">
+        <input type="text" id="ht-${i}" value="${ForgeCam.colors[i]}" style="width:82px" onchange="setZoneColor(${i},this.value)">
       </div>
       <div class="swatch-row">${SWATCHES.map(s => `<div class="swatch" style="background:${s}" onclick="setZoneColor(${i},'${s}')"></div>`).join('')}</div>
     </div>`).join('');
 
+  // Clamped Showcase Drag on #forge-canvas
   const cvs = document.getElementById('forge-canvas');
   let dragging = false, lx = 0, ly = 0;
-  cvs.addEventListener('pointerdown', e => { dragging = true; lx = e.clientX; ly = e.clientY; cvs.setPointerCapture(e.pointerId); });
+  cvs.addEventListener('pointerdown', e => {
+    dragging = true; ForgeCam.sweep = false;
+    lx = e.clientX; ly = e.clientY;
+    cvs.setPointerCapture(e.pointerId);
+  });
   cvs.addEventListener('pointermove', e => {
     if (!dragging) return;
-    ForgeCam.yaw += (e.clientX - lx) * 0.012;
-    ForgeCam.pitch = Math.max(-0.7, Math.min(0.85, ForgeCam.pitch + (e.clientY - ly) * 0.01));
+    ForgeCam.yaw += (e.clientX - lx) * 0.009;
+    if (!ForgeCam.full360) ForgeCam.yaw = Math.max(-0.85, Math.min(0.85, ForgeCam.yaw));
+    ForgeCam.pitch = Math.max(0.10, Math.min(0.68, ForgeCam.pitch + (e.clientY - ly) * 0.008));
+    document.getElementById('sl-yaw').value = Math.round(ForgeCam.yaw * 100);
+    document.getElementById('sl-pitch').value = Math.round(ForgeCam.pitch * 100);
     lx = e.clientX; ly = e.clientY;
     renderForgeFrame();
   });
   cvs.addEventListener('pointerup', () => dragging = false);
 }
 
-function onChassisSelectChange() {
-  const sh = SHIPS.find(s => s.id === document.getElementById('fg-chassis').value) || SHIPS[0];
-  sh.defColors.forEach((c, i) => setZoneColor(i, c));
-  if (sh.id === 'death_star') document.getElementById('fg-weapon').value = 'superlaser';
-  updateForgePreview();
-}
-
-function cyclePresetShip(dir) {
-  const sel = document.getElementById('fg-chassis');
-  const next = (sel.selectedIndex + dir + SHIPS.length) % SHIPS.length;
-  sel.selectedIndex = next;
-  onChassisSelectChange();
+function applyFinishPreset(key) {
+  const cols = FINISHES[key] || FINISHES.steel_copper;
+  cols.forEach((c, i) => setZoneColor(i, c));
 }
 
 function setZoneColor(i, hex) {
   if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
   ForgeCam.colors[i] = hex;
-  document.getElementById('cp-'+i).value = hex;
-  document.getElementById('ht-'+i).value = hex;
+  document.getElementById('cp-' + i).value = hex;
+  document.getElementById('ht-' + i).value = hex;
   if (ForgeCam.snap) { ForgeCam.snap.colors = [...ForgeCam.colors]; renderForgeFrame(); }
+}
+
+function onChassisSelectChange() {
+  updateForgePreview();
+}
+
+function cyclePresetShip(dir) {
+  const sel = document.getElementById('fg-chassis');
+  sel.selectedIndex = (sel.selectedIndex + dir + SHIPS.length) % SHIPS.length;
+  updateForgePreview();
+}
+
+function rollProceduralSeed() {
+  const s = 1 + Math.floor(Math.random() * 2400);
+  document.getElementById('fg-seed').value = s;
+  applyProceduralSeed(s);
+}
+
+function applyProceduralSeed(seedVal) {
+  const spec = decodeSeedToSpec(seedVal);
+  document.getElementById('fg-chassis').value = spec.chassis;
+  document.getElementById('fg-tier').value = spec.tier;
+  document.getElementById('fg-wings').value = spec.wings;
+  document.getElementById('fg-weapon').value = spec.weapon;
+  document.getElementById('fg-finish').value = spec.finish;
+  spec.colors.forEach((c, i) => setZoneColor(i, c));
+  updateForgePreview();
 }
 
 function getForgeSpec() {
   return {
+    seed: Number(document.getElementById('fg-seed').value) || 1,
     tier: Number(document.getElementById('fg-tier').value) || 0,
     chassis: document.getElementById('fg-chassis').value,
     wings: document.getElementById('fg-wings').value,
     weapon: document.getElementById('fg-weapon').value,
-    engine: document.getElementById('fg-engine').value,
-    backdrop: document.getElementById('fg-backdrop').value,
     colors: [...ForgeCam.colors]
   };
 }
 
 function updateForgePreview() {
   const spec = getForgeSpec();
-  ForgeCam.snap = sculptStarship512(spec);
+  ForgeCam.snap = sculptShip200(spec);
   const sh = SHIPS.find(s => s.id === spec.chassis) || SHIPS[0];
-  document.getElementById('fg-voxel-stats').textContent = `512³ Grid • ${sh.name} • ${ForgeCam.snap.count.toLocaleString()} Surface Voxels`;
+  document.getElementById('fg-voxel-stats').textContent =
+    `200³ Solid CSG • ${sh.name} (Codex #${String(spec.seed).padStart(4,'0')}) • ${ForgeCam.snap.count.toLocaleString()} Shaded Surface Voxels`;
   const cost = Math.round(TIERS[spec.tier].val * 0.45);
-  document.getElementById('fg-cost-lbl').textContent = `Shipyard Cost: ◈${cost.toLocaleString()} + 20 Coaxium`;
+  document.getElementById('fg-cost-lbl').textContent = `Foundry Cost: ◈${cost.toLocaleString()} + 20 Alloy`;
   renderForgeFrame();
 }
 
 function renderForgeFrame() {
   if (!ForgeCam.snap) return;
-  render512Snapshot(ForgeCam.snap, document.getElementById('forge-canvas'), ForgeCam.yaw, ForgeCam.pitch, ForgeCam.zoom);
-}
-
-function randomizeForge() {
-  const sh = SHIPS[Math.floor(Math.random() * SHIPS.length)];
-  document.getElementById('fg-chassis').value = sh.id;
-  onChassisSelectChange();
+  render200Snapshot(ForgeCam.snap, document.getElementById('forge-canvas'), ForgeCam.yaw, ForgeCam.pitch, ForgeCam.zoom);
 }
 
 function craftCustomUnit() {
   const spec = getForgeSpec();
   const cost = Math.round(TIERS[spec.tier].val * 0.45);
-  if (State.credits < cost || State.supply < 20) return showToast('Insufficient Credits or Coaxium!');
+  if (State.credits < cost || State.supply < 20) return showToast('Insufficient Credits or Alloy!');
   State.credits -= cost; State.supply -= 20;
 
-  let qName = 'Kuat Craft', qMult = 1.6;
+  let qName = 'Forged Steel', qMult = 1.6;
   const r = Math.random();
-  if (State.godMode || r < 0.1) { qName = '★ MASTERWORK ★'; qMult = 25 + Math.floor(Math.random() * 26); }
-  else if (r < 0.3) { qName = 'Prototype Relic'; qMult = 12; }
-  else if (r < 0.6) { qName = 'Ace Custom'; qMult = 5.5; }
+  if (State.godMode || r < 0.12) { qName = '★ MASTERWORK ★'; qMult = 25 + Math.floor(Math.random() * 26); }
+  else if (r < 0.35) { qName = 'Copper Relic'; qMult = 12; }
+  else if (r < 0.65) { qName = 'Artisan Cast'; qMult = 5.5; }
 
   const shObj = SHIPS.find(s => s.id === spec.chassis);
   const u = makeUnit({
@@ -1147,11 +1611,11 @@ function craftCustomUnit() {
   addUnitToRoster(u, true);
   State.trials++;
   updateHUD();
-  showToast(`🚀 Commissioned ${u.name} (◈${u.val.toLocaleString()})!`);
+  showToast(`🔥 Cast ${u.name} (◈${u.val.toLocaleString()})!`);
 }
 
 /* ============================================================================
-   6. TAB 5: X-WING TACTICAL 8×8 SPACE GRID DOGFIGHT ARENA
+   7. TAB 5: X-WING 8×8 TACTICAL GRID COMBAT TABLE
    ============================================================================ */
 let GridMatch = {
   px: 1, py: 4, pDir: 0, pHull: 100, pShield: 100, pShip: null,
@@ -1159,14 +1623,13 @@ let GridMatch = {
   asteroids: [[3,2],[4,5],[2,6],[5,1]],
   beam: null
 };
-// Dir vectors: 0=East(+X), 1=South(+Y), 2=West(-X), 3=North(-Y)
 const DIRS = [[1,0],[0,1],[-1,0],[0,-1]];
 const DIR_ARROWS = ['▶','▼','◀','▲'];
 
 function initGridMatch() {
   const pShip = State.units[0] || makeUnit({ tier: 5, sIdx: 0 });
   const eIdx = Math.floor(Math.random() * SHIPS.length);
-  const eShip = makeUnit({ tier: pShip.tier, sIdx: eIdx, name: `Imperial ${SHIPS[eIdx].name}` });
+  const eShip = makeUnit({ tier: pShip.tier, sIdx: eIdx, name: `Adversary ${SHIPS[eIdx].name}` });
   GridMatch = {
     px: 1, py: 4, pDir: 0, pHull: 100, pShield: 100, pShip,
     ex: 6, ey: 3, eDir: 2, eHull: 100, eShield: 100, eShip,
@@ -1185,9 +1648,7 @@ function updateGridStatsDOM() {
   document.getElementById('grid-e-stats').textContent = `Hull: ${GridMatch.eHull}% | Shields: ${GridMatch.eShield}% | Sector (${GridMatch.ex},${GridMatch.ey}) ${DIR_ARROWS[GridMatch.eDir]}`;
 }
 
-function isAsteroid(x, y) {
-  return GridMatch.asteroids.some(a => a[0] === x && a[1] === y);
-}
+function isAsteroid(x, y) { return GridMatch.asteroids.some(a => a[0] === x && a[1] === y); }
 
 function drawGridBoard() {
   const cvs = document.getElementById('grid-canvas');
@@ -1195,38 +1656,34 @@ function drawGridBoard() {
   const ctx = cvs.getContext('2d');
   const W = cvs.width, H = cvs.height, cell = W / 8;
 
-  ctx.fillStyle = '#040812';
+  ctx.fillStyle = '#141820';
   ctx.fillRect(0, 0, W, H);
 
-  // Draw 8x8 Tactical Sector Grid + Valid Move Highlights
   for (let y = 0; y < 8; y++) {
     for (let x = 0; x < 8; x++) {
       const dist = Math.abs(x - GridMatch.px) + Math.abs(y - GridMatch.py);
-      if (dist >= 1 && dist <= 2 && !isAsteroid(x, y) && !(x===GridMatch.ex && y===GridMatch.ey)) {
-        ctx.fillStyle = 'rgba(16, 185, 129, 0.14)';
+      if (dist >= 1 && dist <= 2 && !isAsteroid(x, y) && !(x === GridMatch.ex && y === GridMatch.ey)) {
+        ctx.fillStyle = 'rgba(217, 119, 54, 0.22)';
         ctx.fillRect(x * cell, y * cell, cell, cell);
       }
-      ctx.strokeStyle = '#1e293b';
+      ctx.strokeStyle = '#2e3748';
       ctx.strokeRect(x * cell, y * cell, cell, cell);
     }
   }
 
-  // Draw Firing Range Ring around Player Ship
   const shInfo = SHIPS.find(s => s.id === GridMatch.pShip.chassis) || SHIPS[0];
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+  ctx.strokeStyle = 'rgba(242, 154, 94, 0.45)';
   ctx.beginPath();
   ctx.arc((GridMatch.px + 0.5) * cell, (GridMatch.py + 0.5) * cell, shInfo.range * cell, 0, Math.PI * 2);
   ctx.stroke();
 
-  // Draw Asteroids
-  ctx.fillStyle = '#475569';
+  ctx.fillStyle = '#6e4726';
   GridMatch.asteroids.forEach(([ax, ay]) => {
     ctx.beginPath();
     ctx.arc((ax + 0.5) * cell, (ay + 0.5) * cell, cell * 0.34, 0, Math.PI * 2);
     ctx.fill();
   });
 
-  // Draw Laser / Superlaser Beam if active
   if (GridMatch.beam) {
     ctx.strokeStyle = GridMatch.beam.col;
     ctx.lineWidth = 4;
@@ -1237,28 +1694,22 @@ function drawGridBoard() {
     ctx.lineWidth = 1;
   }
 
-  // Draw Player Ship Token (Emerald/Cyan)
-  drawShipToken(ctx, GridMatch.px, GridMatch.py, GridMatch.pDir, '#10b981', cell, GridMatch.pShip.chassis === 'death_star');
-  // Draw Enemy Ship Token (Crimson)
-  drawShipToken(ctx, GridMatch.ex, GridMatch.ey, GridMatch.eDir, '#ef4444', cell, GridMatch.eShip.chassis === 'death_star');
+  drawShipToken(ctx, GridMatch.px, GridMatch.py, GridMatch.pDir, '#10b981', cell);
+  drawShipToken(ctx, GridMatch.ex, GridMatch.ey, GridMatch.eDir, '#ef4444', cell);
 }
 
-function drawShipToken(ctx, gx, gy, dir, col, cell, isMoon) {
+function drawShipToken(ctx, gx, gy, dir, col, cell) {
   const cx = (gx + 0.5) * cell, cy = (gy + 0.5) * cell;
   ctx.save();
   ctx.translate(cx, cy);
   ctx.rotate(dir * Math.PI * 0.5);
   ctx.fillStyle = col;
   ctx.beginPath();
-  if (isMoon) {
-    ctx.arc(0, 0, cell * 0.38, 0, Math.PI * 2);
-  } else {
-    ctx.moveTo(cell * 0.38, 0);
-    ctx.lineTo(-cell * 0.3, -cell * 0.28);
-    ctx.lineTo(-cell * 0.18, 0);
-    ctx.lineTo(-cell * 0.3, cell * 0.28);
-    ctx.closePath();
-  }
+  ctx.moveTo(cell * 0.38, 0);
+  ctx.lineTo(-cell * 0.3, -cell * 0.28);
+  ctx.lineTo(-cell * 0.18, 0);
+  ctx.lineTo(-cell * 0.3, cell * 0.28);
+  ctx.closePath();
   ctx.fill();
   ctx.strokeStyle = '#ffffff';
   ctx.stroke();
@@ -1288,28 +1739,24 @@ function gridFireWeapons() {
   const dist = Math.hypot(GridMatch.ex - GridMatch.px, GridMatch.ey - GridMatch.py);
   let log = '';
 
-  // Player Attack Phase (2D6 X-Wing Dice)
   if (dist <= pInfo.range + 0.8) {
     const dice = 2 + Math.floor(Math.random()*6) + Math.floor(Math.random()*6);
-    const dmg = Math.round(dice * (pInfo.id === 'death_star' ? 9 : 4.5));
-    GridMatch.beam = { x0: GridMatch.px, y0: GridMatch.py, x1: GridMatch.ex, y1: GridMatch.ey, col: '#22c55e' };
+    const dmg = Math.round(dice * 5);
+    GridMatch.beam = { x0: GridMatch.px, y0: GridMatch.py, x1: GridMatch.ex, y1: GridMatch.ey, col: '#f29a5e' };
     if (GridMatch.eShield > 0) {
       const sHit = Math.min(GridMatch.eShield, dmg);
       GridMatch.eShield -= sHit;
       GridMatch.eHull = Math.max(0, GridMatch.eHull - (dmg - sHit));
-    } else {
-      GridMatch.eHull = Math.max(0, GridMatch.eHull - dmg);
-    }
-    log += `🟢 <b>${GridMatch.pShip.name}</b> rolled <b>${dice}</b> (Range ${dist.toFixed(1)}) → <b>-${dmg}%</b> DMG! `;
+    } else GridMatch.eHull = Math.max(0, GridMatch.eHull - dmg);
+    log += `🟢 <b>${GridMatch.pShip.name}</b> rolled <b>${dice}</b> → <b>-${dmg}%</b> DMG! `;
   } else {
-    log += `🟢 Out of Range (${dist.toFixed(1)} > ${pInfo.range}). Closing in! `;
+    log += `🟢 Out of Range (${dist.toFixed(1)} > ${pInfo.range}). `;
   }
 
-  // Check Victory
   if (GridMatch.eHull <= 0) {
-    const spoils = Math.max(80, Math.round(GridMatch.pShip.val * 0.55));
+    const spoils = Math.max(100, Math.round(GridMatch.pShip.val * 0.55));
     State.credits += spoils; State.trials++;
-    log += `<br><span style="color:var(--gold)">🏆 SPLASH ONE BOGEY! +◈${spoils.toLocaleString()} Credit Spoils!</span>`;
+    log += `<br><span style="color:var(--copper-bright)">🏆 TARGET DESTROYED! +◈${spoils.toLocaleString()} Spoils!</span>`;
     if (Math.random() < 0.45) {
       addUnitToRoster(GridMatch.eShip, false);
       log += ` <span style="color:var(--emerald)">+ Captured ${GridMatch.eShip.name}!</span>`;
@@ -1319,7 +1766,6 @@ function gridFireWeapons() {
     return;
   }
 
-  // Enemy AI Maneuver & Return Fire
   const dx = Math.sign(GridMatch.px - GridMatch.ex), dy = Math.sign(GridMatch.py - GridMatch.ey);
   const enx = Math.max(0, Math.min(7, GridMatch.ex + dx));
   const eny = Math.max(0, Math.min(7, GridMatch.ey + dy));
@@ -1328,12 +1774,11 @@ function gridFireWeapons() {
   }
   const eDist = Math.hypot(GridMatch.ex - GridMatch.px, GridMatch.ey - GridMatch.py);
   if (eDist <= 3.5) {
-    const edmg = 8 + Math.floor(Math.random() * 18);
+    const edmg = 8 + Math.floor(Math.random() * 16);
     if (GridMatch.pShield > 0) GridMatch.pShield = Math.max(0, GridMatch.pShield - edmg);
     else GridMatch.pHull = Math.max(10, GridMatch.pHull - edmg);
     log += `<br>🔴 Enemy returned fire for <b>-${edmg}%</b>!`;
   }
-
   document.getElementById('battle-log').innerHTML = log;
   updateGridStatsDOM();
   drawGridBoard();
@@ -1346,7 +1791,7 @@ function autoResolveGridMatch() {
 }
 
 /* ============================================================================
-   7. TAB 1, 3, 4, 6: HANGAR, CRATES, AUCTIONS ("BID") & HIGH COMMAND
+   8. HANGAR, CRATES, AUCTIONS ("BID") & HIGH COMMAND
    ============================================================================ */
 function renderOwnedTab() {
   const grid = document.getElementById('owned-grid');
@@ -1371,12 +1816,12 @@ function renderOwnedTab() {
         <span class="badge-class">${u.cls}</span>
         <span class="badge-codex">#${String(u.dexNum).padStart(4,'0')}</span>
       </div>
-      <div style="font-weight:800;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${u.name}</div>
-      <div style="display:flex;justify-content:space-between;font-size:10px">
-        <span style="color:var(--gold);font-weight:800">◈${u.val.toLocaleString()}</span>
+      <div style="font-weight:800;color:var(--steel-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${u.name}</div>
+      <div style="display:flex;justify-content:space-between;font-size:11px">
+        <span style="color:var(--copper-bright);font-weight:800">◈${u.val.toLocaleString()}</span>
         <span style="color:var(--emerald)">Hull ${u.hp}%</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px">
         <button onclick="listUnitForAuction('${u.uid}')">🔨</button>
         <button onclick="toggleVault('${u.uid}')">${u.vaulted ? '🔒' : '🔓'}</button>
         <button onclick="repairUnit('${u.uid}')">🔧</button>
@@ -1385,26 +1830,26 @@ function renderOwnedTab() {
     </div>`;
   }).join('');
 
-  const tNames = ['Kuat Drive Yards','Incom S-Foil Actuators','Deflector Shield Domes','Kyber Focusing Lens'];
+  const tNames = ['Brushed Beskar Rollers','Copper Induction Coils','CSG Hull Lathe','Kyber Core Calibrator'];
   document.getElementById('tech-grid').innerHTML = tNames.map((nm, i) => `
     <div class="unit-card">
       <div style="font-weight:800">${nm} (Lv.${State.tech[i]})</div>
-      <button class="btn-silver" onclick="upgradeTech(${i})">Upgrade (◈${State.tech[i]*250})</button>
+      <button class="btn-steel" onclick="upgradeTech(${i})">Upgrade (◈${State.tech[i]*250})</button>
     </div>`).join('');
 
   document.getElementById('pilots-grid').innerHTML = State.pilots.map(p => `
     <div class="unit-card">
-      <div style="font-weight:800;color:var(--gold)">${p.name}</div>
-      <div style="font-size:10px;color:var(--emerald)">${p.bonus}</div>
+      <div style="font-weight:800;color:var(--copper-bright)">${p.name}</div>
+      <div style="font-size:11px;color:var(--emerald)">${p.bonus}</div>
     </div>`).join('');
 }
 
 function toggleVault(uid) { const u = State.units.find(x => x.uid === uid); if (u) { u.vaulted = !u.vaulted; renderOwnedTab(); } }
 function repairUnit(uid) { const u = State.units.find(x => x.uid === uid); if (u) { u.hp = 100; renderOwnedTab(); } }
-function repairAllUnits() { State.units.forEach(u => u.hp = 100); renderOwnedTab(); showToast('🔧 Entire Fleet Repaired!'); }
+function repairAllUnits() { State.units.forEach(u => u.hp = 100); renderOwnedTab(); showToast('🔧 Fleet Overhauled!'); }
 function salvageUnit(uid) {
   const idx = State.units.findIndex(x => x.uid === uid);
-  if (idx === -1 || State.units[idx].vaulted) return showToast('🔒 Ship is Locked!');
+  if (idx === -1 || State.units[idx].vaulted) return showToast('🔒 Ship is Vaulted!');
   const u = State.units.splice(idx, 1)[0];
   State.credits += Math.round(u.val * 0.4); updateHUD(); renderOwnedTab();
 }
@@ -1414,9 +1859,9 @@ function salvageDuplicates() {
     if (u.vaulted || !seen.has(u.dexNum)) { seen.add(u.dexNum); return true; }
     State.credits += Math.round(u.val * 0.4); c++; return false;
   });
-  updateHUD(); renderOwnedTab(); showToast(`♻️ Scrapped ${c} duplicate ships!`);
+  updateHUD(); renderOwnedTab(); showToast(`♻️ Smelted ${c} duplicate hulls!`);
 }
-function autoEquipCommanders() { showToast('⚡ Ace Pilots assigned to lead ships!'); }
+function autoEquipCommanders() { showToast('⚡ Flight Aces assigned to lead ships!'); }
 function upgradeTech(i) {
   const cost = State.tech[i] * 250;
   if (State.credits < cost) return showToast('Not enough Credits!');
@@ -1424,44 +1869,44 @@ function upgradeTech(i) {
 }
 
 const CRATES = [
-  { name:'Outer Rim Hangar Pod', cost:20, minT:0, maxT:3 },
-  { name:'Incom Starfighter Crate', cost:200, minT:2, maxT:6 },
-  { name:'Kuat Capital Shipyard Vault', cost:2000, minT:5, maxT:10 },
-  { name:'Project Stardust Mythic Vault', cost:15000, minT:8, maxT:14 }
+  { name:'Outer Rim Foundry Crate', cost:25, minT:0, maxT:4 },
+  { name:'Incom Copper-Cast Vault', cost:250, minT:3, maxT:8 },
+  { name:'Kuat Drive Yards Dreadnought Box', cost:2500, minT:6, maxT:12 },
+  { name:'Beskar & Kyber Mythic Vault', cost:15000, minT:10, maxT:15 }
 ];
 function initCratesAndCommand() {
   document.getElementById('crates-grid').innerHTML = CRATES.map((c, i) => `
     <div class="unit-card">
-      <div style="font-weight:900;color:var(--white)">📦 ${c.name}</div>
-      <div style="font-size:10px;color:var(--muted)">Drops T${c.minT+1}–T${c.maxT+1} Starships</div>
-      <div style="display:flex;gap:4px;margin-top:4px">
-        <button class="btn-silver" onclick="openCrate(${i},1)">1x (◈${c.cost})</button>
-        <button class="btn-gold" onclick="openCrate(${i},5)">5x (◈${c.cost*5})</button>
+      <div style="font-weight:900;color:var(--steel-light)">📦 ${c.name}</div>
+      <div style="font-size:11px;color:var(--muted)">Drops T${c.minT+1}–T${c.maxT+1} (25 Star Wars Hulls)</div>
+      <div style="display:flex;gap:5px;margin-top:4px">
+        <button class="btn-steel" onclick="openCrate(${i},1)">1x (◈${c.cost})</button>
+        <button class="btn-copper" onclick="openCrate(${i},5)">5x (◈${c.cost*5})</button>
         <button class="btn-emerald" onclick="openCrate(${i},10)">10x (◈${c.cost*10})</button>
       </div>
     </div>`).join('');
 
   document.getElementById('pods-grid').innerHTML = State.pilots.map(p => `
-    <div class="unit-card"><div style="font-weight:800">${p.name}</div><div style="font-size:10px;color:var(--gold)">${p.bonus}</div></div>`).join('');
+    <div class="unit-card"><div style="font-weight:800">${p.name}</div><div style="font-size:11px;color:var(--copper-bright)">${p.bonus}</div></div>`).join('');
 
-  const routes = ['Kessel Run','Yavin Trench','Scarif Shield Gate','Endor Death Star II','Hoth Asteroid Belt','Coruscant Orbit'];
+  const routes = ['Kuat Orbital Ring','Corellian Shipyard','Fondor Drydock','Mandalore Forge','Scarif Gate','Mon Cala Docks'];
   document.getElementById('patrols-grid').innerHTML = routes.map((s, i) => `
     <div class="unit-card">
-      <div style="font-weight:800;color:var(--white)">🌌 ${s}</div>
-      <div style="font-size:10px;color:var(--emerald)">Yield: +◈${(i+1)*60}/tick</div>
-      <button class="btn-silver" onclick="showToast('🚀 Ship Assigned to ${s}!')">⚡ Assign Ship</button>
+      <div style="font-weight:800;color:var(--steel-light)">🌌 ${s}</div>
+      <div style="font-size:11px;color:var(--emerald)">Yield: +◈${(i+1)*75}/tick</div>
+      <button class="btn-steel" onclick="showToast('🚀 Ship Assigned to ${s}!')">⚡ Assign Patrol</button>
     </div>`).join('');
 
   document.getElementById('commissions-grid').innerHTML = [1,2,3,4,5,6].map(i => `
     <div class="unit-card">
-      <div style="font-weight:800">Fleet Requisition #${i}</div>
-      <div style="font-size:10px;color:var(--gold)">Reward: ◈${i*500} + Bonus Ship</div>
-      <button class="btn-gold" onclick="claimCommission(${i})">Fulfill Order</button>
+      <div style="font-weight:800">Foundry Commission #${i}</div>
+      <div style="font-size:11px;color:var(--copper-bright)">Reward: ◈${i*600} + Bonus Hull</div>
+      <button class="btn-copper" onclick="claimCommission(${i})">Deliver Hull</button>
     </div>`).join('');
 
-  const books = ['Book I: Escape Pod','Book II: Red Squadron','Book III: Kessel Smuggler','Book IV: Kuat Admiral','Book V: Super Star Destroyer','Book VI: Death Star Architect'];
+  const books = ['Book I: Apprentice Smith','Book II: Copper Casters','Book III: Incom Engineer','Book IV: Kuat Architect','Book V: Dreadnought Wright','Book VI: Beskar Master'];
   document.getElementById('trials-grid').innerHTML = books.map(b => `
-    <div class="unit-card"><div style="font-weight:800;color:var(--white)">${b}</div><div style="font-size:10px;color:var(--emerald)">25 Campaign Medals</div></div>`).join('');
+    <div class="unit-card"><div style="font-weight:800;color:var(--steel-light)">${b}</div><div style="font-size:11px;color:var(--emerald)">25 Shipwright Trials</div></div>`).join('');
 }
 
 function openCrate(idx, count) {
@@ -1476,12 +1921,12 @@ function openCrate(idx, count) {
 }
 function buySupply(amt, cost) {
   if (State.credits < cost) return showToast('Not enough Credits!');
-  State.credits -= cost; State.supply += amt; updateHUD(); showToast(`⛽ +${amt.toLocaleString()} Coaxium Added!`);
+  State.credits -= cost; State.supply += amt; updateHUD(); showToast(`🔩 +${amt.toLocaleString()} Alloy Added!`);
 }
 function claimCommission(i) {
-  State.credits += i * 500;
-  addUnitToRoster(makeUnit({ tier: Math.min(14, i + 1) }), false);
-  State.trials++; updateHUD(); showToast(`📜 Requisition #${i} Fulfilled!`);
+  State.credits += i * 600;
+  addUnitToRoster(makeUnit({ tier: Math.min(15, i + 1) }), false);
+  State.trials++; updateHUD(); showToast(`📜 Commission #${i} Delivered!`);
 }
 function toggleAuto(k) {
   State.auto[k] = !State.auto[k];
@@ -1490,15 +1935,15 @@ function toggleAuto(k) {
   el.textContent = `🤖 Auto-${k}: ${State.auto[k] ? 'ON' : 'OFF'}`;
 }
 
-// BUYER & 5-LANE SELLER AUCTIONS
-let BuyerLot = { unit: null, bid: 10, leader: 'Kuat Broker', timer: 10.0, stun: 0 };
+// BUYER & 5-LANE SELLER AUCTIONS (STRICT "BID" LABELS)
+let BuyerLot = { unit: null, bid: 10, leader: 'Kuat Guild', timer: 10.0, stun: 0 };
 function spawnBuyerLot() {
-  const u = makeUnit({ tier: Math.min(14, Math.floor(Math.random() * 9)) });
+  const u = makeUnit({ tier: Math.min(15, Math.floor(Math.random() * 9)) });
   const url = bakeThumbnailImmediate(u);
-  BuyerLot = { unit: u, bid: Math.max(2, Math.round(u.val * 0.15)), leader: 'Corellian Guild', timer: 10.0, stun: 0 };
+  BuyerLot = { unit: u, bid: Math.max(2, Math.round(u.val * 0.15)), leader: 'Corellian Broker', timer: 10.0, stun: 0 };
   document.getElementById('buy-thumb').src = url;
   document.getElementById('buy-title').textContent = u.name;
-  document.getElementById('buy-meta').textContent = `Est. Value: ◈${u.val.toLocaleString()} | Nav-Dex #${u.dexNum}`;
+  document.getElementById('buy-meta').textContent = `Est. Value: ◈${u.val.toLocaleString()} | Codex #${String(u.dexNum).padStart(4,'0')}`;
   updateBuyerDOM();
 }
 function updateBuyerDOM() {
@@ -1535,12 +1980,12 @@ function autoFillSellerLanes() {
 }
 function renderSellerLanes() {
   document.getElementById('sell-lanes-grid').innerHTML = State.sellerLanes.map((ln, i) => {
-    if (!ln) return `<div class="unit-card" style="text-align:center;padding:16px;color:var(--muted)">Lane #${i+1} Open<br><button style="margin-top:5px" onclick="autoFillSellerLanes()">+ List Ship</button></div>`;
+    if (!ln) return `<div class="unit-card" style="text-align:center;padding:18px;color:var(--muted)">Lane #${i+1} Open<br><button style="margin-top:6px" onclick="autoFillSellerLanes()">+ List Hull</button></div>`;
     return `<div class="unit-card ${ln.war ? 'masterwork' : ''}">
-      <div style="display:flex;justify-content:space-between;font-weight:900"><span>Lane #${i+1} ${ln.war ? '🔥 BID WAR!' : ''}</span><span style="color:var(--gold)">${ln.timer.toFixed(1)}s</span></div>
-      <div style="font-weight:800;color:var(--white)">${ln.unit.name}</div>
+      <div style="display:flex;justify-content:space-between;font-weight:900"><span>Lane #${i+1} ${ln.war ? '🔥 BID WAR!' : ''}</span><span style="color:var(--copper-bright)">${ln.timer.toFixed(1)}s</span></div>
+      <div style="font-weight:800;color:var(--steel-light)">${ln.unit.name}</div>
       <div style="color:var(--emerald);font-weight:900">Bid: ◈${ln.bid.toLocaleString()}</div>
-      <div style="font-size:10px;color:var(--muted)">High Bidder: ${ln.bidder}</div>
+      <div style="font-size:11px;color:var(--muted)">High Bidder: ${ln.bidder}</div>
     </div>`;
   }).join('');
 }
@@ -1550,11 +1995,11 @@ function openInspector(uid) {
   if (!u) return;
   document.getElementById('modal-content').innerHTML = `
     <div class="panel-hdr"><span>🔍 ${u.name}</span><button onclick="closeModal()">✖</button></div>
-    <div class="canvas-stage"><canvas id="inspector-canvas" class="turntable" width="240" height="240"></canvas></div>
-    <div style="font-size:11px">Value: <b style="color:var(--gold)">◈${u.val.toLocaleString()}</b> | Class: <b>${u.cls}</b> | Nav-Dex: <b>#${u.dexNum}</b></div>
+    <div class="canvas-stage"><canvas id="inspector-canvas" class="turntable" width="380" height="380"></canvas></div>
+    <div style="font-size:12px;margin-top:6px">Value: <b style="color:var(--copper-bright)">◈${u.val.toLocaleString()}</b> | Class: <b>${u.cls}</b> | Codex: <b>#${String(u.dexNum).padStart(4,'0')}</b></div>
   `;
   document.getElementById('modal-overlay').classList.add('open');
-  render512Snapshot(sculptStarship512(u), document.getElementById('inspector-canvas'), 0.65, 0.28, 1.08);
+  render200Snapshot(sculptShip200(u), document.getElementById('inspector-canvas'), 0.58, 0.28, 1.06);
 }
 function inspectBuyerLot() {
   if (BuyerLot.unit) { State.units.push(BuyerLot.unit); openInspector(BuyerLot.unit.uid); State.units.pop(); }
@@ -1563,40 +2008,39 @@ function openCodesModal() {
   const u = State.units[0] || makeUnit({ tier: 5 });
   const code = `WFC-${TIERS[u.tier].code}-${u.chassis.toUpperCase()}-${u.colors.map(c=>c.slice(1)).join('-')}`;
   document.getElementById('modal-content').innerHTML = `
-    <div class="panel-hdr"><span>📡 BASE36 STARSHIP TRADE CODEC</span><button onclick="closeModal()">✖</button></div>
+    <div class="panel-hdr"><span>📡 BASE36 FOUNDRY TRADE CODEC</span><button onclick="closeModal()">✖</button></div>
     <span class="ctrl-lbl">Flagship Export Code:</span>
     <input type="text" value="${code}" style="width:100%;margin-bottom:8px" readonly onclick="this.select()">
-    <button class="btn-emerald" style="width:100%" onclick="addUnitToRoster(makeUnit({tier:8,quality:'Imported Relic',qualMult:5}),true);updateHUD();closeModal();showToast('📡 Starship Imported!')">📡 Import Starship Code</button>
+    <button class="btn-emerald" style="width:100%" onclick="addUnitToRoster(makeUnit({tier:9,quality:'Imported Relic',qualMult:6}),true);updateHUD();closeModal();showToast('📡 Starship Imported!')">📡 Import Starship Code</button>
   `;
   document.getElementById('modal-overlay').classList.add('open');
 }
 function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
 function saveState(manual) {
-  try { localStorage.setItem('SW_STARFORGE_512', JSON.stringify({ credits: State.credits, supply: State.supply, trials: State.trials })); if (manual) showToast('💾 Fleet Saved!'); } catch(e) {}
+  try { localStorage.setItem('SW_FOUNDRY_200', JSON.stringify({ credits: State.credits, supply: State.supply, trials: State.trials })); if (manual) showToast('💾 Fleet Saved!'); } catch(e) {}
 }
 
 /* ============================================================================
-   8. BOOT & 60FPS SPACE TURNTABLE LOOP
+   9. BOOT & CLAMPED SHOWCASE TURNTABLE LOOP
    ============================================================================ */
 function boot() {
   initForgeControls();
   initCratesAndCommand();
 
-  // Pre-Bake 6 Iconic Starships into Hangar
-  addUnitToRoster(makeUnit({ tier: 14, sIdx: 3, name: 'DS-1 Orbital Death Star', weapon: 'superlaser' }), true);
-  addUnitToRoster(makeUnit({ tier: 9,  sIdx: 4, name: 'ISD-I Devastator Star Destroyer' }), true);
-  addUnitToRoster(makeUnit({ tier: 7,  sIdx: 2, name: 'YT-1300 Millennium Falcon' }), true);
-  addUnitToRoster(makeUnit({ tier: 5,  sIdx: 0, name: 'Red Five T-65B X-Wing' }), true);
-  addUnitToRoster(makeUnit({ tier: 6,  sIdx: 7, name: 'Firespray-31 Slave I' }), true);
-  addUnitToRoster(makeUnit({ tier: 1,  sIdx: 5, name: 'Tantive IV Class-4 Jettison Pod' }), true);
+  // Pre-Bake 6 Iconic Brushed Steel & Copper Starter Ships
+  addUnitToRoster(makeUnit({ tier: 6,  sIdx: 0,  seed: 1,    name: 'Brushed Steel T-65B X-Wing' }), true);
+  addUnitToRoster(makeUnit({ tier: 8,  sIdx: 6,  seed: 407,  name: 'Forged Copper Millennium Falcon' }), true);
+  addUnitToRoster(makeUnit({ tier: 11, sIdx: 21, seed: 1222, name: 'Imperial-I Star Destroyer' }), true);
+  addUnitToRoster(makeUnit({ tier: 9,  sIdx: 13, seed: 814,  name: 'Beskar ST-70 Razor Crest' }), true);
+  addUnitToRoster(makeUnit({ tier: 15, sIdx: 23, seed: 2324, name: 'DS-1 Death Star Station' }), true);
+  addUnitToRoster(makeUnit({ tier: 4,  sIdx: 24, seed: 250,  name: 'Class-4 Armored Jettison Pod' }), true);
 
-  // Interactive click-to-move on X-Wing 8x8 Grid
   document.getElementById('grid-canvas').addEventListener('pointerdown', e => {
     const rect = e.target.getBoundingClientRect();
     const gx = Math.floor(((e.clientX - rect.left) / rect.width) * 8);
     const gy = Math.floor(((e.clientY - rect.top) / rect.height) * 8);
     const dist = Math.abs(gx - GridMatch.px) + Math.abs(gy - GridMatch.py);
-    if (dist >= 1 && dist <= 2 && !isAsteroid(gx, gy) && !(gx===GridMatch.ex && gy===GridMatch.ey)) {
+    if (dist >= 1 && dist <= 2 && !isAsteroid(gx, gy) && !(gx === GridMatch.ex && gy === GridMatch.ey)) {
       if (gx > GridMatch.px) GridMatch.pDir = 0;
       else if (gx < GridMatch.px) GridMatch.pDir = 2;
       else if (gy > GridMatch.py) GridMatch.pDir = 1;
@@ -1618,7 +2062,7 @@ function boot() {
       if (BuyerLot.stun > 0) BuyerLot.stun = Math.max(0, BuyerLot.stun - 0.1);
       else if (BuyerLot.timer > 0.2 && Math.random() < 0.08) {
         BuyerLot.bid += Math.max(1, Math.round(BuyerLot.unit.val * 0.03));
-        BuyerLot.leader = ['Hutt Cartel','Kuat Yards','Fondor Guild'][Math.floor(Math.random()*3)];
+        BuyerLot.leader = ['Kuat Drive Yards','Fondor Guild','Corellian Engineering'][Math.floor(Math.random()*3)];
       }
       if (BuyerLot.timer <= 0) {
         if (BuyerLot.leader === 'YOU' && State.credits >= BuyerLot.bid) {
@@ -1637,7 +2081,7 @@ function boot() {
       if (ln.timer > 0 && Math.random() < 0.1) {
         if (Math.random() < 0.03) { ln.war = true; ln.bid = Math.round(ln.bid * (2 + Math.random()*4)); }
         else ln.bid = Math.round(ln.bid * 1.12);
-        ln.bidder = ['Rebel High Command','Imperial Moff','Corellian Trader'][Math.floor(Math.random()*3)];
+        ln.bidder = ['Grand Admiral','Rebel Quartermaster','Beskar Collector'][Math.floor(Math.random()*3)];
         if (ln.timer <= 1.0) ln.timer = 2.0;
         dirty = true;
       }
@@ -1657,8 +2101,16 @@ function boot() {
       const img = document.getElementById('img-' + u.uid);
       if (img) img.src = url;
     }
-    if (ForgeCam.autoSpin && document.getElementById('tab-2').classList.contains('active')) {
-      ForgeCam.yaw += 0.014;
+    if (ForgeCam.sweep && document.getElementById('tab-2').classList.contains('active')) {
+      if (ForgeCam.full360) {
+        ForgeCam.yaw += 0.012;
+      } else {
+        // Smooth pendulum showcase sweep between +15° and +68° heroic 3/4 view!
+        ForgeCam.yaw += 0.0045 * ForgeCam.sweepDir;
+        if (ForgeCam.yaw > 0.72) ForgeCam.sweepDir = -1;
+        if (ForgeCam.yaw < 0.22) ForgeCam.sweepDir = 1;
+        document.getElementById('sl-yaw').value = Math.round(ForgeCam.yaw * 100);
+      }
       renderForgeFrame();
     }
     requestAnimationFrame(loop);
